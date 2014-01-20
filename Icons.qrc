@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="delete_item">resource/delete_item.png</file>
+        <file alias="help_about">resource/help_about.png</file>
+        <file alias="help_contents">resource/help_contents.png</file>
+        <file alias="manage_feeds">resource/manage_feeds.png</file>
+        <file alias="qt5_about">resource/qt5_about.png</file>
+        <file alias="save_item">resource/save_item.png</file>
+    </qresource>
+</RCC>

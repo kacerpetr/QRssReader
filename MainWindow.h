@@ -3,7 +3,8 @@
 
 #include <QMainWindow>
 #include <QNetworkReply>
-#include "TreeViewModel.h"
+#include "NewsList.h"
+#include "NewsView.h"
 
 namespace Ui {
     class MainWindow;
@@ -18,11 +19,12 @@ class MainWindow : public QMainWindow{
 
     public slots:
         void replyFinished(QNetworkReply* reply);
+        void manageFeeds();
 
     private:
         Ui::MainWindow* ui;
-        TreeViewModel* twm;
-
+        NewsList* newsList;
+        NewsView* newsView;
 };
 
 #endif // MAINWINDOW_H

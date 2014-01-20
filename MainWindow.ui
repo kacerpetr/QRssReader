@@ -13,91 +13,230 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#MainWindow{
+	background-color: rgb(30, 30, 30);
+}
+
+#NewsListContent{
+	background-color: rgb(30, 30, 30);
+}
+
+QWidget#NewsItem{
+	background-color: rgb(185, 203, 223);
+}
+
+#toolBar{
+	background-color: rgb(80, 80, 80);
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
-     <number>4</number>
+     <number>10</number>
     </property>
     <property name="leftMargin">
-     <number>4</number>
+     <number>10</number>
     </property>
     <property name="topMargin">
-     <number>4</number>
+     <number>0</number>
     </property>
     <property name="rightMargin">
-     <number>4</number>
+     <number>0</number>
     </property>
     <property name="bottomMargin">
-     <number>4</number>
+     <number>0</number>
     </property>
-    <item>
-     <widget class="QFrame" name="frame">
-      <property name="minimumSize">
-       <size>
-        <width>26</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>26</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-     </widget>
-    </item>
     <item>
      <widget class="QSplitter" name="splitter">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QTreeView" name="newsList">
+      <property name="handleWidth">
+       <number>10</number>
+      </property>
+      <widget class="QFrame" name="newsListFrame">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-         <horstretch>0</horstretch>
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>1</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize">
-        <size>
-         <width>1</width>
-         <height>0</height>
-        </size>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
        </property>
-      </widget>
-      <widget class="QScrollArea" name="scrollArea">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-         <horstretch>2</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
        </property>
-       <property name="widgetResizable">
-        <bool>true</bool>
+       <property name="lineWidth">
+        <number>0</number>
        </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>436</width>
-          <height>374</height>
-         </rect>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="spacing">
+         <number>0</number>
         </property>
-       </widget>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+       </layout>
+      </widget>
+      <widget class="QFrame" name="newsViewFrame">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>3</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="lineWidth">
+        <number>0</number>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+       </layout>
       </widget>
      </widget>
     </item>
    </layout>
   </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <property name="floatable">
+    <bool>true</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>LeftToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="ActionManageFeeds"/>
+   <addaction name="separator"/>
+   <addaction name="actionSaveItem"/>
+   <addaction name="actionDeleteItem"/>
+   <addaction name="separator"/>
+   <addaction name="actionHelp"/>
+   <addaction name="actionAbout"/>
+   <addaction name="actionAboutQt"/>
+  </widget>
+  <action name="ActionManageFeeds">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/manage_feeds</normaloff>:/icons/manage_feeds</iconset>
+   </property>
+   <property name="text">
+    <string>MF</string>
+   </property>
+   <property name="toolTip">
+    <string>Manage feeds</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/help_contents</normaloff>:/icons/help_contents</iconset>
+   </property>
+   <property name="text">
+    <string>HP</string>
+   </property>
+   <property name="toolTip">
+    <string>Application help</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/help_about</normaloff>:/icons/help_about</iconset>
+   </property>
+   <property name="text">
+    <string>AU</string>
+   </property>
+   <property name="toolTip">
+    <string>About application</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/qt5_about</normaloff>:/icons/qt5_about</iconset>
+   </property>
+   <property name="text">
+    <string>AQ</string>
+   </property>
+   <property name="toolTip">
+    <string>About Qt5 framework</string>
+   </property>
+  </action>
+  <action name="actionDeleteItem">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/delete_item</normaloff>:/icons/delete_item</iconset>
+   </property>
+   <property name="text">
+    <string>DI</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete news item</string>
+   </property>
+  </action>
+  <action name="actionSaveItem">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/save_item</normaloff>:/icons/save_item</iconset>
+   </property>
+   <property name="text">
+    <string>SI</string>
+   </property>
+   <property name="toolTip">
+    <string>Save news item</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="Icons.qrc"/>
+ </resources>
  <connections/>
 </ui>
