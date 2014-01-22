@@ -14,22 +14,29 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         MainWindow.cpp \
-    TreeViewModel.cpp \
     FeedManagement.cpp \
-    NewsItem.cpp \
-    NewsList.cpp \
-    NewsView.cpp
+    NewsGroupWidget.cpp \
+    NewsItemWidget.cpp \
+    NewsListWidget.cpp \
+    NewsViewWidget.cpp \
+    RssDataModel.cpp \
+    StorageAccess.cpp \
+    RssFeedModel.cpp
 
 HEADERS  += MainWindow.h \
-    TreeViewModel.h \
     FeedManagement.h \
-    NewsItem.h \
-    NewsList.h \
-    NewsView.h
+    NewsGroupWidget.h \
+    NewsItemWidget.h \
+    NewsListWidget.h \
+    NewsViewWidget.h \
+    RssDataModel.h \
+    StorageAccess.h \
+    RssFeedModel.h
 
 FORMS    += MainWindow.ui \
     FeedManagement.ui \
-    NewsItem.ui
+    NewsGroupWidget.ui \
+    NewsItemWidget.ui
 
 CONFIG += mobility
 MOBILITY = 
@@ -37,3 +44,7 @@ MOBILITY =
 RESOURCES += \
     Icons.qrc
 
+OTHER_FILES += \
+    AndroidManifest.xml
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD

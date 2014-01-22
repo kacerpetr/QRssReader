@@ -22,10 +22,6 @@
 	background-color: rgb(30, 30, 30);
 }
 
-QWidget#NewsItem{
-	background-color: rgb(185, 203, 223);
-}
-
 #toolBar{
 	background-color: rgb(80, 80, 80);
 }</string>
@@ -62,6 +58,12 @@ QWidget#NewsItem{
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="frameShape">
         <enum>QFrame::NoFrame</enum>
        </property>
@@ -95,6 +97,12 @@ QWidget#NewsItem{
          <horstretch>3</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
        </property>
        <property name="frameShape">
         <enum>QFrame::NoFrame</enum>
@@ -131,9 +139,6 @@ QWidget#NewsItem{
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
    <property name="movable">
     <bool>false</bool>
    </property>
@@ -143,16 +148,13 @@ QWidget#NewsItem{
      <height>32</height>
     </size>
    </property>
-   <property name="floatable">
-    <bool>true</bool>
-   </property>
    <attribute name="toolBarArea">
     <enum>LeftToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="ActionManageFeeds"/>
+   <addaction name="actionManageFeeds"/>
    <addaction name="separator"/>
    <addaction name="actionSaveItem"/>
    <addaction name="actionDeleteItem"/>
@@ -161,7 +163,7 @@ QWidget#NewsItem{
    <addaction name="actionAbout"/>
    <addaction name="actionAboutQt"/>
   </widget>
-  <action name="ActionManageFeeds">
+  <action name="actionManageFeeds">
    <property name="icon">
     <iconset resource="Icons.qrc">
      <normaloff>:/icons/manage_feeds</normaloff>:/icons/manage_feeds</iconset>

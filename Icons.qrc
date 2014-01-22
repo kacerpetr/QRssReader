@@ -6,5 +6,6 @@
         <file alias="manage_feeds">resource/manage_feeds.png</file>
         <file alias="qt5_about">resource/qt5_about.png</file>
         <file alias="save_item">resource/save_item.png</file>
+        <file alias="edit_paste">resource/edit_paste.png</file>
     </qresource>
 </RCC>

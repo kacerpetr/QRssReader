@@ -3,10 +3,15 @@
 
 #include <QMainWindow>
 #include <QNetworkReply>
-#include "NewsList.h"
-#include "NewsView.h"
 
-namespace Ui {
+#include "NewsListWidget.h"
+#include "NewsViewWidget.h"
+#include "RssDataModel.h"
+#include "RssFeedModel.h"
+
+#define RSS_FEED_FILE "feedlist.xml"
+
+namespace Ui{
     class MainWindow;
 }
 
@@ -23,8 +28,10 @@ class MainWindow : public QMainWindow{
 
     private:
         Ui::MainWindow* ui;
-        NewsList* newsList;
-        NewsView* newsView;
+        NewsListWidget* newsList;
+        NewsViewWidget* newsView;
+        RssDataModel* rssData;
+        RssFeedModel* rssFeed;
 };
 
 #endif // MAINWINDOW_H

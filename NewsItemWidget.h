@@ -4,21 +4,21 @@
 #include <QWidget>
 
 namespace Ui {
-    class NewsItem;
+    class NewsItemWidget;
 }
 
-class NewsItem : public QWidget{
+class NewsItemWidget : public QWidget{
     Q_OBJECT
 
     public:
-        explicit NewsItem(QWidget *parent = 0);
-        ~NewsItem();
+        explicit NewsItemWidget(QWidget *parent = 0);
+        ~NewsItemWidget();
 
     private:
        void paintEvent(QPaintEvent *);
 
     private:
-        Ui::NewsItem *ui;
+        Ui::NewsItemWidget *ui;
 };
 
 #endif // NEWSITEM_H
