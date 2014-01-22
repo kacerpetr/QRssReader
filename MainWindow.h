@@ -2,10 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QNetworkReply>
-
 #include "NewsListWidget.h"
-#include "NewsViewWidget.h"
 #include "RssDataModel.h"
 #include "RssFeedModel.h"
 
@@ -23,13 +20,14 @@ class MainWindow : public QMainWindow{
         ~MainWindow();
 
     public slots:
-        void replyFinished(QNetworkReply* reply);
         void manageFeeds();
+        void refreshAction();
+        void itemPressed(NewsItem* item);
+        void updateNewsList();
 
     private:
         Ui::MainWindow* ui;
         NewsListWidget* newsList;
-        NewsViewWidget* newsView;
         RssDataModel* rssData;
         RssFeedModel* rssFeed;
 };

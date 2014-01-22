@@ -164,3 +164,10 @@ bool RssFeedModel::addFeed(const FeedItem& feed){
 void RssFeedModel::removeFeed(int index){
     feeds.removeAt(index);
 }
+
+const FeedItem* RssFeedModel::byUrl(QString url){
+    for(int i = 0; i < feeds.length(); i++){
+        if(feeds[i].url == url) return &feeds.at(i);
+    }
+    return NULL;
+}

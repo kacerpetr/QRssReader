@@ -14,32 +14,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
 
     //cerates rss models
-    rssData = new RssDataModel();
     rssFeed = new RssFeedModel(RSS_FEED_FILE);
+    rssData = new RssDataModel(this);
+    rssData->setFeedModel(rssFeed);
 
     //creates and adds news list widget
     newsList = new NewsListWidget(ui->newsListFrame);
     ui->newsListFrame->layout()->addWidget(newsList);
 
-    //creates and adds news view widget
-    newsView = new NewsViewWidget(ui->newsViewFrame);
-    ui->newsViewFrame->layout()->addWidget(newsView);
-
     //signal slot connection
     connect(ui->actionManageFeeds, SIGNAL(triggered()), this, SLOT(manageFeeds()));
+    connect(ui->actionRefresh, SIGNAL(triggered()), this, SLOT(refreshAction()));
+    connect(newsList, SIGNAL(pressed(NewsItem*)), this, SLOT(itemPressed(NewsItem*)));
+    connect(rssData, SIGNAL(dataChanged()), this, SLOT(updateNewsList()));
 
     //TODO - testing
     rssFeed->loadFeedList();
     newsList->createList(rssData->data());
-}
-
-
-/*QNetworkAccessManager* manager = new QNetworkAccessManager(this);
-connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
-manager->get(QNetworkRequest(QUrl("http://idnes.cz.feedsportal.com/c/34387/f/625943/index.rss")));*/
-
-void MainWindow::replyFinished(QNetworkReply* reply){
-    qDebug() << reply->readAll();
 }
 
 void MainWindow::manageFeeds(){
@@ -49,8 +40,32 @@ void MainWindow::manageFeeds(){
     dialog.exec();
 }
 
+void MainWindow::refreshAction(){
+    rssData->loadRssData();
+}
+
+void MainWindow::itemPressed(NewsItem* item){
+    ui->titleLabel->setText(item->header);
+    ui->textLabel->setText(item->text);
+
+    QString name = item->feed.name;
+    if(!item->feed.description.isEmpty())
+        name += " - " + item->feed.description;
+    ui->feedNameLabel->setText(name);
+
+    ui->messageTimeLabel->setText(
+    item->time.toString("ddd, dd MMM yyyy hh:mm:ss"));
+}
+
+void MainWindow::updateNewsList(){
+    newsList->clearList();
+    newsList->createList(rssData->data());
+}
+
 MainWindow::~MainWindow(){
     delete ui;
+    delete rssFeed;
+    rssFeed = NULL;
     delete rssData;
     rssData = NULL;
 }

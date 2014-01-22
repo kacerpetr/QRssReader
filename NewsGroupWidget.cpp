@@ -6,6 +6,10 @@ NewsGroupWidget::NewsGroupWidget(QWidget* parent) : QWidget(parent), ui(new Ui::
     ui->setupUi(this);
 }
 
+void NewsGroupWidget::setText(QString text){
+    ui->textLabel->setText(text);
+}
+
 void NewsGroupWidget::paintEvent(QPaintEvent*){
      QStyleOption opt;
      opt.init(this);

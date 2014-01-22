@@ -20,18 +20,16 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#NewsItemWidget{
-	background-color: rgb(185, 203, 223);
-}
-
-#header{
-	font-size: 14pt;
-	font-weight: bold;
-}
-
-#source{
-	font-size: 12pt;
-}</string>
+   <string notr="true">/*#titleLabel{ 
+    font-size: 14pt; 
+    font-weight: bold; 
+} 
+#feedLabel{ 
+    font-size: 12pt; 
+} 
+#NewsItemWidget{ 
+    background-color: rgb(100,150,200); 
+}*/</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -50,7 +48,7 @@
     <number>2</number>
    </property>
    <item>
-    <widget class="QLabel" name="header">
+    <widget class="QLabel" name="titleLabel">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -58,7 +56,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Mozek bankomatů dosluhuje, podpora starých Windows XP končí</string>
+      <string>No title</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -66,7 +64,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="source">
+    <widget class="QLabel" name="feedLabel">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -74,7 +72,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Zdroj: idnes.cz</string>
+      <string>Zdroj: </string>
      </property>
     </widget>
    </item>

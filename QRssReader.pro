@@ -18,7 +18,6 @@ SOURCES += main.cpp\
     NewsGroupWidget.cpp \
     NewsItemWidget.cpp \
     NewsListWidget.cpp \
-    NewsViewWidget.cpp \
     RssDataModel.cpp \
     StorageAccess.cpp \
     RssFeedModel.cpp
@@ -28,7 +27,6 @@ HEADERS  += MainWindow.h \
     NewsGroupWidget.h \
     NewsItemWidget.h \
     NewsListWidget.h \
-    NewsViewWidget.h \
     RssDataModel.h \
     StorageAccess.h \
     RssFeedModel.h

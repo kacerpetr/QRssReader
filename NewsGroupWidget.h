@@ -12,6 +12,7 @@ class NewsGroupWidget : public QWidget{
 
     public:
         explicit NewsGroupWidget(QWidget* parent = 0);
+        void setText(QString text);
         ~NewsGroupWidget();
 
     private:
@@ -21,4 +22,4 @@ class NewsGroupWidget : public QWidget{
         Ui::NewsGroupWidget* ui;
 };
 
-#endif // NEWSGROUPWIDGET_H
+#endif //NEWSGROUPWIDGET_H

@@ -16,9 +16,16 @@ class NewsListWidget : public QScrollArea{
         void createList(const QMultiMap<QDate,NewsItem>& news);
         void clearList();
 
+    signals:
+        void pressed(NewsItem* item);
+
+    private slots:
+        void itemPressed(NewsItem* item);
+
     private:
         QWidget* content;
         QVBoxLayout* layout;
+        QList<QWidget*> items;
 };
 
 #endif // NEWSLISTWIDGET_H

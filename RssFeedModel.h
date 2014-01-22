@@ -25,6 +25,7 @@ class RssFeedModel{
         bool modifyFeed(int index, const FeedItem& feed);
         bool addFeed(const FeedItem& feed);
         void removeFeed(int index);
+        const FeedItem* byUrl(QString url);
 
     private:
         QString filename;

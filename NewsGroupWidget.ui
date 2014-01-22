@@ -18,7 +18,7 @@
 	background-color: rgb(100, 100, 100);
 }
 
-#dateLabel{
+#textLabel{
 	color: rgb(59, 235, 0);
 	font-size: 14pt;
 }</string>
@@ -40,9 +40,9 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="dateLabel">
+    <widget class="QLabel" name="textLabel">
      <property name="text">
-      <string>13.2.2014</string>
+      <string>-</string>
      </property>
     </widget>
    </item>
