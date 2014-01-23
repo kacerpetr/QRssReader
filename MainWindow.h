@@ -24,6 +24,11 @@ class MainWindow : public QMainWindow{
         void refreshAction();
         void itemPressed(NewsItem* item);
         void updateNewsList();
+        void updateProgressBar(QString feed, int progress);
+        void aboutQt5();
+        void showAppHelp();
+        void aboutApp();
+        void hideProgressBar();
 
     private:
         Ui::MainWindow* ui;

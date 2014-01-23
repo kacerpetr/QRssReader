@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     NewsListWidget.cpp \
     RssDataModel.cpp \
     StorageAccess.cpp \
-    RssFeedModel.cpp
+    RssFeedModel.cpp \
+    HelpDialog.cpp
 
 HEADERS  += MainWindow.h \
     FeedManagement.h \
@@ -29,12 +30,14 @@ HEADERS  += MainWindow.h \
     NewsListWidget.h \
     RssDataModel.h \
     StorageAccess.h \
-    RssFeedModel.h
+    RssFeedModel.h \
+    HelpDialog.h
 
 FORMS    += MainWindow.ui \
     FeedManagement.ui \
     NewsGroupWidget.ui \
-    NewsItemWidget.ui
+    NewsItemWidget.ui \
+    HelpDialog.ui
 
 CONFIG += mobility
 MOBILITY = 

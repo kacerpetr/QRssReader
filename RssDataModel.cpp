@@ -19,15 +19,36 @@ void RssDataModel::setFeedModel(RssFeedModel* feedModel){
 
 void RssDataModel::loadRssData(){
     const QList<FeedItem>& feeds = feedModel->feedList();
+
+    //adds feed urls to queue
     for(int i = 0; i < feeds.length(); i++){
-        manager->get(QNetworkRequest(QUrl(feeds[i].url)));
+        loadingQueue.append(feeds[i].url);
     }
+
+    //start loading of first feed
+    loadFeed(loadingQueue.takeFirst());
+}
+
+void RssDataModel::loadFeed(QString url){
+    manager->get(QNetworkRequest(QUrl(url)));
+    int progress = 100 - (loadingQueue.length()+1)*100 / feedModel->feedList().length();
+    emit loadingStarted(url, progress);
 }
 
 void RssDataModel::replyFinished(QNetworkReply* reply){
+    //gets feed item by its url
     const FeedItem* feed = feedModel->byUrl(reply->url().toString());
     parseRss(reply->readAll(), *feed);
-    emit dataChanged();
+
+    //all feeds were loaded
+    if(loadingQueue.length() == 0){
+        emit dataChanged();
+        emit loadingFinished();
+    }
+    //else load next feed
+    else{
+        loadFeed(loadingQueue.takeFirst());
+    }
 }
 
 void RssDataModel::addNewsItem(const NewsItem& item){
@@ -88,12 +109,24 @@ void RssDataModel::parseRss(QString xml, const FeedItem& feed){
                         QDateTime dt = loc.toDateTime(str, format);
                         item.time = dt;
                     }
+                    //link to full article
+                    else if(elemName == "link"){
+                        item.link = rd.text().toString();
+                    }
+                    //guid of article
+                    else if(elemName == "guid"){
+                        item.guid = rd.text().toString();
+                    }
                 }
 
             default:
                 break;
         }
     }
+}
+
+void RssDataModel::saveRss() const{
+
 }
 
 const QMultiMap<QDate,NewsItem>& RssDataModel::data() const{
