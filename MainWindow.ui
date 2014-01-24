@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Icons.qrc">
+    <normaloff>:/icons/qrssreader</normaloff>:/icons/qrssreader</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">#MainWindow{
 	background-color: rgb(30, 30, 30);
@@ -373,10 +377,8 @@ QProgressBar::chunk {
     <bool>false</bool>
    </attribute>
    <addaction name="actionManageFeeds"/>
-   <addaction name="separator"/>
+   <addaction name="actionSettings"/>
    <addaction name="actionRefresh"/>
-   <addaction name="actionSaveItem"/>
-   <addaction name="actionDeleteItem"/>
    <addaction name="separator"/>
    <addaction name="actionHelp"/>
    <addaction name="actionAbout"/>
@@ -440,30 +442,6 @@ QProgressBar::chunk {
     <string>About Qt5 framework</string>
    </property>
   </action>
-  <action name="actionDeleteItem">
-   <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/delete_item</normaloff>:/icons/delete_item</iconset>
-   </property>
-   <property name="text">
-    <string>DI</string>
-   </property>
-   <property name="toolTip">
-    <string>Delete news item</string>
-   </property>
-  </action>
-  <action name="actionSaveItem">
-   <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/save_item</normaloff>:/icons/save_item</iconset>
-   </property>
-   <property name="text">
-    <string>SI</string>
-   </property>
-   <property name="toolTip">
-    <string>Save news item</string>
-   </property>
-  </action>
   <action name="actionRefresh">
    <property name="icon">
     <iconset resource="Icons.qrc">
@@ -474,6 +452,18 @@ QProgressBar::chunk {
    </property>
    <property name="toolTip">
     <string>Refresh news</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/settings</normaloff>:/icons/settings</iconset>
+   </property>
+   <property name="text">
+    <string>Settings</string>
+   </property>
+   <property name="toolTip">
+    <string>Application settings</string>
    </property>
   </action>
  </widget>

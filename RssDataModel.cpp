@@ -2,6 +2,15 @@
 #include <QDebug>
 #include <QXmlStreamReader>
 #include <QTextStream>
+#include <QDir>
+#include "StorageAccess.h"
+
+bool operator==(const NewsItem& item1, const NewsItem& item2){
+    if(item1.header == item2.header && item1.feed.name == item2.feed.name){
+        return true;
+    }
+    return false;
+}
 
 RssDataModel::RssDataModel(QObject* parent) : QObject(parent){
     manager = new QNetworkAccessManager();
@@ -17,7 +26,7 @@ void RssDataModel::setFeedModel(RssFeedModel* feedModel){
     this->feedModel = feedModel;
 }
 
-void RssDataModel::loadRssData(){
+void RssDataModel::downloadRssData(){
     const QList<FeedItem>& feeds = feedModel->feedList();
 
     //adds feed urls to queue
@@ -38,7 +47,9 @@ void RssDataModel::loadFeed(QString url){
 void RssDataModel::replyFinished(QNetworkReply* reply){
     //gets feed item by its url
     const FeedItem* feed = feedModel->byUrl(reply->url().toString());
-    parseRss(reply->readAll(), *feed);
+    QString xml = reply->readAll();
+    parseRss(xml, *feed);
+    saveRss(xml, *feed);
 
     //all feeds were loaded
     if(loadingQueue.length() == 0){
@@ -52,10 +63,15 @@ void RssDataModel::replyFinished(QNetworkReply* reply){
 }
 
 void RssDataModel::addNewsItem(const NewsItem& item){
-    news.insert(item.time.date(), item);
+    QMap<QDate, NewsItem>::iterator it = news.find(item.time.date(), item);
+
+    //adds item if it is not in list
+    if(it == news.end()){
+        news.insert(item.time.date(), item);
+    }
 }
 
-void RssDataModel::parseRss(QString xml, const FeedItem& feed){
+void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
     QXmlStreamReader rd(xml);
 
     //news item
@@ -125,8 +141,31 @@ void RssDataModel::parseRss(QString xml, const FeedItem& feed){
     }
 }
 
-void RssDataModel::saveRss() const{
+void RssDataModel::loadRss(){
+    //feed list
+    const QList<FeedItem>& feeds = feedModel->feedList();
 
+    //loads data
+    for(int i = 0; i < feeds.length(); i++){
+        QString filename = feeds[i].name.toLower().replace(" ", "_");
+        QString relativePath = QString(RSS_DATA_FOLDER) + "/" + filename + ".xml";
+        QString xml;
+        StorageAccess::get().readString(xml, relativePath);
+        parseRss(xml, feeds[i]);
+    }
+
+    //data changed signal
+    emit dataChanged();
+}
+
+void RssDataModel::saveRss(const QString& xml, const FeedItem& feed) const{
+    //creates data folder if does not exists
+    StorageAccess::get().mkDir(RSS_DATA_FOLDER);
+
+    //saves data
+    QString filename = feed.name.toLower().replace(" ", "_");
+    QString relativePath = QString(RSS_DATA_FOLDER) + "/" + filename + ".xml";
+    StorageAccess::get().writeString(xml, relativePath);
 }
 
 const QMultiMap<QDate,NewsItem>& RssDataModel::data() const{

@@ -4,20 +4,24 @@
 #include <QString>
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
+#include <QStringList>
 
 #define APP_FOLDER (".qrssreader")
 
 class StorageAccess{
     public:
         static StorageAccess& get();
-        QString appDir();
-        QString absPath(QString filename);
-        QXmlStreamReader* openXmlReader(QString filename);
-        void closeXmlReader(QXmlStreamReader** reader);
-        QXmlStreamWriter* openXmlWriter(QString filename);
-        void closeXmlWriter(QXmlStreamWriter** writer);
+        QString appDir() const;
+        QString absPath(QString filename) const;
+        QXmlStreamReader* openXmlReader(QString filename) const;
+        void closeXmlReader(QXmlStreamReader** reader) const;
+        QXmlStreamWriter* openXmlWriter(QString filename) const;
+        void closeXmlWriter(QXmlStreamWriter** writer) const;
+        bool writeString(const QString& str, const QString& relativePath) const;
+        bool readString(QString& result, const QString& relativePath) const;
+        bool mkDir(const QString& relativePath) const;
 
-    private:
+     private:
         StorageAccess(){}
         StorageAccess(StorageAccess const&);
         void operator=(StorageAccess const&);

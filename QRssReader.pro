@@ -21,7 +21,9 @@ SOURCES += main.cpp\
     RssDataModel.cpp \
     StorageAccess.cpp \
     RssFeedModel.cpp \
-    HelpDialog.cpp
+    HelpDialog.cpp \
+    SettingsModel.cpp \
+    SettingsDialog.cpp
 
 HEADERS  += MainWindow.h \
     FeedManagement.h \
@@ -31,13 +33,16 @@ HEADERS  += MainWindow.h \
     RssDataModel.h \
     StorageAccess.h \
     RssFeedModel.h \
-    HelpDialog.h
+    HelpDialog.h \
+    SettingsModel.h \
+    SettingsDialog.h
 
 FORMS    += MainWindow.ui \
     FeedManagement.ui \
     NewsGroupWidget.ui \
     NewsItemWidget.ui \
-    HelpDialog.ui
+    HelpDialog.ui \
+    SettingsDialog.ui
 
 CONFIG += mobility
 MOBILITY = 
@@ -46,6 +51,6 @@ RESOURCES += \
     Icons.qrc
 
 OTHER_FILES += \
-    AndroidManifest.xml
+    android/AndroidManifest.xml
 
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

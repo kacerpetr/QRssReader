@@ -1,6 +1,7 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QMessageBox>
+#include <QTextStream>
 #include "StorageAccess.h"
 
 StorageAccess& StorageAccess::get(){
@@ -8,7 +9,7 @@ StorageAccess& StorageAccess::get(){
     return instance;
 }
 
-QString StorageAccess::appDir(){
+QString StorageAccess::appDir() const{
     //data directory path
     QString path;
 
@@ -39,7 +40,7 @@ QString StorageAccess::appDir(){
     return dataDir.absoluteFilePath(APP_FOLDER);
 }
 
-QString StorageAccess::absPath(QString filename){
+QString StorageAccess::absPath(QString filename) const{
     //absolute path of application directory
     QDir directory(appDir());
 
@@ -47,7 +48,7 @@ QString StorageAccess::absPath(QString filename){
     return directory.absoluteFilePath(filename);
 }
 
-QXmlStreamReader* StorageAccess::openXmlReader(QString filename){
+QXmlStreamReader* StorageAccess::openXmlReader(QString filename) const{
     //opens xml file
     QString path = absPath(filename);
 
@@ -93,7 +94,7 @@ QXmlStreamReader* StorageAccess::openXmlReader(QString filename){
     return reader;
 }
 
-void StorageAccess::closeXmlReader(QXmlStreamReader** reader){
+void StorageAccess::closeXmlReader(QXmlStreamReader** reader) const{
     //parsing error check
     if((*reader)->hasError()){
         QMessageBox msgBox;
@@ -116,7 +117,7 @@ void StorageAccess::closeXmlReader(QXmlStreamReader** reader){
     *reader = NULL;
 }
 
-QXmlStreamWriter* StorageAccess::openXmlWriter(QString filename){
+QXmlStreamWriter* StorageAccess::openXmlWriter(QString filename) const{
     //opens xml file
     QString path = absPath(filename);
 
@@ -139,7 +140,7 @@ QXmlStreamWriter* StorageAccess::openXmlWriter(QString filename){
         QMessageBox msgBox;
         msgBox.setWindowTitle("Error in openXmlWriter(...)");
         msgBox.setText("File \"" + path + "\" can't be opened (for writing)");
-        msgBox.setInformativeText("Check if file exists or program have permissions to read it.");
+        msgBox.setInformativeText("Check if program have permissions to write it.");
         msgBox.setIcon(QMessageBox::Critical);
         msgBox.exec();
         delete file;
@@ -162,7 +163,7 @@ QXmlStreamWriter* StorageAccess::openXmlWriter(QString filename){
     return writer;
 }
 
-void StorageAccess::closeXmlWriter(QXmlStreamWriter** writer){
+void StorageAccess::closeXmlWriter(QXmlStreamWriter** writer) const{
     //parsing error check
     if((*writer)->hasError()){
         QMessageBox msgBox;
@@ -181,4 +182,85 @@ void StorageAccess::closeXmlWriter(QXmlStreamWriter** writer){
     //deletes reader
     delete *writer;
     *writer = NULL;
+}
+
+bool StorageAccess::writeString(const QString& str, const QString& relativePath) const{
+    //absolute path of file
+    QString absolutePath = absPath(relativePath);
+
+    //opens file
+    QFile file(absolutePath);
+    bool success = file.open(QIODevice::WriteOnly);
+
+    //in case of failure
+    if(!success){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Error in writeString(...)");
+        msgBox.setText("File \"" + absolutePath + "\" can't be opened (for writing)");
+        msgBox.setInformativeText("Check if program have permissions to write it.");
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        return false;
+    }
+
+    //creates stream and writes file
+    QTextStream outStream(&file);
+    outStream << str;
+
+    //QFile destructor will do it too
+    file.close();
+
+    //success
+    return true;
+}
+
+bool StorageAccess::readString(QString& result, const QString& relativePath) const{
+    //absolute path of file
+    QString absolutePath = absPath(relativePath);
+
+    //opens file
+    QFile file(absolutePath);
+    bool success = file.open(QIODevice::ReadOnly);
+
+    //in case of failure
+    if(!success){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Error in readString(...)");
+        msgBox.setText("File \"" + absolutePath + "\" can't be opened (for reading)");
+        msgBox.setInformativeText("Check if file exists or program have permissions to read it.");
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        return false;
+    }
+
+    //creates stream and writes file
+    QTextStream inStream(&file);
+    result = inStream.readAll();
+
+    //QFile destructor will do it too
+    file.close();
+
+    //success
+    return true;
+}
+
+bool StorageAccess::mkDir(const QString& relativePath) const{
+    //application directory
+    QDir appQDir(appDir());
+
+    //does nothing if directory exists
+    if(appQDir.exists(relativePath)) return true;
+
+    //creates directory if not
+    if(!appQDir.mkdir(relativePath)){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Error in mkDir(...)");
+        msgBox.setText("Directory \"" + relativePath + "\" can't be created");
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        return false;
+    }
+
+    //success
+    return true;
 }

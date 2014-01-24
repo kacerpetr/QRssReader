@@ -6,6 +6,9 @@
 FeedManagement::FeedManagement(QWidget* parent) : QDialog(parent), ui(new Ui::FeedManagement), model(NULL){
     ui->setupUi(this);
 
+    //sets focus to save button
+    ui->saveButton->setFocus();
+
     //background color preview
     connect(ui->bkgRedBox, SIGNAL(valueChanged(int)), this, SLOT(bkgColorChanged()));
     connect(ui->bkgGreenBox, SIGNAL(valueChanged(int)), this, SLOT(bkgColorChanged()));

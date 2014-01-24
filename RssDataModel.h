@@ -8,6 +8,8 @@
 #include <QNetworkReply>
 #include "RssFeedModel.h"
 
+#define RSS_DATA_FOLDER "RssData"
+
 typedef struct{
     QString header;
     QString text;
@@ -17,6 +19,8 @@ typedef struct{
     QString guid;
 }NewsItem;
 
+bool operator==(const NewsItem& item1, const NewsItem& item2);
+
 class RssDataModel : public QObject{
     Q_OBJECT
 
@@ -24,11 +28,9 @@ class RssDataModel : public QObject{
         RssDataModel(QObject* parent = 0);
         ~RssDataModel();
         void setFeedModel(RssFeedModel* feedModel);
-        void loadRssData();
-        void addNewsItem(const NewsItem& item);
-        void parseRss(QString xml, const FeedItem& feed);
+        void downloadRssData();
         const QMultiMap<QDate,NewsItem>& data() const;
-        void saveRss() const;
+        void loadRss();
 
     public slots:
         void replyFinished(QNetworkReply* reply);
@@ -39,7 +41,11 @@ class RssDataModel : public QObject{
         void loadingFinished();
 
     private:
+        void addNewsItem(const NewsItem& item);
+        void parseRss(const QString& xml, const FeedItem& feed);
+        void saveRss(const QString& xml, const FeedItem& feed) const;
         void loadFeed(QString url);
+        void newsToXml();
 
     private:
         QMultiMap<QDate,NewsItem> news;

@@ -11,6 +11,7 @@
 #include "FeedManagement.h"
 #include "StorageAccess.h"
 #include "HelpDialog.h"
+#include "SettingsDialog.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
@@ -21,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //hides progress bar
     ui->progressBar->setHidden(true);
 
-    //cerates rss models
+    //cerates and inits rss models
     rssFeed = new RssFeedModel(RSS_FEED_FILE);
     rssData = new RssDataModel(this);
     rssData->setFeedModel(rssFeed);
@@ -40,11 +41,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(showAppHelp()));
     connect(rssData, SIGNAL(loadingStarted(QString,int)), this, SLOT(updateProgressBar(QString,int)));
     connect(rssData, SIGNAL(loadingFinished()), this, SLOT(hideProgressBar()));
+    connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
 
-
-    //TODO - testing
+    //loads saved data
     rssFeed->loadFeedList();
-    newsList->createList(rssData->data());
+    rssData->loadRss();
 }
 
 void MainWindow::manageFeeds(){
@@ -55,7 +56,7 @@ void MainWindow::manageFeeds(){
 }
 
 void MainWindow::refreshAction(){
-    rssData->loadRssData();
+    rssData->downloadRssData();
 }
 
 void MainWindow::itemPressed(NewsItem* item){
@@ -106,6 +107,12 @@ void MainWindow::aboutApp(){
     QString about = "Application is currently in development state.\n";
     about += "by Petr Kacer <kacerpetr@gmail.com>";
     QMessageBox::about(this, "About QRssReader", about);
+}
+
+void MainWindow::showSettings(){
+    SettingsDialog dialog;
+    dialog.setWindowState(Qt::WindowMaximized);
+    dialog.exec();
 }
 
 void MainWindow::showAppHelp(){

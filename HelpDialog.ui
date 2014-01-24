@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Icons.qrc">
+    <normaloff>:/icons/qrssreader</normaloff>:/icons/qrssreader</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">#contents{
 	background-color: white;
@@ -126,7 +130,9 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="Icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>pushButton</sender>

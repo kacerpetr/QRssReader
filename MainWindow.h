@@ -28,6 +28,7 @@ class MainWindow : public QMainWindow{
         void aboutQt5();
         void showAppHelp();
         void aboutApp();
+        void showSettings();
         void hideProgressBar();
 
     private:
