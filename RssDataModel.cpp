@@ -26,11 +26,16 @@ void RssDataModel::setFeedModel(RssFeedModel* feedModel){
     this->feedModel = feedModel;
 }
 
+void RssDataModel::setFolder(const QString& folder){
+    this->folder = folder;
+}
+
 void RssDataModel::downloadRssData(){
     const QList<FeedItem>& feeds = feedModel->feedList();
 
     //adds feed urls to queue
     for(int i = 0; i < feeds.length(); i++){
+        if(!feeds[i].enabled) continue;
         loadingQueue.append(feeds[i].url);
     }
 
@@ -147,8 +152,9 @@ void RssDataModel::loadRss(){
 
     //loads data
     for(int i = 0; i < feeds.length(); i++){
+        if(!feeds[i].enabled) continue;
         QString filename = feeds[i].name.toLower().replace(" ", "_");
-        QString relativePath = QString(RSS_DATA_FOLDER) + "/" + filename + ".xml";
+        QString relativePath = QString(this->folder) + "/" + filename + ".xml";
         QString xml;
         StorageAccess::get().readString(xml, relativePath);
         parseRss(xml, feeds[i]);
@@ -160,11 +166,11 @@ void RssDataModel::loadRss(){
 
 void RssDataModel::saveRss(const QString& xml, const FeedItem& feed) const{
     //creates data folder if does not exists
-    StorageAccess::get().mkDir(RSS_DATA_FOLDER);
+    StorageAccess::get().mkDir(this->folder);
 
     //saves data
     QString filename = feed.name.toLower().replace(" ", "_");
-    QString relativePath = QString(RSS_DATA_FOLDER) + "/" + filename + ".xml";
+    QString relativePath = QString(this->folder) + "/" + filename + ".xml";
     StorageAccess::get().writeString(xml, relativePath);
 }
 

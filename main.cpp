@@ -8,6 +8,9 @@
 // 4. NewsListWidget - better naming (items X this->items)
 // 5. check internet connection
 // 6. rename NewsItem.header to NewsItem.title
+// 7. determine behavior when no folder given to RssDataModel
+// 8. do something if required settings tag does not exists
+// 9. refactor settings to configuration file
 
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);

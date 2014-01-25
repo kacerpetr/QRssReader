@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/settings">
+        <file alias="settings_android">default/settings_android.xml</file>
+        <file alias="settings_pc">default/settings_pc.xml</file>
+    </qresource>
+</RCC>

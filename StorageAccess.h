@@ -20,6 +20,7 @@ class StorageAccess{
         bool writeString(const QString& str, const QString& relativePath) const;
         bool readString(QString& result, const QString& relativePath) const;
         bool mkDir(const QString& relativePath) const;
+        bool exists(const QString& relativePath) const;
 
      private:
         StorageAccess(){}

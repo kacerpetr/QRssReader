@@ -47,38 +47,7 @@ QProgressBar::chunk {
 	border: 0px;
 	background-color: rgb(50, 230, 50);
 }
-
-#newsViewContents #titleLabel{
-	font-size: 22pt;
-	font-weight: bold;
-	text-decoration: underline;
-	color: black;
-}
-
-#newsViewContents #textLabel{
-	font-size: 18pt;
-	color: black;
-}
-
-#newsViewContents  #feedNameLabel{
-	font-size: 16pt;
-	font-style: italic;
-}
-
-#newsViewContents  #timeLabel{
-	font-size: 16pt;
-	font-style: italic;
-}
-
-#newsViewContents  #linkLabel{
-	font-size: 16pt;
-	font-style: italic;
-}
-
-#newsViewContents  #guidLabel{
-	font-size: 16pt;
-	font-style: italic;
-}</string>
+</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">

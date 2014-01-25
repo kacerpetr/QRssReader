@@ -17,6 +17,9 @@ class NewsItemWidget : public QWidget{
         ~NewsItemWidget();
         void setNewsItem(NewsItem item);
 
+    public slots:
+        void settingsChanged(QString key);
+
     signals:
         void pressed(NewsItem* newsItem);
 

@@ -14,6 +14,11 @@ class SettingsDialog : public QDialog{
         explicit SettingsDialog(QWidget* parent = 0);
         ~SettingsDialog();
 
+    public slots:
+        void clearCachePressed();
+        void savePressed();
+        void loadPresetPressed();
+
     private:
         Ui::SettingsDialog *ui;
 };

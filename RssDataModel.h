@@ -8,8 +8,6 @@
 #include <QNetworkReply>
 #include "RssFeedModel.h"
 
-#define RSS_DATA_FOLDER "RssData"
-
 typedef struct{
     QString header;
     QString text;
@@ -28,6 +26,7 @@ class RssDataModel : public QObject{
         RssDataModel(QObject* parent = 0);
         ~RssDataModel();
         void setFeedModel(RssFeedModel* feedModel);
+        void setFolder(const QString& folder);
         void downloadRssData();
         const QMultiMap<QDate,NewsItem>& data() const;
         void loadRss();
@@ -52,6 +51,7 @@ class RssDataModel : public QObject{
         QNetworkAccessManager* manager;
         RssFeedModel* feedModel;
         QList<QString> loadingQueue;
+        QString folder;
 
 };
 

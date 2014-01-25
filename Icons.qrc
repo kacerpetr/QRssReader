@@ -8,6 +8,5 @@
         <file alias="view_refresh">resource/view_refresh.png</file>
         <file alias="settings">resource/settings.png</file>
         <file alias="qrssreader">resource/qrssreader.png</file>
-        <file alias="select_folder">resource/select_folder.png</file>
     </qresource>
 </RCC>

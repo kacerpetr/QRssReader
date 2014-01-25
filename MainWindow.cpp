@@ -12,6 +12,7 @@
 #include "StorageAccess.h"
 #include "HelpDialog.h"
 #include "SettingsDialog.h"
+#include "SettingsModel.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
@@ -25,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //cerates and inits rss models
     rssFeed = new RssFeedModel(RSS_FEED_FILE);
     rssData = new RssDataModel(this);
+    rssData->setFolder(RSS_DATA_FOLDER);
     rssData->setFeedModel(rssFeed);
 
     //creates and adds news list widget
@@ -42,17 +44,20 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(rssData, SIGNAL(loadingStarted(QString,int)), this, SLOT(updateProgressBar(QString,int)));
     connect(rssData, SIGNAL(loadingFinished()), this, SLOT(hideProgressBar()));
     connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
+    connect(&SettingsModel::get(), SIGNAL(dataChanged(QString)), this, SLOT(settingsChanged(QString)));
+
+    //loads settings
+    SettingsModel::get().loadSettings();
+
+    //sets width of news list
+    settingsChanged("list_width");
+    settingsChanged("view_footer_font_size");
+    settingsChanged("view_text_font_size");
+    settingsChanged("view_title_font_size");
 
     //loads saved data
     rssFeed->loadFeedList();
     rssData->loadRss();
-}
-
-void MainWindow::manageFeeds(){
-    FeedManagement dialog;
-    dialog.setWindowState(Qt::WindowMaximized);
-    dialog.setModel(rssFeed);
-    dialog.exec();
 }
 
 void MainWindow::refreshAction(){
@@ -109,16 +114,60 @@ void MainWindow::aboutApp(){
     QMessageBox::about(this, "About QRssReader", about);
 }
 
+void MainWindow::manageFeeds(){
+    FeedManagement dialog;
+    #ifdef ANDROID
+        dialog.setWindowState(Qt::WindowMaximized);
+    #endif
+    dialog.setModel(rssFeed);
+    dialog.exec();
+}
+
 void MainWindow::showSettings(){
     SettingsDialog dialog;
-    dialog.setWindowState(Qt::WindowMaximized);
+    #ifdef ANDROID
+        dialog.setWindowState(Qt::WindowMaximized);
+    #endif
     dialog.exec();
 }
 
 void MainWindow::showAppHelp(){
     HelpDialog dialog;
-    dialog.setWindowState(Qt::WindowMaximized);
+    #ifdef ANDROID
+        dialog.setWindowState(Qt::WindowMaximized);
+    #endif
     dialog.exec();
+}
+
+void MainWindow::settingsChanged(QString tag){
+    if(tag == "list_width"){
+        int width = SettingsModel::get().getInt(tag);
+        ui->newsListFrame->setMinimumWidth(width);
+    }
+    if(tag == "view_title_font_size"){
+        SettingsModel& sm = SettingsModel::get();
+        QFont font;
+        font.setBold(true);
+        font.setUnderline(true);
+        font.setPointSize(sm.getInt(tag));
+        ui->titleLabel->setFont(font);
+    }
+    if(tag == "view_text_font_size"){
+        SettingsModel& sm = SettingsModel::get();
+        QFont font;
+        font.setPointSize(sm.getInt(tag));
+        ui->textLabel->setFont(font);
+    }
+    if(tag == "view_footer_font_size"){
+        SettingsModel& sm = SettingsModel::get();
+        QFont font;
+        font.setItalic(true);
+        font.setPointSize(sm.getInt(tag));
+        ui->timeLabel->setFont(font);
+        ui->linkLabel->setFont(font);
+        ui->feedNameLabel->setFont(font);
+        ui->guidLabel->setFont(font);
+    }
 }
 
 MainWindow::~MainWindow(){

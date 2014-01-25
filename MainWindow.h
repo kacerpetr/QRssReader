@@ -7,6 +7,7 @@
 #include "RssFeedModel.h"
 
 #define RSS_FEED_FILE "feedlist.xml"
+#define RSS_DATA_FOLDER "RssData"
 
 namespace Ui{
     class MainWindow;
@@ -30,6 +31,7 @@ class MainWindow : public QMainWindow{
         void aboutApp();
         void showSettings();
         void hideProgressBar();
+        void settingsChanged(QString tag);
 
     private:
         Ui::MainWindow* ui;

@@ -2,9 +2,39 @@
 #include "ui_NewsItemWidget.h"
 #include <QPainter>
 #include <QDebug>
+#include "SettingsModel.h"
 
 NewsItemWidget::NewsItemWidget(QWidget* parent) : QWidget(parent), ui(new Ui::NewsItemWidget){
     ui->setupUi(this);
+
+    //settings model instance
+    SettingsModel& sm = SettingsModel::get();
+
+    //data changed signal
+    connect(&sm, SIGNAL(dataChanged(QString)), this, SLOT(settingsChanged(QString)));
+
+    //set fonts
+    settingsChanged("list_title_font_size");
+    settingsChanged("list_time_font_size");
+}
+
+void NewsItemWidget::settingsChanged(QString key){
+    //changes title size
+    if(key == "list_title_font_size"){
+        SettingsModel& sm = SettingsModel::get();
+        QFont titleFont;
+        titleFont.setBold(true);
+        titleFont.setPointSize(sm.getInt(key));
+        ui->titleLabel->setFont(titleFont);
+    }
+    //changes time - feed label font size
+    else if(key == "list_time_font_size"){
+        SettingsModel& sm = SettingsModel::get();
+        QFont timeFont;
+        timeFont.setItalic(true);
+        timeFont.setPointSize(sm.getInt(key));
+        ui->feedLabel->setFont(timeFont);
+    }
 }
 
 void NewsItemWidget::paintEvent(QPaintEvent*){
@@ -39,13 +69,6 @@ void NewsItemWidget::setColor(QColor bkgColor, QColor textColor){
 
     //text color
     QString styleSheet = QString(
-        "#titleLabel{ \n"
-        "    font-size: 15pt; \n"
-        "    font-weight: bold; \n"
-        "} \n"
-        "#feedLabel{ \n"
-        "    font-size: 13pt; \n"
-        "} \n"
         "#NewsItemWidget{ \n"
         "    background-color: rgb(" + bkgClrStr + "); \n"
         "    color: rgb(" + textClrStr + "); \n"

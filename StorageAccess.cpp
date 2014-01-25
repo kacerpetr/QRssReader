@@ -264,3 +264,8 @@ bool StorageAccess::mkDir(const QString& relativePath) const{
     //success
     return true;
 }
+
+bool StorageAccess::exists(const QString& relativePath) const{
+    QDir appQDir(appDir());
+    return appQDir.exists(relativePath);
+}

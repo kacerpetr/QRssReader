@@ -48,7 +48,9 @@ CONFIG += mobility
 MOBILITY = 
 
 RESOURCES += \
-    Icons.qrc
+    Icons.qrc \
+    Default.qrc \
+    FeedList.qrc
 
 OTHER_FILES += \
     android/AndroidManifest.xml
