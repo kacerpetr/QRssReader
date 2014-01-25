@@ -41,16 +41,24 @@ void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
         for(int j = items.length()-1; j >= 0 ; j--){
             NewsItemWidget* item = new NewsItemWidget(content);
             item->setNewsItem(items[j]);
-            connect(item, SIGNAL(pressed(NewsItem*)), this, SLOT(itemPressed(NewsItem*)));
+            connect(item, SIGNAL(pressed(NewsItemWidget*)), this, SLOT(itemPressed(NewsItemWidget*)));
             layout->addWidget(item);
             this->allItems.append(item);
             this->newsItems.append(item);
         }
     }
+
+    //selects first item
+    selectFirst();
 }
 
-void NewsListWidget::itemPressed(NewsItem* item){
-    emit pressed(item);
+void NewsListWidget::itemPressed(NewsItemWidget* item){
+    for(int i = 0; i < newsItems.length(); i++){
+        if(newsItems[i]->isSelected())
+            newsItems[i]->setSelected(false);
+    }
+    item->setSelected(true);
+    emit pressed(item->newsItem());
 }
 
 void NewsListWidget::clearList(){
@@ -72,6 +80,7 @@ NewsItem* NewsListWidget::selectFirst(){
     }
 
     newsItems.first()->setSelected(true);
+    ensureWidgetVisible(newsItems.first());
     return newsItems.first()->newsItem();
 }
 
@@ -89,8 +98,11 @@ NewsItem* NewsListWidget::selectNext(){
 
     if(selectedIndex+1 < newsItems.length()-1){
         newsItems[selectedIndex+1]->setSelected(true);
+        ensureWidgetVisible(newsItems[selectedIndex+1]);
         return newsItems[selectedIndex+1]->newsItem();
     }else{
+        newsItems.last()->setSelected(true);
+        ensureWidgetVisible(newsItems.last());
         return newsItems.last()->newsItem();
     }
 }
@@ -98,7 +110,7 @@ NewsItem* NewsListWidget::selectNext(){
 NewsItem* NewsListWidget::selectPrev(){
     if(newsItems.isEmpty()) return NULL;
 
-    int selectedIndex = 0;
+    int selectedIndex = newsItems.length()-1;
 
     for(int i = newsItems.length()-1; i >= 0 ; i--){
         if(newsItems[i]->isSelected()){
@@ -109,8 +121,11 @@ NewsItem* NewsListWidget::selectPrev(){
 
     if(selectedIndex-1 > 0){
         newsItems[selectedIndex-1]->setSelected(true);
+        ensureWidgetVisible(newsItems[selectedIndex-1]);
         return newsItems[selectedIndex-1]->newsItem();
     }else{
+        newsItems.first()->setSelected(true);
+        ensureWidgetVisible(newsItems.first());
         return newsItems.first()->newsItem();
     }
 }
@@ -123,5 +138,6 @@ NewsItem* NewsListWidget::selectLast(){
     }
 
     newsItems.last()->setSelected(true);
+    ensureWidgetVisible(newsItems.last());
     return newsItems.last()->newsItem();
 }

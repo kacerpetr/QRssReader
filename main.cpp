@@ -13,6 +13,7 @@
 // 9. refactor settings to configuration file
 // 10. dont save empty files to cache (when no internet connection)
 // 11. change of background or font color have effect only with reload
+// 12. add android like scrolling
 
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);

@@ -24,7 +24,7 @@ class NewsItemWidget : public QWidget{
         void settingsChanged(QString key);
 
     signals:
-        void pressed(NewsItem* newsItem);
+        void pressed(NewsItemWidget* item);
 
     private:
         void setColor(QColor bkgColor, QColor textColor);

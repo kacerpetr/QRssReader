@@ -30,6 +30,14 @@
 	background-color: rgb(100, 100, 100);
 }
 
+#toolBar QToolButton:hover{
+	background-color: rgb(70, 70, 70);
+}
+
+#toolBar QToolButton:pressed{
+	background-color: rgb(70, 70, 70);
+}
+
 #newsViewContents{
 	background-color: white;
 }
@@ -47,10 +55,7 @@ QProgressBar::chunk {
 	border: 0px;
 	background-color: rgb(50, 230, 50);
 }
-
-#toolBar QToolButton:hover{
-	background-color: rgb(70, 70, 70);
-}</string>
+</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -357,9 +362,10 @@ QProgressBar::chunk {
    <addaction name="actionAboutQt"/>
    <addaction name="separator"/>
    <addaction name="actionFirst"/>
+   <addaction name="actionLast"/>
+   <addaction name="separator"/>
    <addaction name="actionPrevious"/>
    <addaction name="actionNext"/>
-   <addaction name="actionLast"/>
   </widget>
   <action name="actionManageFeeds">
    <property name="icon">
@@ -383,6 +389,9 @@ QProgressBar::chunk {
    </property>
    <property name="toolTip">
     <string>Help</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -420,6 +429,9 @@ QProgressBar::chunk {
    <property name="toolTip">
     <string>Refresh</string>
    </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
   </action>
   <action name="actionSettings">
    <property name="icon">
@@ -441,6 +453,9 @@ QProgressBar::chunk {
    <property name="text">
     <string>Home</string>
    </property>
+   <property name="shortcut">
+    <string>Home</string>
+   </property>
   </action>
   <action name="actionPrevious">
    <property name="icon">
@@ -449,6 +464,9 @@ QProgressBar::chunk {
    </property>
    <property name="text">
     <string>Previous</string>
+   </property>
+   <property name="shortcut">
+    <string>Up</string>
    </property>
   </action>
   <action name="actionNext">
@@ -459,6 +477,9 @@ QProgressBar::chunk {
    <property name="text">
     <string>Next</string>
    </property>
+   <property name="shortcut">
+    <string>Down</string>
+   </property>
   </action>
   <action name="actionLast">
    <property name="icon">
@@ -466,6 +487,9 @@ QProgressBar::chunk {
      <normaloff>:/icons/arrow_down_double</normaloff>:/icons/arrow_down_double</iconset>
    </property>
    <property name="text">
+    <string>End</string>
+   </property>
+   <property name="shortcut">
     <string>End</string>
    </property>
   </action>

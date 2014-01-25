@@ -24,7 +24,7 @@ class NewsListWidget : public QScrollArea{
         void pressed(NewsItem* item);
 
     private slots:
-        void itemPressed(NewsItem* item);
+        void itemPressed(NewsItemWidget* item);
 
     private:
         QWidget* content;

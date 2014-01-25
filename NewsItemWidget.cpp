@@ -101,7 +101,7 @@ void NewsItemWidget::setColor(QColor bkgColor, QColor textColor){
 }
 
 void NewsItemWidget::mousePressEvent(QMouseEvent*){
-    emit pressed(&item);
+    emit pressed(this);
 }
 
 NewsItemWidget::~NewsItemWidget(){
