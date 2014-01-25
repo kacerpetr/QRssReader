@@ -21,6 +21,8 @@ class StorageAccess{
         bool readString(QString& result, const QString& relativePath) const;
         bool mkDir(const QString& relativePath) const;
         bool exists(const QString& relativePath) const;
+        bool clearDir(const QString& relativePath) const;
+        bool rmFile(const QString& relativePath) const;
 
      private:
         StorageAccess(){}

@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>736</width>
-    <height>384</height>
+    <height>470</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>QRssReader</string>
   </property>
   <property name="windowIcon">
    <iconset resource="Icons.qrc">
@@ -47,7 +47,10 @@ QProgressBar::chunk {
 	border: 0px;
 	background-color: rgb(50, 230, 50);
 }
-</string>
+
+#toolBar QToolButton:hover{
+	background-color: rgb(70, 70, 70);
+}</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -142,7 +145,7 @@ QProgressBar::chunk {
            <x>0</x>
            <y>0</y>
            <width>334</width>
-           <height>341</height>
+           <height>446</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -352,16 +355,11 @@ QProgressBar::chunk {
    <addaction name="actionHelp"/>
    <addaction name="actionAbout"/>
    <addaction name="actionAboutQt"/>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>736</width>
-     <height>19</height>
-    </rect>
-   </property>
+   <addaction name="separator"/>
+   <addaction name="actionFirst"/>
+   <addaction name="actionPrevious"/>
+   <addaction name="actionNext"/>
+   <addaction name="actionLast"/>
   </widget>
   <action name="actionManageFeeds">
    <property name="icon">
@@ -369,10 +367,10 @@ QProgressBar::chunk {
      <normaloff>:/icons/manage_feeds</normaloff>:/icons/manage_feeds</iconset>
    </property>
    <property name="text">
-    <string>MF</string>
+    <string>Feeds</string>
    </property>
    <property name="toolTip">
-    <string>Manage feeds</string>
+    <string>Feeds</string>
    </property>
   </action>
   <action name="actionHelp">
@@ -381,10 +379,10 @@ QProgressBar::chunk {
      <normaloff>:/icons/help_contents</normaloff>:/icons/help_contents</iconset>
    </property>
    <property name="text">
-    <string>HP</string>
+    <string>Help</string>
    </property>
    <property name="toolTip">
-    <string>Application help</string>
+    <string>Help</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -393,10 +391,10 @@ QProgressBar::chunk {
      <normaloff>:/icons/help_about</normaloff>:/icons/help_about</iconset>
    </property>
    <property name="text">
-    <string>AU</string>
+    <string>About</string>
    </property>
    <property name="toolTip">
-    <string>About application</string>
+    <string>About</string>
    </property>
   </action>
   <action name="actionAboutQt">
@@ -405,10 +403,10 @@ QProgressBar::chunk {
      <normaloff>:/icons/qt5_about</normaloff>:/icons/qt5_about</iconset>
    </property>
    <property name="text">
-    <string>AQ</string>
+    <string>AboutQt</string>
    </property>
    <property name="toolTip">
-    <string>About Qt5 framework</string>
+    <string>AboutQt</string>
    </property>
   </action>
   <action name="actionRefresh">
@@ -417,10 +415,10 @@ QProgressBar::chunk {
      <normaloff>:/icons/view_refresh</normaloff>:/icons/view_refresh</iconset>
    </property>
    <property name="text">
-    <string>RL</string>
+    <string>Refresh</string>
    </property>
    <property name="toolTip">
-    <string>Refresh news</string>
+    <string>Refresh</string>
    </property>
   </action>
   <action name="actionSettings">
@@ -432,7 +430,43 @@ QProgressBar::chunk {
     <string>Settings</string>
    </property>
    <property name="toolTip">
-    <string>Application settings</string>
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionFirst">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/arrow_up_double</normaloff>:/icons/arrow_up_double</iconset>
+   </property>
+   <property name="text">
+    <string>Home</string>
+   </property>
+  </action>
+  <action name="actionPrevious">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/arrow_up</normaloff>:/icons/arrow_up</iconset>
+   </property>
+   <property name="text">
+    <string>Previous</string>
+   </property>
+  </action>
+  <action name="actionNext">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/arrow_down</normaloff>:/icons/arrow_down</iconset>
+   </property>
+   <property name="text">
+    <string>Next</string>
+   </property>
+  </action>
+  <action name="actionLast">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/arrow_down_double</normaloff>:/icons/arrow_down_double</iconset>
+   </property>
+   <property name="text">
+    <string>End</string>
    </property>
   </action>
  </widget>

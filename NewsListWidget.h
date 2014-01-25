@@ -15,6 +15,10 @@ class NewsListWidget : public QScrollArea{
         explicit NewsListWidget(QWidget* parent = 0);
         void createList(const QMultiMap<QDate,NewsItem>& news);
         void clearList();
+        NewsItem* selectFirst();
+        NewsItem* selectNext();
+        NewsItem* selectPrev();
+        NewsItem* selectLast();
 
     signals:
         void pressed(NewsItem* item);
@@ -25,7 +29,8 @@ class NewsListWidget : public QScrollArea{
     private:
         QWidget* content;
         QVBoxLayout* layout;
-        QList<QWidget*> items;
+        QList<QWidget*> allItems;
+        QList<NewsItemWidget*> newsItems;
 };
 
 #endif // NEWSLISTWIDGET_H

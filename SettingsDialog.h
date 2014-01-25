@@ -2,6 +2,10 @@
 #define SETTINGSDIALOG_H
 
 #include <QDialog>
+#include <RssFeedModel.h>
+#include <RssDataModel.h>
+
+#define FEEDS_PREFIX ":/feedlist/feedlist"
 
 namespace Ui {
     class SettingsDialog;
@@ -12,6 +16,8 @@ class SettingsDialog : public QDialog{
 
     public:
         explicit SettingsDialog(QWidget* parent = 0);
+        void setRssFeedModel(RssFeedModel* model);
+        void setRssDataModel(RssDataModel* model);
         ~SettingsDialog();
 
     public slots:
@@ -20,7 +26,9 @@ class SettingsDialog : public QDialog{
         void loadPresetPressed();
 
     private:
-        Ui::SettingsDialog *ui;
+        Ui::SettingsDialog* ui;
+        RssFeedModel* feedModel;
+        RssDataModel* dataModel;
 };
 
 #endif // SETTINGSDIALOG_H

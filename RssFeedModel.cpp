@@ -41,10 +41,10 @@ void RssFeedModel::saveFeedList() const{
         wr->writeTextElement("bkgColor", bkgClr);
 
         //text color in news list
-        QString textClr = QString::number(feeds[i].bkgColor.red()) + ",";
-        textClr += QString::number(feeds[i].bkgColor.green()) + ",";
-        textClr += QString::number(feeds[i].bkgColor.blue());
-        wr->writeTextElement("bkgColor", textClr);
+        QString textClr = QString::number(feeds[i].textColor.red()) + ",";
+        textClr += QString::number(feeds[i].textColor.green()) + ",";
+        textClr += QString::number(feeds[i].textColor.blue());
+        wr->writeTextElement("textColor", textClr);
 
         //end element
         wr->writeEndElement();
@@ -170,4 +170,8 @@ const FeedItem* RssFeedModel::byUrl(QString url){
         if(feeds[i].url == url) return &feeds.at(i);
     }
     return NULL;
+}
+
+QString RssFeedModel::feedListFile() const{
+    return filename;
 }

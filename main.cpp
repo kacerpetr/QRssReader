@@ -11,6 +11,8 @@
 // 7. determine behavior when no folder given to RssDataModel
 // 8. do something if required settings tag does not exists
 // 9. refactor settings to configuration file
+// 10. dont save empty files to cache (when no internet connection)
+// 11. change of background or font color have effect only with reload
 
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);

@@ -8,5 +8,9 @@
         <file alias="view_refresh">resource/view_refresh.png</file>
         <file alias="settings">resource/settings.png</file>
         <file alias="qrssreader">resource/qrssreader.png</file>
+        <file alias="arrow_up">resource/arrow_up.png</file>
+        <file alias="arrow_down_double">resource/arrow_down_double.png</file>
+        <file alias="arrow_down">resource/arrow_down.png</file>
+        <file alias="arrow_up_double">resource/arrow_up_double.png</file>
     </qresource>
 </RCC>

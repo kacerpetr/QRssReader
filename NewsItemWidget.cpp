@@ -4,7 +4,7 @@
 #include <QDebug>
 #include "SettingsModel.h"
 
-NewsItemWidget::NewsItemWidget(QWidget* parent) : QWidget(parent), ui(new Ui::NewsItemWidget){
+NewsItemWidget::NewsItemWidget(QWidget* parent) : QWidget(parent), ui(new Ui::NewsItemWidget), selected(false){
     ui->setupUi(this);
 
     //settings model instance
@@ -54,6 +54,27 @@ void NewsItemWidget::setNewsItem(NewsItem item){
 
     //stores news item
     this->item = item;
+}
+
+void NewsItemWidget::setSelected(bool selected){
+    if(selected){
+        QColor bkgClr = item.feed.bkgColor;
+        QString clrStr = QString::number((bkgClr.red()<=40) ? 0 : (bkgClr.red()-40)) + ",";
+        clrStr += QString::number((bkgClr.green()<=40) ? 0 : (bkgClr.green()-40)) + ",";
+        clrStr += QString::number((bkgClr.blue()<=40) ? 0 : (bkgClr.blue()-40));
+        ui->selectHighlight->setStyleSheet("background-color: rgb(" + clrStr + ")");
+    }else{
+        ui->selectHighlight->setStyleSheet("");
+    }
+    this->selected = selected;
+}
+
+NewsItem* NewsItemWidget::newsItem(){
+    return &item;
+}
+
+bool NewsItemWidget::isSelected() const{
+    return selected;
 }
 
 void NewsItemWidget::setColor(QColor bkgColor, QColor textColor){

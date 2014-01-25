@@ -6,12 +6,57 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>730</width>
-    <height>517</height>
+    <width>803</width>
+    <height>482</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Application settings</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#SettingsDialog{
+	background-color: rgb(30, 30, 30);
+}
+
+QLabel{
+	color: rgb(215,215,215);
+}
+
+QSpinBox{
+	background-color: rgb(70, 70, 70);
+	color: rgb(215,215,215);
+}
+
+QListWidget{
+	background-color: rgb(50, 50, 50);
+	color: rgb(215,215,215);
+	border: 1px solid rgb(90, 90, 90);
+	border-radius: 2px;
+	margin-top: 1ex;
+}
+
+QListView::item:selected{
+	border-radius: 2px;
+	background-color: rgb(90, 90, 90);
+}
+
+QPushButton{
+	background-color: rgb(30, 30, 30);
+	color: rgb(215,215,215);
+}
+
+QGroupBox{
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(35, 35, 35), stop: 1 rgb(45, 45, 45));
+	border: 1px solid rgb(90, 90, 90);
+	border-radius: 2px;
+	margin-top: 1ex;
+}
+
+QGroupBox::title{
+	color: rgb(215,215,215);
+	subcontrol-origin: margin;
+	subcontrol-position: top conter;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
@@ -30,45 +75,122 @@
     <number>10</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout1">
-     <property name="spacing">
-      <number>10</number>
-     </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QFrame" name="frame1">
+      <widget class="QGroupBox" name="groupBox4">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>1</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="frameShape">
-        <enum>QFrame::NoFrame</enum>
+       <property name="title">
+        <string>Feeds presets</string>
        </property>
-       <property name="frameShadow">
-        <enum>QFrame::Raised</enum>
+       <property name="flat">
+        <bool>false</bool>
        </property>
-       <property name="lineWidth">
-        <number>0</number>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>10</number>
+        </property>
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
+        <item>
+         <widget class="QListWidget" name="listWidget">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout3">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <item>
+           <spacer name="horizontalSpacer5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="loadButton">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Load predefined feedlist</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="title">
+        <string>Application settings</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="spacing">
          <number>10</number>
         </property>
         <property name="leftMargin">
-         <number>0</number>
+         <number>10</number>
         </property>
         <property name="topMargin">
-         <number>0</number>
+         <number>10</number>
         </property>
         <property name="rightMargin">
-         <number>0</number>
+         <number>10</number>
         </property>
         <property name="bottomMargin">
-         <number>0</number>
+         <number>10</number>
         </property>
         <item>
-         <widget class="QGroupBox" name="groupBox1">
+         <widget class="QGroupBox" name="groupBox5">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -164,6 +286,13 @@
              </property>
             </widget>
            </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label3">
+             <property name="text">
+              <string>Time font size</string>
+             </property>
+            </widget>
+           </item>
            <item row="2" column="1">
             <widget class="QSpinBox" name="listTimeFontSize">
              <property name="minimumSize">
@@ -186,13 +315,6 @@
              </property>
              <property name="value">
               <number>12</number>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label3">
-             <property name="text">
-              <string>Time font size</string>
              </property>
             </widget>
            </item>
@@ -378,76 +500,66 @@
           </property>
          </spacer>
         </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout2">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="saveButton">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Close and Save changes</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cancelButton">
+            <property name="minimumSize">
+             <size>
+              <width>180</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Close and Discard changes</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
        </layout>
-      </widget>
-     </item>
-     <item>
-      <widget class="QGroupBox" name="groupBox4">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>1</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="title">
-        <string>Feeds presets</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout2">
-     <item>
-      <widget class="QPushButton" name="cancelButton">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Close and Discard changes</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="saveButton">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Close and Save changes</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="loadButton">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Load predefined feedlist</string>
-       </property>
       </widget>
      </item>
     </layout>
@@ -463,12 +575,12 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>417</x>
-     <y>487</y>
+     <x>774</x>
+     <y>513</y>
     </hint>
     <hint type="destinationlabel">
-     <x>216</x>
-     <y>490</y>
+     <x>714</x>
+     <y>547</y>
     </hint>
    </hints>
   </connection>

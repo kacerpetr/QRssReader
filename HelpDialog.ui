@@ -11,15 +11,39 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Application help</string>
   </property>
   <property name="windowIcon">
    <iconset resource="Icons.qrc">
     <normaloff>:/icons/qrssreader</normaloff>:/icons/qrssreader</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">#contents{
-	background-color: white;
+   <string notr="true">#HelpDialog{
+	background-color: rgb(30, 30, 30);
+}
+
+QLabel{
+	color: rgb(215,215,215);
+}
+
+QScrollArea{
+	border: 1px solid gray;
+	border-radius: 2px;
+}
+
+QScrollArea{
+	border: 1px solid gray;
+	border-radius: 2px;
+}
+
+#contents{
+	background-color: rgb(30, 30, 30);
+	color: rgb(215,215,215);
+}
+
+QPushButton{
+	background-color: rgb(30, 30, 30);
+	color: rgb(215,215,215);
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">

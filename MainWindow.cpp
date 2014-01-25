@@ -46,6 +46,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
     connect(&SettingsModel::get(), SIGNAL(dataChanged(QString)), this, SLOT(settingsChanged(QString)));
 
+    connect(ui->actionFirst, SIGNAL(triggered()), this, SLOT(selectFirst()));
+    connect(ui->actionLast, SIGNAL(triggered()), this, SLOT(selectLast()));
+    connect(ui->actionNext, SIGNAL(triggered()), this, SLOT(selectNext()));
+    connect(ui->actionPrevious, SIGNAL(triggered()), this, SLOT(selectPrev()));
+
     //loads settings
     SettingsModel::get().loadSettings();
 
@@ -125,6 +130,8 @@ void MainWindow::manageFeeds(){
 
 void MainWindow::showSettings(){
     SettingsDialog dialog;
+    dialog.setRssFeedModel(rssFeed);
+    dialog.setRssDataModel(rssData);
     #ifdef ANDROID
         dialog.setWindowState(Qt::WindowMaximized);
     #endif
@@ -168,6 +175,26 @@ void MainWindow::settingsChanged(QString tag){
         ui->feedNameLabel->setFont(font);
         ui->guidLabel->setFont(font);
     }
+}
+
+void MainWindow::selectFirst(){
+    NewsItem* item = newsList->selectFirst();
+    itemPressed(item);
+}
+
+void MainWindow::selectNext(){
+    NewsItem* item = newsList->selectNext();
+    itemPressed(item);
+}
+
+void MainWindow::selectPrev(){
+    NewsItem* item = newsList->selectPrev();
+    itemPressed(item);
+}
+
+void MainWindow::selectLast(){
+    NewsItem* item = newsList->selectLast();
+    itemPressed(item);
 }
 
 MainWindow::~MainWindow(){

@@ -16,6 +16,9 @@ class NewsItemWidget : public QWidget{
         explicit NewsItemWidget(QWidget* parent = 0);
         ~NewsItemWidget();
         void setNewsItem(NewsItem item);
+        void setSelected(bool selected);
+        NewsItem* newsItem();
+        bool isSelected() const;
 
     public slots:
         void settingsChanged(QString key);
@@ -33,6 +36,7 @@ class NewsItemWidget : public QWidget{
     private:
         Ui::NewsItemWidget* ui;
         NewsItem item;
+        bool selected;
 };
 
 #endif // NEWSITEM_H

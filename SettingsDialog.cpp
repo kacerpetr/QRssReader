@@ -6,9 +6,15 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QMessageBox>
+#include <QDirIterator>
+#include <QDebug>
 
-SettingsDialog::SettingsDialog(QWidget* parent) : QDialog(parent), ui(new Ui::SettingsDialog){
+SettingsDialog::SettingsDialog(QWidget* parent) : QDialog(parent),
+ui(new Ui::SettingsDialog), feedModel(NULL), dataModel(NULL){
     ui->setupUi(this);
+
+    //button focus
+    ui->saveButton->setFocus();
 
     //fills form with data
     ui->listWidthBox->setValue(SettingsModel::get().getInt("list_width"));
@@ -17,6 +23,13 @@ SettingsDialog::SettingsDialog(QWidget* parent) : QDialog(parent), ui(new Ui::Se
     ui->viewTitleSize->setValue(SettingsModel::get().getInt("view_title_font_size"));
     ui->viewTextSize->setValue(SettingsModel::get().getInt("view_text_font_size"));
     ui->viewFooterSize->setValue(SettingsModel::get().getInt("view_footer_font_size"));
+
+    //predefined feed lists
+    QDirIterator it(FEEDS_PREFIX, QDirIterator::Subdirectories);
+    while(it.hasNext()){
+        ui->listWidget->addItem(it.next().remove(0, QString(FEEDS_PREFIX).length()));
+    }
+    ui->listWidget->setCurrentRow(0);
 
     //connects
     connect(ui->saveButton, SIGNAL(pressed()), this, SLOT(savePressed()));
@@ -28,8 +41,26 @@ SettingsDialog::~SettingsDialog(){
     delete ui;
 }
 
-void SettingsDialog::clearCachePressed(){
+void SettingsDialog::setRssFeedModel(RssFeedModel* model){
+    feedModel = model;
+}
 
+void SettingsDialog::setRssDataModel(RssDataModel* model){
+    dataModel = model;
+}
+
+void SettingsDialog::clearCachePressed(){
+    //does nothing if no cache dir was given
+    if(dataModel == NULL) return;
+
+    //clears cache directory
+    if(StorageAccess::get().clearDir(dataModel->dataFolder())){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Clear cache");
+        msgBox.setText("Rss data cache succesfully cleared");
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
+    }
 }
 
 void SettingsDialog::savePressed(){
@@ -61,5 +92,59 @@ void SettingsDialog::savePressed(){
 }
 
 void SettingsDialog::loadPresetPressed(){
+    //must have data models
+    if(dataModel == NULL) return;
+    if(feedModel == NULL) return;
 
+    //storage access singleton reference
+    StorageAccess& sa = StorageAccess::get();
+
+    //predefined feedlist path
+    QString pflPath = FEEDS_PREFIX + ui->listWidget->currentItem()->text();
+
+    //error handling vars
+    bool success = false;
+
+    //deletes old feedlist
+    sa.rmFile(feedModel->feedListFile());
+
+    //creates copy of predefined feedlist to current feedlist
+    QFile source(pflPath);
+    success = source.copy(sa.absPath(feedModel->feedListFile()));
+
+    //error check
+    if(!success){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Load preset error");
+        msgBox.setText("Error creating copy of predefined feed list file");
+        msgBox.setInformativeText(source.errorString());
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        return;
+    }
+
+    //sets file permissions
+    QFile file(sa.absPath(feedModel->feedListFile()));
+    success = file.setPermissions(QFileDevice::WriteOwner | QFileDevice::ReadOwner |
+                                  QFileDevice::ReadGroup | QFileDevice::ReadOther);
+
+    //error check
+    if(!success){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Load preset error");
+        msgBox.setText("Unable to set feedlist file permissions");
+        msgBox.setInformativeText(file.errorString());
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+    }
+
+    //clears data cache
+    sa.clearDir(dataModel->dataFolder());
+
+    //success
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Load preset");
+    msgBox.setText("Predefined feedlist loaded");
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.exec();
 }

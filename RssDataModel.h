@@ -30,6 +30,7 @@ class RssDataModel : public QObject{
         void downloadRssData();
         const QMultiMap<QDate,NewsItem>& data() const;
         void loadRss();
+        QString dataFolder() const;
 
     public slots:
         void replyFinished(QNetworkReply* reply);

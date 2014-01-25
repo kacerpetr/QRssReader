@@ -124,8 +124,9 @@ void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
                     //item datetime
                     else if(elemName == "pubDate"){
                         QString str = rd.text().toString();
-                        str.chop(4);
                         QString format = "ddd, dd MMM yyyy hh:mm:ss";
+                        if(str.length() > format.length())
+                            str.chop(str.length() - format.length());
                         QLocale loc(QLocale::English);
                         QDateTime dt = loc.toDateTime(str, format);
                         item.time = dt;
@@ -152,9 +153,10 @@ void RssDataModel::loadRss(){
 
     //loads data
     for(int i = 0; i < feeds.length(); i++){
-        if(!feeds[i].enabled) continue;
         QString filename = feeds[i].name.toLower().replace(" ", "_");
         QString relativePath = QString(this->folder) + "/" + filename + ".xml";
+        if(!StorageAccess::get().exists(relativePath)) continue;
+        if(!feeds[i].enabled) continue;
         QString xml;
         StorageAccess::get().readString(xml, relativePath);
         parseRss(xml, feeds[i]);
@@ -178,3 +180,6 @@ const QMultiMap<QDate,NewsItem>& RssDataModel::data() const{
     return news;
 }
 
+QString RssDataModel::dataFolder() const{
+    return folder;
+}

@@ -1,3 +1,5 @@
 <RCC>
-    <qresource prefix="/feedlist"/>
+    <qresource prefix="/feedlist">
+        <file>feedlist/cznews-idnes_blesk_ac24.xml</file>
+    </qresource>
 </RCC>

@@ -269,3 +269,52 @@ bool StorageAccess::exists(const QString& relativePath) const{
     QDir appQDir(appDir());
     return appQDir.exists(relativePath);
 }
+
+bool StorageAccess::clearDir(const QString& relativePath) const{
+    //directory to clear
+    QDir dir(absPath(relativePath));
+
+    //error handleing vars
+    QString errFile;
+    bool success = true;
+
+    //clears all files from directory
+    dir.setFilter( QDir::NoDotAndDotDot | QDir::Files );
+    foreach(QString item, dir.entryList()){
+        success = dir.remove(item);
+        if(!success){
+            errFile = item;
+            break;
+        }
+    }
+
+    //creates directory if not
+    if(!success){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Error in clearDir(...)");
+        msgBox.setText("Directory \"" + relativePath + "\" can't be cleared");
+        msgBox.setInformativeText("File \"" + errFile + "\" can't be deleted");
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+    }
+
+    //everithing ok?
+    return success;
+}
+
+bool StorageAccess::rmFile(const QString& relativePath) const{
+    //application directory
+    QDir appQDir(appDir());
+
+    //deletes file
+    if(!appQDir.remove(relativePath)){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Error rmFile(...)");
+        msgBox.setText("File \"" + relativePath + "\" can't be deleted");
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        return false;
+    }
+
+    return true;
+}

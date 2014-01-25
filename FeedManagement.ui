@@ -6,16 +6,71 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>845</width>
-    <height>638</height>
+    <width>993</width>
+    <height>573</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Feed management</string>
   </property>
   <property name="windowIcon">
    <iconset resource="Icons.qrc">
     <normaloff>:/icons/qrssreader</normaloff>:/icons/qrssreader</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#FeedManagement{
+	background-color: rgb(30, 30, 30);
+}
+
+QLabel{
+	color: rgb(215,215,215);
+}
+
+QSpinBox{
+	background-color: rgb(70, 70, 70);
+	color: rgb(215,215,215);
+}
+
+QLineEdit{
+	background-color: rgb(70, 70, 70);
+	color: rgb(215,215,215);
+}
+
+QListWidget{
+	background-color: rgb(50, 50, 50);
+	color: rgb(215,215,215);
+	border: 1px solid rgb(90, 90, 90);
+	border-radius: 2px;
+	margin-top: 1ex;
+}
+
+QListView::item:selected{
+	border-radius: 2px;
+	background-color: rgb(90, 90, 90);
+}
+
+QPushButton{
+	background-color: rgb(30, 30, 30);
+	color: rgb(215,215,215);
+}
+
+QToolButton{
+	background-color: rgb(30, 30, 30);
+	color: rgb(215,215,215);
+}
+
+QGroupBox{
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(35, 35, 35), stop: 1 rgb(45, 45, 45));
+	border: 1px solid rgb(90, 90, 90);
+	border-radius: 2px;
+	margin-top: 1ex;
+}
+
+QGroupBox::title{
+	color: rgb(215,215,215);
+	subcontrol-origin: margin;
+	subcontrol-position: top conter;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -44,7 +99,7 @@
      <widget class="QListWidget" name="feedList">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
+        <horstretch>2</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
@@ -52,7 +107,7 @@
      <widget class="QFrame" name="frame1">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
+        <horstretch>1</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
@@ -93,6 +148,24 @@
           <string>Feed properties</string>
          </property>
          <layout class="QFormLayout" name="formLayout">
+          <property name="horizontalSpacing">
+           <number>10</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>10</number>
+          </property>
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label1">
             <property name="text">
@@ -219,7 +292,14 @@
           <item row="3" column="1">
            <widget class="QCheckBox" name="enableBox">
             <property name="text">
-             <string>Feed enabled</string>
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label3_2">
+            <property name="text">
+             <string>Enabled</string>
             </property>
            </widget>
           </item>
@@ -529,19 +609,6 @@
            <number>0</number>
           </property>
           <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
            <widget class="QPushButton" name="removeButton">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -551,12 +618,18 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>130</width>
               <height>40</height>
              </size>
             </property>
             <property name="text">
              <string>Remove feed</string>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -570,7 +643,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>130</width>
               <height>40</height>
              </size>
             </property>
@@ -589,7 +662,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>130</width>
               <height>40</height>
              </size>
             </property>
@@ -608,7 +681,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>0</width>
+              <width>130</width>
               <height>40</height>
              </size>
             </property>

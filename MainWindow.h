@@ -32,6 +32,10 @@ class MainWindow : public QMainWindow{
         void showSettings();
         void hideProgressBar();
         void settingsChanged(QString tag);
+        void selectFirst();
+        void selectNext();
+        void selectPrev();
+        void selectLast();
 
     private:
         Ui::MainWindow* ui;
