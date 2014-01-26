@@ -27,7 +27,7 @@
 #include "RssFeedModel.h"
 
 typedef struct{
-    QString header;
+    QString title;
     QString text;
     QDateTime time;
     FeedItem feed;

@@ -107,7 +107,7 @@ void MainWindow::itemPressed(NewsItem* item){
     ui->linkLabel->setText("Link: <a href=\""+item->link+"\">" + linkText + "</a>");
 
     //other report parts
-    ui->titleLabel->setText(item->header);
+    ui->titleLabel->setText(item->title);
     ui->textLabel->setText(item->text);
     ui->guidLabel->setText("Guid: " + item->guid);
 }
@@ -115,6 +115,7 @@ void MainWindow::itemPressed(NewsItem* item){
 void MainWindow::updateNewsList(){
     newsList->clearList();
     newsList->createList(rssData->data());
+    selectFirst();
 }
 
 void MainWindow::updateProgressBar(QString feed, int progress){

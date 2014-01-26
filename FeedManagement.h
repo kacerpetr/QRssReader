@@ -22,7 +22,7 @@
 #include <QDialog>
 #include "RssFeedModel.h"
 
-namespace Ui {
+namespace Ui{
     class FeedManagement;
 }
 
@@ -32,8 +32,10 @@ class FeedManagement : public QDialog{
     public:
         explicit FeedManagement(QWidget* parent = 0);
         void setModel(RssFeedModel* model);
-        FeedItem makeFeedItem() const;
         ~FeedManagement();
+
+    private:
+        FeedItem makeFeedItem() const;
 
     public slots:
         void feedSelected(int row);

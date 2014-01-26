@@ -64,7 +64,7 @@ void NewsItemWidget::paintEvent(QPaintEvent*){
 
 void NewsItemWidget::setNewsItem(NewsItem item){
     //set labels
-    ui->titleLabel->setText(item.header);
+    ui->titleLabel->setText(item.title);
     ui->feedLabel->setText(item.time.time().toString("hh:mm:ss") + " - " + item.feed.name);
 
     //set colors

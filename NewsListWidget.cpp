@@ -19,6 +19,8 @@
 #include "NewsListWidget.h"
 #include <QWidget>
 #include <QScrollBar>
+#include <QScroller>
+#include <QEasingCurve>
 
 NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
     //scroll area settings
@@ -38,6 +40,17 @@ NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
     //puts it together
     content->setLayout(layout);
     this->setWidget(content);
+
+    //enables figer scrolling for android
+    #ifdef ANDROID
+        QScroller::grabGesture(this, QScroller::LeftMouseButtonGesture);
+        QScrollerProperties sp;
+        sp.setScrollMetric(QScrollerProperties::DragStartDistance, 0.001);
+        sp.setScrollMetric(QScrollerProperties::FrameRate, QScrollerProperties::Fps60);
+        sp.setScrollMetric(QScrollerProperties::MousePressEventDelay, 0.13);
+        QScroller* qs = QScroller::scroller(this);
+        qs->setScrollerProperties(sp);
+    #endif
 }
 
 void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
@@ -65,9 +78,6 @@ void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
             this->newsItems.append(item);
         }
     }
-
-    //selects first item
-    selectFirst();
 }
 
 void NewsListWidget::itemPressed(NewsItemWidget* item){

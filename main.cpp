@@ -25,13 +25,12 @@
 // 3. what RssDataModel should do when no RssFeedModel was given
 // 4. NewsListWidget - better naming (items X this->items)
 // 5. check internet connection
-// 6. rename NewsItem.header to NewsItem.title
 // 7. determine behavior when no folder given to RssDataModel
 // 8. do something if required settings tag does not exists
 // 9. refactor settings to configuration file
 // 10. dont save empty files to cache (when no internet connection)
 // 11. change of background or font color have effect only with reload
-// 12. add android like scrolling
+// 12. enable / disable feed does not work properly
 
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);

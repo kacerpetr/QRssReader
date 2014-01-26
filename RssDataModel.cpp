@@ -24,7 +24,7 @@
 #include "StorageAccess.h"
 
 bool operator==(const NewsItem& item1, const NewsItem& item2){
-    if(item1.header == item2.header && item1.feed.name == item2.feed.name){
+    if(item1.title == item2.title && item1.feed.name == item2.feed.name){
         return true;
     }
     return false;
@@ -112,7 +112,7 @@ void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
                 elemName = rd.name().toString();
                 if(rd.name() == "item"){
                     state = 1;
-                    item.header = "";
+                    item.title = "";
                     item.text = "";
                     item.time = QDateTime();
                 }
@@ -133,7 +133,7 @@ void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
                 if(state == 1){
                     //item title
                     if(elemName == "title"){
-                        item.header = rd.text().toString();
+                        item.title = rd.text().toString();
                     }
                     //item description
                     else if(elemName == "description"){
