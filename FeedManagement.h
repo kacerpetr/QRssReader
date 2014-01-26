@@ -26,6 +26,10 @@ namespace Ui{
     class FeedManagement;
 }
 
+/**
+ * @brief The FeedManagement dialog class
+ * Dialog to edit feed items in list of feeds
+ */
 class FeedManagement : public QDialog{
     Q_OBJECT
 

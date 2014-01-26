@@ -20,12 +20,18 @@
 #include <QApplication>
 
 //------ TODO -----//
-// 2. get data directory in android in better way
-// 4. what to do when no internet access ?
-// 8. do something if required settings tag does not exists
-// 11. change of background or font color have effect only with reload
-// 12. add tabs - browsing more feedlist at once
+// 1. get data directory in android in better way
+// 2. what to do when no internet access ?
+// 3. do something if required settings tag does not exists
+// 4. add tabs - browsing more feedlist at once
+// 5. write application help
 
+/**
+ * @brief main
+ * @param argc
+ * @param argv
+ * @return
+ */
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
     MainWindow w;

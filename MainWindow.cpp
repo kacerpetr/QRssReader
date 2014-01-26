@@ -23,7 +23,6 @@
 #include <QDir>
 #include <QStandardPaths>
 #include <QMessageBox>
-
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "FeedManagement.h"
@@ -32,6 +31,10 @@
 #include "SettingsDialog.h"
 #include "SettingsModel.h"
 
+/**
+ * @brief Class constructor
+ * @param parent
+ */
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
 
@@ -52,18 +55,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->newsListFrame->layout()->addWidget(newsList);
 
     //signal slot connection
-    connect(ui->actionManageFeeds, SIGNAL(triggered()), this, SLOT(manageFeeds()));
-    connect(ui->actionRefresh, SIGNAL(triggered()), this, SLOT(refreshAction()));
     connect(newsList, SIGNAL(pressed(NewsItem*)), this, SLOT(itemPressed(NewsItem*)));
     connect(rssData, SIGNAL(dataChanged()), this, SLOT(updateNewsList()));
+    connect(rssData, SIGNAL(loadingStarted(QString,int)), this, SLOT(updateProgressBar(QString,int)));
+    connect(rssData, SIGNAL(loadingFinished()), this, SLOT(hideProgressBar()));
+    connect(&SettingsModel::get(), SIGNAL(dataChanged(QString)), this, SLOT(settingsChanged(QString)));
+    connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
+    connect(ui->actionManageFeeds, SIGNAL(triggered()), this, SLOT(manageFeeds()));
+    connect(ui->actionRefresh, SIGNAL(triggered()), this, SLOT(refreshAction()));
     connect(ui->actionAboutQt, SIGNAL(triggered()), this, SLOT(aboutQt5()));
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(aboutApp()));
     connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(showAppHelp()));
-    connect(rssData, SIGNAL(loadingStarted(QString,int)), this, SLOT(updateProgressBar(QString,int)));
-    connect(rssData, SIGNAL(loadingFinished()), this, SLOT(hideProgressBar()));
-    connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
-    connect(&SettingsModel::get(), SIGNAL(dataChanged(QString)), this, SLOT(settingsChanged(QString)));
-
     connect(ui->actionFirst, SIGNAL(triggered()), this, SLOT(selectFirst()));
     connect(ui->actionLast, SIGNAL(triggered()), this, SLOT(selectLast()));
     connect(ui->actionNext, SIGNAL(triggered()), this, SLOT(selectNext()));
@@ -83,11 +85,28 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     rssData->loadRss();
 }
 
+/**
+ * @brief Class destructor
+ */
+MainWindow::~MainWindow(){
+    delete ui;
+    delete rssFeed;
+    rssFeed = NULL;
+    delete rssData;
+    rssData = NULL;
+}
+
+/**
+ * @brief Starts downloading of rss data
+ */
 void MainWindow::refreshAction(){
-    rssData->setFeedModel(NULL);
     rssData->downloadRssData();
 }
 
+/**
+ * @brief Called when item from news list is pressed
+ * @param item pointer to selected news item
+ */
 void MainWindow::itemPressed(NewsItem* item){
     //unhides line under report text
     ui->line1->setHidden(false);
@@ -113,32 +132,52 @@ void MainWindow::itemPressed(NewsItem* item){
     ui->guidLabel->setText("Guid: " + item->guid);
 }
 
+/**
+ * @brief Called when data was changed in RssDataModel
+ */
 void MainWindow::updateNewsList(){
     newsList->clearList();
     newsList->createList(rssData->data());
     selectFirst();
 }
 
+/**
+ * @brief Pregress bar update during rss data downloading
+ * @param feed url of currently processed feed
+ * @param progress in range from 0 to 100
+ */
 void MainWindow::updateProgressBar(QString feed, int progress){
     ui->progressBar->setHidden(false);
     ui->progressBar->setValue(progress);
     ui->progressBar->setFormat(feed);
 }
 
+/**
+ * @brief Hides download progress bar
+ */
 void MainWindow::hideProgressBar(){
     ui->progressBar->setHidden(true);
 }
 
+/**
+ * @brief Shows dialog about Qt5 framework
+ */
 void MainWindow::aboutQt5(){
     QMessageBox::aboutQt(this, "About Qt5");
 }
 
+/**
+ * @brief Shows dialog about QRssReader
+ */
 void MainWindow::aboutApp(){
     QString about = "Application is currently in development state.\n";
     about += "by Petr Kacer <kacerpetr@gmail.com>";
     QMessageBox::about(this, "About QRssReader", about);
 }
 
+/**
+ * @brief Shows feed management dialog
+ */
 void MainWindow::manageFeeds(){
     FeedManagement dialog;
     #ifdef ANDROID
@@ -148,6 +187,9 @@ void MainWindow::manageFeeds(){
     dialog.exec();
 }
 
+/**
+ * @brief Shows settings dialog
+ */
 void MainWindow::showSettings(){
     SettingsDialog dialog;
     dialog.setRssFeedModel(rssFeed);
@@ -158,6 +200,9 @@ void MainWindow::showSettings(){
     dialog.exec();
 }
 
+/**
+ * @brief Shows application help
+ */
 void MainWindow::showAppHelp(){
     HelpDialog dialog;
     #ifdef ANDROID
@@ -166,6 +211,10 @@ void MainWindow::showAppHelp(){
     dialog.exec();
 }
 
+/**
+ * @brief Called when settings was changed
+ * @param tag key of item in settings
+ */
 void MainWindow::settingsChanged(QString tag){
     if(tag == "list_width"){
         int width = SettingsModel::get().getInt(tag);
@@ -197,30 +246,34 @@ void MainWindow::settingsChanged(QString tag){
     }
 }
 
+/**
+ * @brief Selects first item from news list
+ */
 void MainWindow::selectFirst(){
     NewsItem* item = newsList->selectFirst();
     itemPressed(item);
 }
 
+/**
+ * @brief Selects next item from news list
+ */
 void MainWindow::selectNext(){
     NewsItem* item = newsList->selectNext();
     itemPressed(item);
 }
 
+/**
+ * @brief Selects previous item from news list
+ */
 void MainWindow::selectPrev(){
     NewsItem* item = newsList->selectPrev();
     itemPressed(item);
 }
 
+/**
+ * @brief Selects last item from news list
+ */
 void MainWindow::selectLast(){
     NewsItem* item = newsList->selectLast();
     itemPressed(item);
-}
-
-MainWindow::~MainWindow(){
-    delete ui;
-    delete rssFeed;
-    rssFeed = NULL;
-    delete rssData;
-    rssData = NULL;
 }

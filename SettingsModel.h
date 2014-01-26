@@ -23,8 +23,13 @@
 #include <QString>
 #include <QMap>
 
+/** Name of application settings file */
 #define SETTINGS_FILE "settings.xml"
 
+/**
+ * @brief The SettingsModel class, singleton
+ * Handles application settings excluding feedlist
+ */
 class SettingsModel : public QObject{
     Q_OBJECT
 

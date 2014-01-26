@@ -22,6 +22,10 @@
 #include <QDebug>
 #include "SettingsModel.h"
 
+/**
+ * @brief Class constructor
+ * @param parent
+ */
 NewsItemWidget::NewsItemWidget(QWidget* parent) : QWidget(parent), ui(new Ui::NewsItemWidget), selected(false){
     ui->setupUi(this);
 
@@ -36,6 +40,17 @@ NewsItemWidget::NewsItemWidget(QWidget* parent) : QWidget(parent), ui(new Ui::Ne
     settingsChanged("list_time_font_size");
 }
 
+/**
+ * @brief Class destructor
+ */
+NewsItemWidget::~NewsItemWidget(){
+    delete ui;
+}
+
+/**
+ * @brief Called when settings was changed
+ * @param tag key of item in settings
+ */
 void NewsItemWidget::settingsChanged(QString key){
     //changes title size
     if(key == "list_title_font_size"){
@@ -55,6 +70,9 @@ void NewsItemWidget::settingsChanged(QString key){
     }
 }
 
+/**
+ * @brief Because of using stylesheets
+ */
 void NewsItemWidget::paintEvent(QPaintEvent*){
      QStyleOption opt;
      opt.init(this);
@@ -62,6 +80,10 @@ void NewsItemWidget::paintEvent(QPaintEvent*){
      style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
 
+/**
+ * @brief Shows title and other from given NewsItem
+ * @param item this one will be shown in news list
+ */
 void NewsItemWidget::setNewsItem(NewsItem item){
     //set labels
     ui->titleLabel->setText(item.title);
@@ -74,6 +96,10 @@ void NewsItemWidget::setNewsItem(NewsItem item){
     this->item = item;
 }
 
+/**
+ * @brief Selects or unselects this item
+ * @param selected true to select, false to unselect
+ */
 void NewsItemWidget::setSelected(bool selected){
     if(selected){
         QColor bkgClr = item.feed.bkgColor;
@@ -87,14 +113,25 @@ void NewsItemWidget::setSelected(bool selected){
     this->selected = selected;
 }
 
+/**
+ * @brief Returns pointer of asociated NewsItem
+ */
 NewsItem* NewsItemWidget::newsItem(){
     return &item;
 }
 
+/**
+ * @brief Returns true if item is selected
+ */
 bool NewsItemWidget::isSelected() const{
     return selected;
 }
 
+/**
+ * @brief Sets colors of NewsItemWidget
+ * @param bkgColor background color
+ * @param textColor text color
+ */
 void NewsItemWidget::setColor(QColor bkgColor, QColor textColor){
     //background color
     QString textClrStr = QString::number(textColor.red()) + ",";
@@ -118,11 +155,9 @@ void NewsItemWidget::setColor(QColor bkgColor, QColor textColor){
     setStyleSheet(styleSheet);
 }
 
+/**
+ * Emits pressed signal on mouse press event
+ */
 void NewsItemWidget::mousePressEvent(QMouseEvent*){
     emit pressed(this);
 }
-
-NewsItemWidget::~NewsItemWidget(){
-    delete ui;
-}
-

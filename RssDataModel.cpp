@@ -23,6 +23,9 @@
 #include <QDir>
 #include "StorageAccess.h"
 
+/**
+ * @brief Compares two news items
+ */
 bool operator==(const NewsItem& item1, const NewsItem& item2){
     if(item1.title == item2.title && item1.feed.name == item2.feed.name){
         return true;
@@ -30,24 +33,43 @@ bool operator==(const NewsItem& item1, const NewsItem& item2){
     return false;
 }
 
+/**
+ * @brief Class constructor
+ * @param parent
+ */
 RssDataModel::RssDataModel(QObject* parent) : QObject(parent){
     manager = new QNetworkAccessManager();
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
 }
 
+/**
+ * @brief Class destructor
+ */
 RssDataModel::~RssDataModel(){
     delete manager;
     manager = NULL;
 }
 
+/**
+ * @brief FeedModel setter
+ * @param feedModel model pointer
+ */
 void RssDataModel::setFeedModel(RssFeedModel* feedModel){
     this->feedModel = feedModel;
 }
 
+/**
+ * @brief RssDataModel::setFolder
+ * @param folder
+ */
 void RssDataModel::setFolder(const QString& folder){
     this->folder = folder;
 }
 
+/**
+ * @brief Starts downloading rss data
+ * Adds feed urls to queue
+ */
 void RssDataModel::downloadRssData(){
     //check if feedmodel is NULL
     Q_ASSERT_X(this->feedModel!=NULL, "downloadRssData()", "FeedModel is null");
@@ -68,6 +90,10 @@ void RssDataModel::downloadRssData(){
     loadFeed(loadingQueue.takeFirst());
 }
 
+/**
+ * @brief Loads rss on given url
+ * @param url address of rss source
+ */
 void RssDataModel::loadFeed(QString url){
     //check if feedmodel is NULL
     Q_ASSERT_X(this->feedModel!=NULL, "loadFeed()", "FeedModel is null");
@@ -78,6 +104,10 @@ void RssDataModel::loadFeed(QString url){
     emit loadingStarted(url, progress);
 }
 
+/**
+ * @brief Called when rss data download is completed
+ * @param reply
+ */
 void RssDataModel::replyFinished(QNetworkReply* reply){
     //check if feedmodel is NULL
     Q_ASSERT_X(this->feedModel!=NULL, "replyFinished()", "FeedModel is null");
@@ -100,6 +130,10 @@ void RssDataModel::replyFinished(QNetworkReply* reply){
     }
 }
 
+/**
+ * @brief Adds item to list of news
+ * @param item
+ */
 void RssDataModel::addNewsItem(const NewsItem& item){
     QMap<QDate, NewsItem>::iterator it = news.find(item.time.date(), item);
 
@@ -109,6 +143,11 @@ void RssDataModel::addNewsItem(const NewsItem& item){
     }
 }
 
+/**
+ * @brief Parsing of dowloaded or loaded rss data
+ * @param xml
+ * @param feed
+ */
 void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
     QXmlStreamReader rd(xml);
 
@@ -180,6 +219,10 @@ void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
     }
 }
 
+/**
+ * @brief Loads rss data from chache
+ * Ususaly called at program startup
+ */
 void RssDataModel::loadRss(){
     Q_ASSERT_X(this->feedModel!=NULL, "loadRss()", "FeedModel is null");
     Q_ASSERT_X(!this->folder.isEmpty(), "loadRss()", "No cache folder was set");
@@ -202,6 +245,11 @@ void RssDataModel::loadRss(){
     emit dataChanged();
 }
 
+/**
+ * @brief Saves xml data to cache
+ * @param xml downloaded data
+ * @param feed asociated feed
+ */
 void RssDataModel::saveRss(const QString& xml, const FeedItem& feed) const{
     Q_ASSERT_X(!this->folder.isEmpty(), "saveRss()", "No cache folder was set");
 
@@ -214,10 +262,16 @@ void RssDataModel::saveRss(const QString& xml, const FeedItem& feed) const{
     StorageAccess::get().writeString(xml, relativePath);
 }
 
+/**
+ * Returns reference to downloaded rss data
+ */
 const QMultiMap<QDate,NewsItem>& RssDataModel::data() const{
     return news;
 }
 
+/**
+ * Returns name of cache folder
+ */
 QString RssDataModel::dataFolder() const{
     return folder;
 }

@@ -26,6 +26,7 @@
 #include <QNetworkReply>
 #include "RssFeedModel.h"
 
+/** News item structure */
 typedef struct{
     QString title;
     QString text;
@@ -37,6 +38,10 @@ typedef struct{
 
 bool operator==(const NewsItem& item1, const NewsItem& item2);
 
+/**
+ * @brief The RssDataModel class
+ * Stores, saves, loads and downloads rss data
+ */
 class RssDataModel : public QObject{
     Q_OBJECT
 

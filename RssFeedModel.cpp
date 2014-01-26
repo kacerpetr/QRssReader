@@ -19,18 +19,31 @@
 #include "RssFeedModel.h"
 #include "StorageAccess.h"
 
+/**
+ * @brief Compares two feed items
+ */
 bool operator==(const FeedItem& item1, const FeedItem& item2){
     if(item1.name == item2.name) return true;
     if(item1.url == item2.url) return true;
     return false;
 }
 
+/**
+ * @brief Class constructor
+ * @param filename
+ */
 RssFeedModel::RssFeedModel(QString filename) : filename(filename){}
 
+/**
+ * @brief Returns reference to list of feeds
+ */
 const QList<FeedItem>& RssFeedModel::feedList() const{
     return feeds;
 }
 
+/**
+ * @brief Saves feedlist to xml
+ */
 void RssFeedModel::saveFeedList() const{
     Q_ASSERT_X(!this->filename.isEmpty(), "saveFeedList()", "No feedlist file was set");
 
@@ -77,6 +90,9 @@ void RssFeedModel::saveFeedList() const{
     StorageAccess::get().closeXmlWriter(&wr);
 }
 
+/**
+ * @brief Loads feedlist from xml
+ */
 void RssFeedModel::loadFeedList(){
     Q_ASSERT_X(!this->filename.isEmpty(), "loadFeedList()", "No feedlist file was set");
 
@@ -169,6 +185,12 @@ void RssFeedModel::loadFeedList(){
     StorageAccess::get().closeXmlReader(&rd);
 }
 
+/**
+ * @brief RssFeedModel::modifyFeed
+ * @param index index of feed to modify
+ * @param feed new values
+ * @return true if success, false otherwise
+ */
 bool RssFeedModel::modifyFeed(int index, const FeedItem& feed){
     int sres = feeds.indexOf(feed);
     if(sres >= 0 && sres != index) return false;
@@ -176,6 +198,10 @@ bool RssFeedModel::modifyFeed(int index, const FeedItem& feed){
     return true;
 }
 
+/**
+ * @brief Adds new feed to list
+ * @param feed
+ */
 bool RssFeedModel::addFeed(const FeedItem& feed){
     int index = feeds.indexOf(feed);
     if(index >= 0) return false;
@@ -183,10 +209,18 @@ bool RssFeedModel::addFeed(const FeedItem& feed){
     return true;
 }
 
+/**
+ * @brief Removes feed from list
+ * @param index
+ */
 void RssFeedModel::removeFeed(int index){
     feeds.removeAt(index);
 }
 
+/**
+ * @brief Returns pointer to feed with given url
+ * @param url
+ */
 const FeedItem* RssFeedModel::byUrl(QString url){
     for(int i = 0; i < feeds.length(); i++){
         if(feeds[i].url == url) return &feeds.at(i);
@@ -194,6 +228,9 @@ const FeedItem* RssFeedModel::byUrl(QString url){
     return NULL;
 }
 
+/**
+ * @brief Returns name of feedlist xml file
+ */
 QString RssFeedModel::feedListFile() const{
     return filename;
 }

@@ -26,6 +26,10 @@
 #include "NewsGroupWidget.h"
 #include "RssDataModel.h"
 
+/**
+ * @brief The NewsListWidget class
+ * Shows list of downloaded news
+ */
 class NewsListWidget : public QScrollArea{
     Q_OBJECT
 

@@ -29,6 +29,10 @@ namespace Ui {
     class SettingsDialog;
 }
 
+/**
+ * @brief The SettingsDialog class
+ * Application settings and feedlist selection
+ */
 class SettingsDialog : public QDialog{
     Q_OBJECT
 

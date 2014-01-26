@@ -22,6 +22,10 @@
 #include <QScroller>
 #include <QEasingCurve>
 
+/**
+ * @brief Class constructor
+ * @param parent
+ */
 NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
     //scroll area settings
     setWidgetResizable(true);
@@ -53,6 +57,10 @@ NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
     #endif
 }
 
+/**
+ * @brief Fills scroll area with item widgets
+ * @param news reference to rss data
+ */
 void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
     //gets array of keys (daily groups)
     QList<QDate> keys = news.uniqueKeys();
@@ -70,6 +78,7 @@ void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
 
         //through all news in day
         for(int j = items.length()-1; j >= 0 ; j--){
+            if(!items[j].feed.enabled) continue;
             NewsItemWidget* item = new NewsItemWidget(content);
             item->setNewsItem(items[j]);
             connect(item, SIGNAL(pressed(NewsItemWidget*)), this, SLOT(itemPressed(NewsItemWidget*)));
@@ -80,43 +89,70 @@ void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
     }
 }
 
+/**
+ * @brief Called when some item widget is pressed
+ * @param item pointer of pressed widget
+ */
 void NewsListWidget::itemPressed(NewsItemWidget* item){
+    //unselects all selected items
     for(int i = 0; i < newsItems.length(); i++){
         if(newsItems[i]->isSelected())
             newsItems[i]->setSelected(false);
     }
+    //selects presed item
     item->setSelected(true);
+
+    //emits signal
     emit pressed(item->newsItem());
 }
 
+/**
+ * @brief Clears news list
+ */
 void NewsListWidget::clearList(){
+    //reamoves widgets from layout and deletes them
     for(int i = 0; i < allItems.length(); i++){
         layout->removeWidget(allItems[i]);
         delete allItems[i];
         allItems[i] = NULL;
     }
 
+    //clears pointer lists
     allItems.clear();
     newsItems.clear();
 }
 
+/**
+ * @brief Selects first item in list
+ * @return NewsItem pointer asociated with current item widget
+ */
 NewsItem* NewsListWidget::selectFirst(){
     if(newsItems.isEmpty()) return NULL;
 
+    //unselects all selected items
     for(int i = 0; i < newsItems.length(); i++){
         if(newsItems[i]->isSelected()) newsItems[i]->setSelected(false);
     }
 
+    //selects first item and scrolls to it
     newsItems.first()->setSelected(true);
     ensureWidgetVisible(newsItems.first());
+
+    //returns asociated NewsItem pointer
     return newsItems.first()->newsItem();
 }
 
+/**
+ * @brief Selects next item in list
+ * @return NewsItem pointer asociated with current item widget
+ */
 NewsItem* NewsListWidget::selectNext(){
     if(newsItems.isEmpty()) return NULL;
 
+    //index of selected item
     int selectedIndex = 0;
 
+    //unselects all selected items and get index of last of them
     for(int i = 0; i < newsItems.length(); i++){
         if(newsItems[i]->isSelected()){
             newsItems[i]->setSelected(false);
@@ -124,22 +160,31 @@ NewsItem* NewsListWidget::selectNext(){
         }
     }
 
+    //next item selection
     if(selectedIndex+1 < newsItems.length()-1){
         newsItems[selectedIndex+1]->setSelected(true);
         ensureWidgetVisible(newsItems[selectedIndex+1]);
         return newsItems[selectedIndex+1]->newsItem();
-    }else{
+    }
+    //next item is last
+    else{
         newsItems.last()->setSelected(true);
         ensureWidgetVisible(newsItems.last());
         return newsItems.last()->newsItem();
     }
 }
 
+/**
+ * @brief Selects previous item in list
+ * @return NewsItem pointer asociated with current item widget
+ */
 NewsItem* NewsListWidget::selectPrev(){
     if(newsItems.isEmpty()) return NULL;
 
+    //index of selected item
     int selectedIndex = newsItems.length()-1;
 
+    //unselects all selected items and get index of first of them
     for(int i = newsItems.length()-1; i >= 0 ; i--){
         if(newsItems[i]->isSelected()){
             newsItems[i]->setSelected(false);
@@ -147,25 +192,36 @@ NewsItem* NewsListWidget::selectPrev(){
         }
     }
 
+    //previous item selection
     if(selectedIndex-1 > 0){
         newsItems[selectedIndex-1]->setSelected(true);
         ensureWidgetVisible(newsItems[selectedIndex-1]);
         return newsItems[selectedIndex-1]->newsItem();
-    }else{
+    }
+    //previous item is first
+    else{
         newsItems.first()->setSelected(true);
         ensureWidgetVisible(newsItems.first());
         return newsItems.first()->newsItem();
     }
 }
 
+/**
+ * @brief Selects last item in list
+ * @return NewsItem pointer asociated with current item widget
+ */
 NewsItem* NewsListWidget::selectLast(){
     if(newsItems.isEmpty()) return NULL;
 
+    //unselects all selected items
     for(int i = 0; i < newsItems.length(); i++){
         if(newsItems[i]->isSelected()) newsItems[i]->setSelected(false);
     }
 
+    //selects last item and scrolls to it
     newsItems.last()->setSelected(true);
     ensureWidgetVisible(newsItems.last());
+
+    //returns asociated NewsItem pointer
     return newsItems.last()->newsItem();
 }

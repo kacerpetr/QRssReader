@@ -25,6 +25,10 @@ namespace Ui{
     class NewsGroupWidget;
 }
 
+/**
+ * @brief The NewsGroupWidget class
+ * Used to show date of day in list of news
+ */
 class NewsGroupWidget : public QWidget{
     Q_OBJECT
 

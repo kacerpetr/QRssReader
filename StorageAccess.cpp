@@ -22,11 +22,17 @@
 #include <QTextStream>
 #include "StorageAccess.h"
 
+/**
+ * @brief Returns reference of model object
+ */
 StorageAccess& StorageAccess::get(){
     static StorageAccess instance;
     return instance;
 }
 
+/**
+ * @brief Returns name of application data directory
+ */
 QString StorageAccess::appDir() const{
     //data directory path
     QString path;
@@ -58,6 +64,10 @@ QString StorageAccess::appDir() const{
     return dataDir.absoluteFilePath(APP_FOLDER);
 }
 
+/**
+ * @brief Returns absolute path of given file
+ * Given file pathname is relative to application directory
+ */
 QString StorageAccess::absPath(QString filename) const{
     //absolute path of application directory
     QDir directory(appDir());
@@ -66,6 +76,10 @@ QString StorageAccess::absPath(QString filename) const{
     return directory.absoluteFilePath(filename);
 }
 
+/**
+ * @brief Returns QXmlStreamReader that will read from given file
+ * Given file pathname is relative to application directory
+ */
 QXmlStreamReader* StorageAccess::openXmlReader(QString filename) const{
     //opens xml file
     QString path = absPath(filename);
@@ -112,6 +126,10 @@ QXmlStreamReader* StorageAccess::openXmlReader(QString filename) const{
     return reader;
 }
 
+/**
+ * @brief Closes given QXmlStreamReader
+ * @param reader
+ */
 void StorageAccess::closeXmlReader(QXmlStreamReader** reader) const{
     //parsing error check
     if((*reader)->hasError()){
@@ -135,6 +153,10 @@ void StorageAccess::closeXmlReader(QXmlStreamReader** reader) const{
     *reader = NULL;
 }
 
+/**
+ * @brief Returns QXmlStreamWriter that will write into given file
+ * Given file pathname is relative to application directory
+ */
 QXmlStreamWriter* StorageAccess::openXmlWriter(QString filename) const{
     //opens xml file
     QString path = absPath(filename);
@@ -181,6 +203,10 @@ QXmlStreamWriter* StorageAccess::openXmlWriter(QString filename) const{
     return writer;
 }
 
+/**
+ * @brief Closes given QXmlStreamWriter
+ * @param writer
+ */
 void StorageAccess::closeXmlWriter(QXmlStreamWriter** writer) const{
     //parsing error check
     if((*writer)->hasError()){
@@ -202,6 +228,12 @@ void StorageAccess::closeXmlWriter(QXmlStreamWriter** writer) const{
     *writer = NULL;
 }
 
+/**
+ * @brief Writes given string to file
+ * @param str string to write into file
+ * @param relativePath output file pathname
+ * @return true when success, false otherwise
+ */
 bool StorageAccess::writeString(const QString& str, const QString& relativePath) const{
     //absolute path of file
     QString absolutePath = absPath(relativePath);
@@ -232,6 +264,12 @@ bool StorageAccess::writeString(const QString& str, const QString& relativePath)
     return true;
 }
 
+/**
+ * @brief Reads text file
+ * @param result output variable
+ * @param relativePath input file pathname
+ * @return true when success, false otherwise
+ */
 bool StorageAccess::readString(QString& result, const QString& relativePath) const{
     //absolute path of file
     QString absolutePath = absPath(relativePath);
@@ -262,6 +300,11 @@ bool StorageAccess::readString(QString& result, const QString& relativePath) con
     return true;
 }
 
+/**
+ * @brief Creates directory
+ * @param relativePath
+ * @return true when success, false otherwise
+ */
 bool StorageAccess::mkDir(const QString& relativePath) const{
     //application directory
     QDir appQDir(appDir());
@@ -283,11 +326,20 @@ bool StorageAccess::mkDir(const QString& relativePath) const{
     return true;
 }
 
+/**
+ * @brief Returns true if file exists
+ * @param relativePath
+ */
 bool StorageAccess::exists(const QString& relativePath) const{
     QDir appQDir(appDir());
     return appQDir.exists(relativePath);
 }
 
+/**
+ * @brief Clears given directory
+ * @param relativePath
+ * @return true when success, false otherwise
+ */
 bool StorageAccess::clearDir(const QString& relativePath) const{
     //directory to clear
     QDir dir(absPath(relativePath));
@@ -320,6 +372,11 @@ bool StorageAccess::clearDir(const QString& relativePath) const{
     return success;
 }
 
+/**
+ * @brief Removes given file
+ * @param relativePath
+ * @return true when success, false otherwise
+ */
 bool StorageAccess::rmFile(const QString& relativePath) const{
     //application directory
     QDir appQDir(appDir());

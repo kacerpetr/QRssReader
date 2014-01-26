@@ -25,15 +25,16 @@ namespace Ui{
     class HelpDialog;
 }
 
+/**
+ * @brief The HelpDialog class
+ * Application help window
+ */
 class HelpDialog : public QDialog{
     Q_OBJECT
 
     public:
         explicit HelpDialog(QWidget* parent = 0);
         ~HelpDialog();
-
-    private:
-        void paintEvent(QPaintEvent*);
 
     private:
         Ui::HelpDialog *ui;

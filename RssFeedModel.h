@@ -23,6 +23,7 @@
 #include <QColor>
 #include <QList>
 
+/** Feed item structure */
 typedef struct{
     QString name;
     QString url;
@@ -34,6 +35,10 @@ typedef struct{
 
 bool operator==(const FeedItem& item1, const FeedItem& item2);
 
+/**
+ * @brief The RssFeedModel class
+ * Holds and manages list of feeds
+ */
 class RssFeedModel{
     public:
         RssFeedModel(QString filename);

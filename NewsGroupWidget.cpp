@@ -20,14 +20,25 @@
 #include "ui_NewsGroupWidget.h"
 #include <QPainter>
 
+/**
+ * @brief Class constructor
+ * @param parent
+ */
 NewsGroupWidget::NewsGroupWidget(QWidget* parent) : QWidget(parent), ui(new Ui::NewsGroupWidget){
     ui->setupUi(this);
 }
 
+/**
+ * @brief Given text will be shown
+ * @param text usualy serves as header of day marker
+ */
 void NewsGroupWidget::setText(QString text){
     ui->textLabel->setText(text);
 }
 
+/**
+ * @brief Because of using stylesheets
+ */
 void NewsGroupWidget::paintEvent(QPaintEvent*){
      QStyleOption opt;
      opt.init(this);
@@ -35,6 +46,9 @@ void NewsGroupWidget::paintEvent(QPaintEvent*){
      style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
 
+/**
+ * @brief Class destructor
+ */
 NewsGroupWidget::~NewsGroupWidget(){
     delete ui;
 }

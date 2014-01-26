@@ -24,8 +24,13 @@
 #include <QXmlStreamWriter>
 #include <QStringList>
 
+/** Application data folder */
 #define APP_FOLDER (".qrssreader")
 
+/**
+ * @brief The StorageAccess class
+ * Support functions for working with files, singleton
+ */
 class StorageAccess{
     public:
         static StorageAccess& get();

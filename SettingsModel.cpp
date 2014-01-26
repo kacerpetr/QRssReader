@@ -23,11 +23,18 @@
 #include <QMessageBox>
 #include <QDebug>
 
+/**
+ * @brief Returns reference of model object
+ */
 SettingsModel& SettingsModel::get(){
     static SettingsModel instance;
     return instance;
 }
 
+/**
+ * @brief Loads setting file
+ * If file does not exist, copy of default settings file is created
+ */
 void SettingsModel::loadSettings(){
     //settings file does not exist, default configuration will be used
     if(!StorageAccess::get().exists(SETTINGS_FILE)){
@@ -101,6 +108,9 @@ void SettingsModel::loadSettings(){
     StorageAccess::get().closeXmlReader(&rd);
 }
 
+/**
+ * @brief Saves settings to xml file
+ */
 void SettingsModel::saveSettings(){
     //opens xml writer
     QXmlStreamWriter* wr = StorageAccess::get().openXmlWriter(SETTINGS_FILE);
@@ -125,29 +135,56 @@ void SettingsModel::saveSettings(){
     StorageAccess::get().closeXmlWriter(&wr);
 }
 
+/**
+ * @brief Settings item value setter
+ * @param tag key of item
+ * @param value value of item
+ */
 void SettingsModel::setValue(const QString& tag, const QString& value){
     data.insert(tag, value);
     emit dataChanged(tag);
 }
 
+/**
+ * @brief Settings item value setter
+ * @param tag key of item
+ * @param value value of item
+ */
 void SettingsModel::setValue(const QString& tag, const int value){
     data.insert(tag, QString::number(value));
     emit dataChanged(tag);
 }
 
+/**
+ * @brief Settings item value setter
+ * @param tag key of item
+ * @param value value of item
+ */
 void SettingsModel::setValue(const QString& tag, const double value){
     data.insert(tag, QString::number(value));
     emit dataChanged(tag);
 }
 
+/**
+ * @brief Settings value getter
+ * @param tag key of settings item
+ */
 QString SettingsModel::getText(const QString& tag) const{
     return data[tag];
 }
 
+/**
+ * @brief Settings value getter
+ * @param tag key of settings item
+ */
 int SettingsModel::getInt(const QString& tag) const{
     return data[tag].toInt();
 }
 
+/**
+ * @brief Settings value getter
+ * @param tag key of settings item
+ */
 double SettingsModel::getDouble(const QString& tag) const{
     return data[tag].toDouble();
 }

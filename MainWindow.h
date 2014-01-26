@@ -31,6 +31,10 @@ namespace Ui{
     class MainWindow;
 }
 
+/**
+ * @brief The MainWindow class
+ * Main screen of application
+ */
 class MainWindow : public QMainWindow{
     Q_OBJECT
 

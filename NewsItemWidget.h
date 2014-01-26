@@ -27,6 +27,10 @@ namespace Ui {
     class NewsItemWidget;
 }
 
+/**
+ * @brief The NewsItemWidget class
+ * Represents one report in list of news
+ */
 class NewsItemWidget : public QWidget{
     Q_OBJECT
 
@@ -46,8 +50,6 @@ class NewsItemWidget : public QWidget{
 
     private:
         void setColor(QColor bkgColor, QColor textColor);
-
-    private:
         void paintEvent(QPaintEvent*);
         void mousePressEvent(QMouseEvent*);
 

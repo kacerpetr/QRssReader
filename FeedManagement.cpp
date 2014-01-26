@@ -21,6 +21,10 @@
 #include <QMessageBox>
 #include <QClipboard>
 
+/**
+ * @brief Class constructor
+ * @param parent
+ */
 FeedManagement::FeedManagement(QWidget* parent) : QDialog(parent), ui(new Ui::FeedManagement), model(NULL){
     ui->setupUi(this);
 
@@ -51,6 +55,18 @@ FeedManagement::FeedManagement(QWidget* parent) : QDialog(parent), ui(new Ui::Fe
     connect(ui->descriptionNameButton, SIGNAL(pressed()), this, SLOT(pasteDescriptionPressed()));
 }
 
+/**
+ * @brief Class destructor
+ */
+FeedManagement::~FeedManagement(){
+    delete ui;
+}
+
+/**
+ * @brief Sets RssFeedModel pointer
+ * @param model
+ * @see RssFeedModel
+ */
 void FeedManagement::setModel(RssFeedModel* model){
     //saves model pointer
     this->model = model;
@@ -67,6 +83,10 @@ void FeedManagement::setModel(RssFeedModel* model){
     ui->feedList->setCurrentRow(0);
 }
 
+/**
+ * @brief Returns FeedItem created from dialog inputs
+ * @see FeedItem
+ */
 FeedItem FeedManagement::makeFeedItem() const{
     FeedItem item;
 
@@ -93,6 +113,10 @@ FeedItem FeedManagement::makeFeedItem() const{
     return item;
 }
 
+/**
+ * @brief Fills form inputs with feed data
+ * @param row
+ */
 void FeedManagement::feedSelected(int row){
     //invalid row check
     if(row < 0) return;
@@ -121,6 +145,9 @@ void FeedManagement::feedSelected(int row){
     textColorChanged();
 }
 
+/**
+ * @brief Set color of background color preview label
+ */
 void FeedManagement::bkgColorChanged(){
     QString color = QString::number(ui->bkgRedBox->value()) + ",";
     color += QString::number(ui->bkgGreenBox->value()) + ",";
@@ -128,6 +155,9 @@ void FeedManagement::bkgColorChanged(){
     ui->bkgColorPreview->setStyleSheet("background-color: rgb(" + color + ");");
 }
 
+/**
+ * @brief Set color of text color preview label
+ */
 void FeedManagement::textColorChanged(){
     QString color = QString::number(ui->textRedBox->value()) + ",";
     color += QString::number(ui->textGreenBox->value()) + ",";
@@ -135,6 +165,9 @@ void FeedManagement::textColorChanged(){
     ui->textColorPreview->setStyleSheet("background-color: rgb(" + color + ");");
 }
 
+/**
+ * @brief Saves modified feed parameters as new feed
+ */
 void FeedManagement::addNewPressed(){
     FeedItem item = makeFeedItem();
 
@@ -155,6 +188,9 @@ void FeedManagement::addNewPressed(){
     model->saveFeedList();
 }
 
+/**
+ * @brief Saves changes of selected feed
+ */
 void FeedManagement::saveChangesPressed(){
     //index of selected item
     int index = ui->feedList->currentRow();
@@ -180,6 +216,9 @@ void FeedManagement::saveChangesPressed(){
      model->saveFeedList();
 }
 
+/**
+ * @brief Removes selected feed
+ */
 void FeedManagement::removePressed(){
     //index of selected item
     int index = ui->feedList->currentRow();
@@ -197,21 +236,26 @@ void FeedManagement::removePressed(){
     model->saveFeedList();
 }
 
+/**
+ * @brief Pastes text from clipboard to feed name input
+ */
 void FeedManagement::pasteNamePressed(){
     QClipboard *clipboard = QApplication::clipboard();
     ui->nameEdit->setText(clipboard->text());
 }
 
+/**
+ * @brief Pastes text from clipboard to feed url input
+ */
 void FeedManagement::pasteUrlPressed(){
     QClipboard *clipboard = QApplication::clipboard();
     ui->urlEdit->setText(clipboard->text());
 }
 
+/**
+ * @brief Pastes text from clipboard to feed description input
+ */
 void FeedManagement::pasteDescriptionPressed(){
     QClipboard *clipboard = QApplication::clipboard();
     ui->descriptionEdit->setText(clipboard->text());
-}
-
-FeedManagement::~FeedManagement(){
-    delete ui;
 }

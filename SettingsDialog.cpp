@@ -27,6 +27,10 @@
 #include <QDirIterator>
 #include <QDebug>
 
+/**
+ * @brief Class constructor
+ * @param parent
+ */
 SettingsDialog::SettingsDialog(QWidget* parent) : QDialog(parent),
 ui(new Ui::SettingsDialog), feedModel(NULL), dataModel(NULL){
     ui->setupUi(this);
@@ -55,18 +59,33 @@ ui(new Ui::SettingsDialog), feedModel(NULL), dataModel(NULL){
     connect(ui->clearCacheButton, SIGNAL(pressed()), this, SLOT(clearCachePressed()));
 }
 
+/**
+ * @brief Class destructor
+ */
 SettingsDialog::~SettingsDialog(){
     delete ui;
 }
 
+/**
+ * @brief RssFeedModel setter
+ * @param model
+ */
 void SettingsDialog::setRssFeedModel(RssFeedModel* model){
     feedModel = model;
 }
 
+/**
+ * @brief RssDataModel setter
+ * @param model
+ */
 void SettingsDialog::setRssDataModel(RssDataModel* model){
     dataModel = model;
 }
 
+/**
+ * @brief Clears rss data cache
+ * Called when clear cache button pressed
+ */
 void SettingsDialog::clearCachePressed(){
     //does nothing if no cache dir was given
     if(dataModel == NULL) return;
@@ -81,6 +100,9 @@ void SettingsDialog::clearCachePressed(){
     }
 }
 
+/**
+ * @brief Saves changes in application settings
+ */
 void SettingsDialog::savePressed(){
     SettingsModel& sm = SettingsModel::get();
 
@@ -109,6 +131,9 @@ void SettingsDialog::savePressed(){
     close();
 }
 
+/**
+ * @brief Loads predefined feedlist
+ */
 void SettingsDialog::loadPresetPressed(){
     //must have data models
     if(dataModel == NULL) return;
