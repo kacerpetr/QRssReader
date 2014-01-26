@@ -32,6 +32,8 @@ const QList<FeedItem>& RssFeedModel::feedList() const{
 }
 
 void RssFeedModel::saveFeedList() const{
+    Q_ASSERT_X(!this->filename.isEmpty(), "saveFeedList()", "No feedlist file was set");
+
     //opens xml writer
     QXmlStreamWriter* wr = StorageAccess::get().openXmlWriter(filename);
     if(wr == NULL) return;
@@ -76,6 +78,8 @@ void RssFeedModel::saveFeedList() const{
 }
 
 void RssFeedModel::loadFeedList(){
+    Q_ASSERT_X(!this->filename.isEmpty(), "loadFeedList()", "No feedlist file was set");
+
     //opens xml reader
     QXmlStreamReader* rd = StorageAccess::get().openXmlReader(filename);
     if(rd == NULL) return;

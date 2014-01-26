@@ -84,6 +84,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 }
 
 void MainWindow::refreshAction(){
+    rssData->setFeedModel(NULL);
     rssData->downloadRssData();
 }
 

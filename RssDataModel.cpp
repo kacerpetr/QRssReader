@@ -49,6 +49,10 @@ void RssDataModel::setFolder(const QString& folder){
 }
 
 void RssDataModel::downloadRssData(){
+    //check if feedmodel is NULL
+    Q_ASSERT_X(this->feedModel!=NULL, "downloadRssData()", "FeedModel is null");
+
+    //list of feeds
     const QList<FeedItem>& feeds = feedModel->feedList();
 
     //adds feed urls to queue
@@ -57,20 +61,31 @@ void RssDataModel::downloadRssData(){
         loadingQueue.append(feeds[i].url);
     }
 
+    //clears rss data
+    news.clear();
+
     //start loading of first feed
     loadFeed(loadingQueue.takeFirst());
 }
 
 void RssDataModel::loadFeed(QString url){
+    //check if feedmodel is NULL
+    Q_ASSERT_X(this->feedModel!=NULL, "loadFeed()", "FeedModel is null");
+
+    //loads feed
     manager->get(QNetworkRequest(QUrl(url)));
     int progress = 100 - (loadingQueue.length()+1)*100 / feedModel->feedList().length();
     emit loadingStarted(url, progress);
 }
 
 void RssDataModel::replyFinished(QNetworkReply* reply){
+    //check if feedmodel is NULL
+    Q_ASSERT_X(this->feedModel!=NULL, "replyFinished()", "FeedModel is null");
+
     //gets feed item by its url
     const FeedItem* feed = feedModel->byUrl(reply->url().toString());
     QString xml = reply->readAll();
+    if(xml.isEmpty()) return;
     parseRss(xml, *feed);
     saveRss(xml, *feed);
 
@@ -166,6 +181,9 @@ void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
 }
 
 void RssDataModel::loadRss(){
+    Q_ASSERT_X(this->feedModel!=NULL, "loadRss()", "FeedModel is null");
+    Q_ASSERT_X(!this->folder.isEmpty(), "loadRss()", "No cache folder was set");
+
     //feed list
     const QList<FeedItem>& feeds = feedModel->feedList();
 
@@ -185,6 +203,8 @@ void RssDataModel::loadRss(){
 }
 
 void RssDataModel::saveRss(const QString& xml, const FeedItem& feed) const{
+    Q_ASSERT_X(!this->folder.isEmpty(), "saveRss()", "No cache folder was set");
+
     //creates data folder if does not exists
     StorageAccess::get().mkDir(this->folder);
 
