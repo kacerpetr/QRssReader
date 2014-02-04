@@ -41,6 +41,8 @@ class NewsListWidget : public QScrollArea{
         NewsItem* selectNext();
         NewsItem* selectPrev();
         NewsItem* selectLast();
+        NewsItem* selectedItem() const;
+
 
     signals:
         void pressed(NewsItem* item);

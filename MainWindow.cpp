@@ -104,7 +104,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //selects first tab
     ui->actionTab1->setChecked(true);
     tabSelected(ui->actionTab1);
-    selectFirst();
 
     //signal slot connection
     connect(&SettingsModel::get(), SIGNAL(dataChanged(QString)), this, SLOT(settingsChanged(QString)));
@@ -360,4 +359,10 @@ void MainWindow::tabSelected(QAction* action){
         newsListCurrent = (NewsListWidget*)ui->newsListStack->widget(6);
         ui->newsListStack->setCurrentIndex(6);
     }
+
+    //selected item
+    NewsItem* item = newsListCurrent->selectedItem();
+    //shows this item or selects first
+    if(item != NULL) itemPressed(item);
+    else selectFirst();
 }

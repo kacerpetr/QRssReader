@@ -257,3 +257,17 @@ NewsItem* NewsListWidget::selectLast(){
     //returns asociated NewsItem pointer
     return newsItems.last()->newsItem();
 }
+
+/**
+ * @brief Returns pointer of selected news item
+ */
+NewsItem* NewsListWidget::selectedItem() const{
+    //search of selectend item
+    for(int i = 0; i < newsItems.length(); i++){
+        if(newsItems[i]->isSelected())
+            return newsItems[i]->newsItem();
+    }
+
+    //nothing found
+    return NULL;
+}
