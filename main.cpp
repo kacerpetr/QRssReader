@@ -25,6 +25,7 @@
 // 3. do something if required settings tag does not exists
 // 4. add tabs - browsing more feedlist at once
 // 5. write application help
+// 6. load default feedlist if one does not exists
 
 /**
  * @brief main

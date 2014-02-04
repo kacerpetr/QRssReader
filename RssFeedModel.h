@@ -39,21 +39,24 @@ bool operator==(const FeedItem& item1, const FeedItem& item2);
  * @brief The RssFeedModel class
  * Holds and manages list of feeds
  */
-class RssFeedModel{
+class RssFeedModel : public QObject{
+    Q_OBJECT
+
     public:
-        RssFeedModel(QString filename);
+        RssFeedModel(QObject* parent = 0);
+        void setFeedListFileName(QString feedListFile);
         const QList<FeedItem>& feedList() const;
         void saveFeedList() const;
         void loadFeedList();
         bool modifyFeed(int index, const FeedItem& feed);
         bool addFeed(const FeedItem& feed);
         void removeFeed(int index);
-        const FeedItem* byUrl(QString url);
-        QString feedListFile() const;
+        const FeedItem* feedByUrl(QString url);
+        QString feedListFileName() const;
 
     private:
-        QString filename;
+        QString feedListFile;
         QList<FeedItem> feeds;
 };
 
-#endif // RSSFEEDMODEL_H
+#endif //RSSFEEDMODEL_H

@@ -32,7 +32,15 @@ bool operator==(const FeedItem& item1, const FeedItem& item2){
  * @brief Class constructor
  * @param filename
  */
-RssFeedModel::RssFeedModel(QString filename) : filename(filename){}
+RssFeedModel::RssFeedModel(QObject* parent) : QObject(parent){}
+
+/**
+ * @brief Sets name of feedlist file
+ * @param filename
+ */
+void RssFeedModel::setFeedListFileName(QString filename){
+    this->feedListFile = filename;
+}
 
 /**
  * @brief Returns reference to list of feeds
@@ -45,10 +53,10 @@ const QList<FeedItem>& RssFeedModel::feedList() const{
  * @brief Saves feedlist to xml
  */
 void RssFeedModel::saveFeedList() const{
-    Q_ASSERT_X(!this->filename.isEmpty(), "saveFeedList()", "No feedlist file was set");
+    Q_ASSERT_X(!this->feedListFile.isEmpty(), "saveFeedList()", "No feedlist file was set");
 
     //opens xml writer
-    QXmlStreamWriter* wr = StorageAccess::get().openXmlWriter(filename);
+    QXmlStreamWriter* wr = StorageAccess::get().openXmlWriter(feedListFile);
     if(wr == NULL) return;
 
     //beginning of xml writing
@@ -94,10 +102,19 @@ void RssFeedModel::saveFeedList() const{
  * @brief Loads feedlist from xml
  */
 void RssFeedModel::loadFeedList(){
-    Q_ASSERT_X(!this->filename.isEmpty(), "loadFeedList()", "No feedlist file was set");
+    Q_ASSERT_X(!this->feedListFile.isEmpty(), "loadFeedList()", "No feedlist file was set");
+
+    //clears feedlist
+    feeds.clear();
+
+    //loads default feedlist if file does not exists
+    //TODO: maybe in future
+    if(!StorageAccess::get().exists(feedListFile)){
+        return;
+    }
 
     //opens xml reader
-    QXmlStreamReader* rd = StorageAccess::get().openXmlReader(filename);
+    QXmlStreamReader* rd = StorageAccess::get().openXmlReader(feedListFile);
     if(rd == NULL) return;
 
     //support variables
@@ -221,7 +238,7 @@ void RssFeedModel::removeFeed(int index){
  * @brief Returns pointer to feed with given url
  * @param url
  */
-const FeedItem* RssFeedModel::byUrl(QString url){
+const FeedItem* RssFeedModel::feedByUrl(QString url){
     for(int i = 0; i < feeds.length(); i++){
         if(feeds[i].url == url) return &feeds.at(i);
     }
@@ -231,6 +248,6 @@ const FeedItem* RssFeedModel::byUrl(QString url){
 /**
  * @brief Returns name of feedlist xml file
  */
-QString RssFeedModel::feedListFile() const{
-    return filename;
+QString RssFeedModel::feedListFileName() const{
+    return feedListFile;
 }

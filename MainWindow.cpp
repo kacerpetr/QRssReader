@@ -44,21 +44,69 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //hides progress bar
     ui->progressBar->setHidden(true);
 
-    //cerates and inits rss models
-    rssFeed = new RssFeedModel(RSS_FEED_FILE);
-    rssData = new RssDataModel(this);
-    rssData->setFolder(RSS_DATA_FOLDER);
-    rssData->setFeedModel(rssFeed);
+    //tab actions
+    actionGroup = new QActionGroup(ui->toolBar);
+    actionGroup->setExclusive(true);
+    actionGroup->addAction(ui->actionTab1);
+    actionGroup->addAction(ui->actionTab2);
+    actionGroup->addAction(ui->actionTab3);
+    actionGroup->addAction(ui->actionTab4);
+    actionGroup->addAction(ui->actionTab5);
+    actionGroup->addAction(ui->actionTab6);
+    actionGroup->addAction(ui->actionTab7);
 
-    //creates and adds news list widget
-    newsList = new NewsListWidget(ui->newsListFrame);
-    ui->newsListFrame->layout()->addWidget(newsList);
+    //loads settings
+    SettingsModel::get().loadSettings();
+
+    //cerates and inits rss models
+    for(int i = 0; i < TAB_COUNT; i++){
+        //creates data model
+        RssDataModel* rssDataMdl = new RssDataModel(this);
+        rssDataMdl->setFeedListFileName(RSS_FEED_FILE + QString::number(i+1) + ".xml");
+        rssDataMdl->setCacheFolder(RSS_DATA_FOLDER + QString::number(i+1));
+
+        //loads save data
+        rssDataMdl->loadFeedList();
+        rssDataMdl->loadRssCache();
+
+        //signal slot connection
+        //needs to be done after loadRssCache() because of dataChanged()
+        connect(rssDataMdl, SIGNAL(dataChanged()), this, SLOT(updateNewsList()));
+        connect(rssDataMdl, SIGNAL(loadingStarted(QString,int)), this, SLOT(updateProgressBar(QString,int)));
+        connect(rssDataMdl, SIGNAL(loadingFinished()), this, SLOT(hideProgressBar()));
+
+        //adds pointer to array
+        rssData.append(rssDataMdl);
+    }
+
+    //creates and adds news list widgets to stack widget
+    for(int i = 0; i < TAB_COUNT; i++){
+        //creates news list
+        NewsListWidget* newsListWg = new NewsListWidget(ui->newsListStack);
+
+        //generates list from cache data
+        newsListWg->clearList();
+        newsListWg->createList(rssData[i]->data());
+
+        //adds widget to stack
+        ui->newsListStack->addWidget(newsListWg);
+
+        //signal must be emited only when widget is current
+        connect(newsListWg, SIGNAL(pressed(NewsItem*)), this, SLOT(itemPressed(NewsItem*)));
+    }
+
+    //sets width of news list
+    settingsChanged("list_width");
+    settingsChanged("view_footer_font_size");
+    settingsChanged("view_text_font_size");
+    settingsChanged("view_title_font_size");
+
+    //selects first tab
+    ui->actionTab1->setChecked(true);
+    tabSelected(ui->actionTab1);
+    selectFirst();
 
     //signal slot connection
-    connect(newsList, SIGNAL(pressed(NewsItem*)), this, SLOT(itemPressed(NewsItem*)));
-    connect(rssData, SIGNAL(dataChanged()), this, SLOT(updateNewsList()));
-    connect(rssData, SIGNAL(loadingStarted(QString,int)), this, SLOT(updateProgressBar(QString,int)));
-    connect(rssData, SIGNAL(loadingFinished()), this, SLOT(hideProgressBar()));
     connect(&SettingsModel::get(), SIGNAL(dataChanged(QString)), this, SLOT(settingsChanged(QString)));
     connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
     connect(ui->actionManageFeeds, SIGNAL(triggered()), this, SLOT(manageFeeds()));
@@ -70,19 +118,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionLast, SIGNAL(triggered()), this, SLOT(selectLast()));
     connect(ui->actionNext, SIGNAL(triggered()), this, SLOT(selectNext()));
     connect(ui->actionPrevious, SIGNAL(triggered()), this, SLOT(selectPrev()));
-
-    //loads settings
-    SettingsModel::get().loadSettings();
-
-    //sets width of news list
-    settingsChanged("list_width");
-    settingsChanged("view_footer_font_size");
-    settingsChanged("view_text_font_size");
-    settingsChanged("view_title_font_size");
-
-    //loads saved data
-    rssFeed->loadFeedList();
-    rssData->loadRss();
+    connect(actionGroup, SIGNAL(triggered(QAction*)), this, SLOT(tabSelected(QAction*)));
 }
 
 /**
@@ -90,17 +126,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
  */
 MainWindow::~MainWindow(){
     delete ui;
-    delete rssFeed;
-    rssFeed = NULL;
-    delete rssData;
-    rssData = NULL;
 }
 
 /**
  * @brief Starts downloading of rss data
  */
 void MainWindow::refreshAction(){
-    rssData->downloadRssData();
+    rssDataCurrent->downloadRssData();
 }
 
 /**
@@ -136,8 +168,8 @@ void MainWindow::itemPressed(NewsItem* item){
  * @brief Called when data was changed in RssDataModel
  */
 void MainWindow::updateNewsList(){
-    newsList->clearList();
-    newsList->createList(rssData->data());
+    newsListCurrent->clearList();
+    newsListCurrent->createList(rssDataCurrent->data());
     selectFirst();
 }
 
@@ -180,10 +212,10 @@ void MainWindow::aboutApp(){
  */
 void MainWindow::manageFeeds(){
     FeedManagement dialog;
+    dialog.setModel(rssDataCurrent);
     #ifdef ANDROID
         dialog.setWindowState(Qt::WindowMaximized);
     #endif
-    dialog.setModel(rssFeed);
     dialog.exec();
 }
 
@@ -192,8 +224,7 @@ void MainWindow::manageFeeds(){
  */
 void MainWindow::showSettings(){
     SettingsDialog dialog;
-    dialog.setRssFeedModel(rssFeed);
-    dialog.setRssDataModel(rssData);
+    dialog.setRssModel(rssDataCurrent);
     #ifdef ANDROID
         dialog.setWindowState(Qt::WindowMaximized);
     #endif
@@ -218,7 +249,7 @@ void MainWindow::showAppHelp(){
 void MainWindow::settingsChanged(QString tag){
     if(tag == "list_width"){
         int width = SettingsModel::get().getInt(tag);
-        ui->newsListFrame->setMinimumWidth(width);
+        ui->newsListStack->setMinimumWidth(width);
     }
     if(tag == "view_title_font_size"){
         SettingsModel& sm = SettingsModel::get();
@@ -250,7 +281,8 @@ void MainWindow::settingsChanged(QString tag){
  * @brief Selects first item from news list
  */
 void MainWindow::selectFirst(){
-    NewsItem* item = newsList->selectFirst();
+    NewsItem* item = newsListCurrent->selectFirst();
+    if(item == NULL) return;
     itemPressed(item);
 }
 
@@ -258,7 +290,8 @@ void MainWindow::selectFirst(){
  * @brief Selects next item from news list
  */
 void MainWindow::selectNext(){
-    NewsItem* item = newsList->selectNext();
+    NewsItem* item = newsListCurrent->selectNext();
+    if(item == NULL) return;
     itemPressed(item);
 }
 
@@ -266,7 +299,8 @@ void MainWindow::selectNext(){
  * @brief Selects previous item from news list
  */
 void MainWindow::selectPrev(){
-    NewsItem* item = newsList->selectPrev();
+    NewsItem* item = newsListCurrent->selectPrev();
+    if(item == NULL) return;
     itemPressed(item);
 }
 
@@ -274,6 +308,56 @@ void MainWindow::selectPrev(){
  * @brief Selects last item from news list
  */
 void MainWindow::selectLast(){
-    NewsItem* item = newsList->selectLast();
+    NewsItem* item = newsListCurrent->selectLast();
+    if(item == NULL) return;
     itemPressed(item);
+}
+
+/**
+ * @brief Handles tab actions
+ * @param action
+ */
+void MainWindow::tabSelected(QAction* action){
+    //tab1 selected
+    if(action == ui->actionTab1){
+        rssDataCurrent = rssData[0];
+        newsListCurrent = (NewsListWidget*)ui->newsListStack->widget(0);
+        ui->newsListStack->setCurrentIndex(0);
+    }
+    //tab2 selected
+    else if(action == ui->actionTab2){
+        rssDataCurrent = rssData[1];
+        newsListCurrent = (NewsListWidget*)ui->newsListStack->widget(1);
+        ui->newsListStack->setCurrentIndex(1);
+    }
+    //tab3 selected
+    else if(action == ui->actionTab3){
+        rssDataCurrent = rssData[2];
+        newsListCurrent = (NewsListWidget*)ui->newsListStack->widget(2);
+        ui->newsListStack->setCurrentIndex(2);
+    }
+    //tab4 selected
+    else if(action == ui->actionTab4){
+        rssDataCurrent = rssData[3];
+        newsListCurrent = (NewsListWidget*)ui->newsListStack->widget(3);
+        ui->newsListStack->setCurrentIndex(3);
+    }
+    //tab5 selected
+    else if(action == ui->actionTab5){
+        rssDataCurrent = rssData[4];
+        newsListCurrent = (NewsListWidget*)ui->newsListStack->widget(4);
+        ui->newsListStack->setCurrentIndex(4);
+    }
+    //tab6 selected
+    else if(action == ui->actionTab6){
+        rssDataCurrent = rssData[5];
+        newsListCurrent = (NewsListWidget*)ui->newsListStack->widget(5);
+        ui->newsListStack->setCurrentIndex(5);
+    }
+    //tab7 selected
+    else if(action == ui->actionTab7){
+        rssDataCurrent = rssData[6];
+        newsListCurrent = (NewsListWidget*)ui->newsListStack->widget(6);
+        ui->newsListStack->setCurrentIndex(6);
+    }
 }

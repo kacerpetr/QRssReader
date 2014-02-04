@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>736</width>
-    <height>470</height>
+    <height>467</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,6 +36,19 @@
 
 #toolBar QToolButton:pressed{
 	background-color: rgb(70, 70, 70);
+}
+
+#toolBar QToolButton:checked{
+	background-color: rgb(30, 30, 130);
+}
+
+#toolBar::separator{
+	background-color: rgb(150, 150, 150);
+	margin-top: 2px;
+	margin-bottom: 2px;
+	border: 0px;
+	padding: 0px;
+	height: 1px;
 }
 
 #newsViewContents{
@@ -75,7 +88,7 @@ QProgressBar::chunk {
      <number>0</number>
     </property>
     <item>
-     <widget class="QFrame" name="newsListFrame">
+     <widget class="QStackedWidget" name="newsListStack">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>1</horstretch>
@@ -103,23 +116,6 @@ QProgressBar::chunk {
       <property name="lineWidth">
        <number>0</number>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-      </layout>
      </widget>
     </item>
     <item>
@@ -150,7 +146,7 @@ QProgressBar::chunk {
            <x>0</x>
            <y>0</y>
            <width>334</width>
-           <height>446</height>
+           <height>443</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -366,6 +362,14 @@ QProgressBar::chunk {
    <addaction name="separator"/>
    <addaction name="actionPrevious"/>
    <addaction name="actionNext"/>
+   <addaction name="separator"/>
+   <addaction name="actionTab1"/>
+   <addaction name="actionTab2"/>
+   <addaction name="actionTab3"/>
+   <addaction name="actionTab4"/>
+   <addaction name="actionTab5"/>
+   <addaction name="actionTab6"/>
+   <addaction name="actionTab7"/>
   </widget>
   <action name="actionManageFeeds">
    <property name="icon">
@@ -491,6 +495,102 @@ QProgressBar::chunk {
    </property>
    <property name="shortcut">
     <string>End</string>
+   </property>
+  </action>
+  <action name="actionTab1">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/list_tab1</normaloff>:/icons/list_tab1</iconset>
+   </property>
+   <property name="text">
+    <string>Tab1</string>
+   </property>
+  </action>
+  <action name="actionTab2">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/list_tab2</normaloff>:/icons/list_tab2</iconset>
+   </property>
+   <property name="text">
+    <string>Tab2</string>
+   </property>
+  </action>
+  <action name="actionTab3">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/list_tab3</normaloff>:/icons/list_tab3</iconset>
+   </property>
+   <property name="text">
+    <string>Tab3</string>
+   </property>
+   <property name="toolTip">
+    <string>Tab3</string>
+   </property>
+  </action>
+  <action name="actionTab4">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/list_tab4</normaloff>:/icons/list_tab4</iconset>
+   </property>
+   <property name="text">
+    <string>Tab4</string>
+   </property>
+  </action>
+  <action name="actionTab5">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/list_tab5</normaloff>:/icons/list_tab5</iconset>
+   </property>
+   <property name="text">
+    <string>Tab5</string>
+   </property>
+   <property name="toolTip">
+    <string>Tab5</string>
+   </property>
+  </action>
+  <action name="actionTab6">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/list_tab6</normaloff>:/icons/list_tab6</iconset>
+   </property>
+   <property name="text">
+    <string>Tab6</string>
+   </property>
+   <property name="toolTip">
+    <string>Tab6</string>
+   </property>
+  </action>
+  <action name="actionTab7">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/icons/list_tab7</normaloff>:/icons/list_tab7</iconset>
+   </property>
+   <property name="text">
+    <string>Tab7</string>
+   </property>
+   <property name="toolTip">
+    <string>Tab7</string>
    </property>
   </action>
  </widget>

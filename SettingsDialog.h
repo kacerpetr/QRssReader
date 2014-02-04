@@ -38,8 +38,7 @@ class SettingsDialog : public QDialog{
 
     public:
         explicit SettingsDialog(QWidget* parent = 0);
-        void setRssFeedModel(RssFeedModel* model);
-        void setRssDataModel(RssDataModel* model);
+        void setRssModel(RssDataModel* model);
         ~SettingsDialog();
 
     public slots:
@@ -49,8 +48,7 @@ class SettingsDialog : public QDialog{
 
     private:
         Ui::SettingsDialog* ui;
-        RssFeedModel* feedModel;
-        RssDataModel* dataModel;
+        RssDataModel* model;
 };
 
-#endif // SETTINGSDIALOG_H
+#endif //SETTINGSDIALOG_H

@@ -26,7 +26,8 @@
  * @brief Class constructor
  * @param parent
  */
-NewsItemWidget::NewsItemWidget(QWidget* parent) : QWidget(parent), ui(new Ui::NewsItemWidget), selected(false){
+NewsItemWidget::NewsItemWidget(QWidget* parent) : QWidget(parent),
+ui(new Ui::NewsItemWidget), selected(false), groupWidget(NULL){
     ui->setupUi(this);
 
     //settings model instance
@@ -111,6 +112,14 @@ void NewsItemWidget::setSelected(bool selected){
         ui->selectHighlight->setStyleSheet("");
     }
     this->selected = selected;
+}
+
+void NewsItemWidget::setGroup(NewsGroupWidget* group){
+    groupWidget = group;
+}
+
+NewsGroupWidget* NewsItemWidget::group() const{
+    return groupWidget;
 }
 
 /**

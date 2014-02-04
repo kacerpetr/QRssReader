@@ -22,6 +22,7 @@
 #include <QWidget>
 #include <QColor>
 #include "RssDataModel.h"
+#include "NewsGroupWidget.h"
 
 namespace Ui {
     class NewsItemWidget;
@@ -39,6 +40,8 @@ class NewsItemWidget : public QWidget{
         ~NewsItemWidget();
         void setNewsItem(NewsItem item);
         void setSelected(bool selected);
+        void setGroup(NewsGroupWidget* group);
+        NewsGroupWidget* group() const;
         NewsItem* newsItem();
         bool isSelected() const;
 
@@ -57,6 +60,7 @@ class NewsItemWidget : public QWidget{
         Ui::NewsItemWidget* ui;
         NewsItem item;
         bool selected;
+        NewsGroupWidget* groupWidget;
 };
 
 #endif // NEWSITEM_H

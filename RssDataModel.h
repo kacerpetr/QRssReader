@@ -42,18 +42,17 @@ bool operator==(const NewsItem& item1, const NewsItem& item2);
  * @brief The RssDataModel class
  * Stores, saves, loads and downloads rss data
  */
-class RssDataModel : public QObject{
+class RssDataModel : public RssFeedModel{
     Q_OBJECT
 
     public:
         RssDataModel(QObject* parent = 0);
         ~RssDataModel();
-        void setFeedModel(RssFeedModel* feedModel);
-        void setFolder(const QString& folder);
+        void setCacheFolder(const QString& cacheFolder);
         void downloadRssData();
         const QMultiMap<QDate,NewsItem>& data() const;
-        void loadRss();
-        QString dataFolder() const;
+        void loadRssCache();
+        QString rssCacheFolder() const;
 
     public slots:
         void replyFinished(QNetworkReply* reply);
@@ -73,9 +72,8 @@ class RssDataModel : public QObject{
     private:
         QMultiMap<QDate,NewsItem> news;
         QNetworkAccessManager* manager;
-        RssFeedModel* feedModel;
         QList<QString> loadingQueue;
-        QString folder;
+        QString cacheFolder;
 };
 
 #endif // RSSDATAMODEL_H

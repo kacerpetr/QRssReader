@@ -12,5 +12,14 @@
         <file alias="arrow_down_double">resource/arrow_down_double.png</file>
         <file alias="arrow_down">resource/arrow_down.png</file>
         <file alias="arrow_up_double">resource/arrow_up_double.png</file>
+        <file alias="list_tab1">resource/list_tab1.png</file>
+        <file alias="list_tab2">resource/list_tab2.png</file>
+        <file alias="list_tab3">resource/list_tab3.png</file>
+        <file alias="list_tab4">resource/list_tab4.png</file>
+        <file alias="list_tab5">resource/list_tab5.png</file>
+        <file alias="list_tab6">resource/list_tab6.png</file>
+        <file alias="list_tab7">resource/list_tab7.png</file>
+        <file alias="expanded_list">resource/expanded_list.png</file>
+        <file alias="collapsed_list">resource/collapsed_list.png</file>
     </qresource>
 </RCC>

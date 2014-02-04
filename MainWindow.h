@@ -20,12 +20,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QActionGroup>
 #include "NewsListWidget.h"
 #include "RssDataModel.h"
 #include "RssFeedModel.h"
 
-#define RSS_FEED_FILE "feedlist.xml"
+#define RSS_FEED_FILE "feedlist"
 #define RSS_DATA_FOLDER "RssData"
+#define TAB_COUNT 7
 
 namespace Ui{
     class MainWindow;
@@ -58,12 +60,14 @@ class MainWindow : public QMainWindow{
         void selectNext();
         void selectPrev();
         void selectLast();
+        void tabSelected(QAction* action);
 
     private:
         Ui::MainWindow* ui;
-        NewsListWidget* newsList;
-        RssDataModel* rssData;
-        RssFeedModel* rssFeed;
+        NewsListWidget* newsListCurrent;
+        QList<RssDataModel*> rssData;
+        RssDataModel* rssDataCurrent;
+        QActionGroup* actionGroup;
 };
 
 #endif // MAINWINDOW_H

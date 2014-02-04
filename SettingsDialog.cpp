@@ -32,7 +32,7 @@
  * @param parent
  */
 SettingsDialog::SettingsDialog(QWidget* parent) : QDialog(parent),
-ui(new Ui::SettingsDialog), feedModel(NULL), dataModel(NULL){
+ui(new Ui::SettingsDialog), model(NULL){
     ui->setupUi(this);
 
     //button focus
@@ -67,19 +67,11 @@ SettingsDialog::~SettingsDialog(){
 }
 
 /**
- * @brief RssFeedModel setter
- * @param model
- */
-void SettingsDialog::setRssFeedModel(RssFeedModel* model){
-    feedModel = model;
-}
-
-/**
  * @brief RssDataModel setter
  * @param model
  */
-void SettingsDialog::setRssDataModel(RssDataModel* model){
-    dataModel = model;
+void SettingsDialog::setRssModel(RssDataModel* model){
+    this->model = model;
 }
 
 /**
@@ -88,10 +80,10 @@ void SettingsDialog::setRssDataModel(RssDataModel* model){
  */
 void SettingsDialog::clearCachePressed(){
     //does nothing if no cache dir was given
-    if(dataModel == NULL) return;
+    if(model == NULL) return;
 
     //clears cache directory
-    if(StorageAccess::get().clearDir(dataModel->dataFolder())){
+    if(StorageAccess::get().clearDir(model->rssCacheFolder())){
         QMessageBox msgBox;
         msgBox.setWindowTitle("Clear cache");
         msgBox.setText("Rss data cache succesfully cleared");
@@ -136,8 +128,7 @@ void SettingsDialog::savePressed(){
  */
 void SettingsDialog::loadPresetPressed(){
     //must have data models
-    if(dataModel == NULL) return;
-    if(feedModel == NULL) return;
+    if(model == NULL) return;
 
     //storage access singleton reference
     StorageAccess& sa = StorageAccess::get();
@@ -149,11 +140,11 @@ void SettingsDialog::loadPresetPressed(){
     bool success = false;
 
     //deletes old feedlist
-    sa.rmFile(feedModel->feedListFile());
+    sa.rmFile(model->feedListFileName());
 
     //creates copy of predefined feedlist to current feedlist
     QFile source(pflPath);
-    success = source.copy(sa.absPath(feedModel->feedListFile()));
+    success = source.copy(sa.absPath(model->feedListFileName()));
 
     //error check
     if(!success){
@@ -167,22 +158,27 @@ void SettingsDialog::loadPresetPressed(){
     }
 
     //sets file permissions
-    QFile file(sa.absPath(feedModel->feedListFile()));
-    success = file.setPermissions(QFileDevice::WriteOwner | QFileDevice::ReadOwner |
-                                  QFileDevice::ReadGroup | QFileDevice::ReadOther);
+    #ifndef ANDROID
+        QFile file(sa.absPath(model->feedListFileName()));
+        success = file.setPermissions(QFileDevice::WriteOwner | QFileDevice::ReadOwner |
+                                      QFileDevice::ReadGroup | QFileDevice::ReadOther);
 
-    //error check
-    if(!success){
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Load preset error");
-        msgBox.setText("Unable to set feedlist file permissions");
-        msgBox.setInformativeText(file.errorString());
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
-    }
+        //error check
+        if(!success){
+            QMessageBox msgBox;
+            msgBox.setWindowTitle("Load preset error");
+            msgBox.setText("Unable to set feedlist file permissions");
+            msgBox.setInformativeText(file.errorString());
+            msgBox.setIcon(QMessageBox::Critical);
+            msgBox.exec();
+        }
+    #endif
 
     //clears data cache
-    sa.clearDir(dataModel->dataFolder());
+    sa.clearDir(model->rssCacheFolder());
+
+    //and finaly, loads feedlist into model
+    model->loadFeedList();
 
     //success
     QMessageBox msgBox;

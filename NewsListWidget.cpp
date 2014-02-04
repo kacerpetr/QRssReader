@@ -69,6 +69,8 @@ void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
     for(int i = keys.length()-1; i >=0; i--){
         //adds group header
         NewsGroupWidget* title = new NewsGroupWidget(content);
+        connect(title, SIGNAL(collapsePress(NewsGroupWidget*)), this, SLOT(collapsePressed(NewsGroupWidget*)));
+        connect(title, SIGNAL(expandPress(NewsGroupWidget*)), this, SLOT(expandPressed(NewsGroupWidget*)));
         title->setText(keys[i].toString("dddd dd.MM.yyyy"));
         layout->addWidget(title);
         this->allItems.append(title);
@@ -80,12 +82,18 @@ void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
         for(int j = items.length()-1; j >= 0 ; j--){
             if(!items[j].feed.enabled) continue;
             NewsItemWidget* item = new NewsItemWidget(content);
+            item->setGroup(title);
+            item->setHidden(true);
             item->setNewsItem(items[j]);
             connect(item, SIGNAL(pressed(NewsItemWidget*)), this, SLOT(itemPressed(NewsItemWidget*)));
             layout->addWidget(item);
             this->allItems.append(item);
             this->newsItems.append(item);
         }
+
+        //expand first item
+        if(i == keys.length()-1)
+            title->setExpanded(true);
     }
 }
 
@@ -120,6 +128,30 @@ void NewsListWidget::clearList(){
     //clears pointer lists
     allItems.clear();
     newsItems.clear();
+}
+
+/**
+ * @brief Handles expanded group title press
+ * @param group
+ */
+void NewsListWidget::collapsePressed(NewsGroupWidget* group){
+    for(int i = 0; i < newsItems.length(); i++){
+        if(newsItems[i]->group() == group){
+            newsItems[i]->setHidden(true);
+        }
+    }
+}
+
+/**
+ * @brief Handles collapsed group title press
+ * @param group
+ */
+void NewsListWidget::expandPressed(NewsGroupWidget* group){
+    for(int i = 0; i < newsItems.length(); i++){
+        if(newsItems[i]->group() == group){
+            newsItems[i]->setHidden(false);
+        }
+    }
 }
 
 /**

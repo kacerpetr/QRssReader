@@ -21,6 +21,7 @@
 #include <QXmlStreamReader>
 #include <QTextStream>
 #include <QDir>
+#include <QMessageBox>
 #include "StorageAccess.h"
 
 /**
@@ -37,7 +38,7 @@ bool operator==(const NewsItem& item1, const NewsItem& item2){
  * @brief Class constructor
  * @param parent
  */
-RssDataModel::RssDataModel(QObject* parent) : QObject(parent){
+RssDataModel::RssDataModel(QObject* parent) : RssFeedModel(parent){
     manager = new QNetworkAccessManager();
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
 }
@@ -51,19 +52,11 @@ RssDataModel::~RssDataModel(){
 }
 
 /**
- * @brief FeedModel setter
- * @param feedModel model pointer
- */
-void RssDataModel::setFeedModel(RssFeedModel* feedModel){
-    this->feedModel = feedModel;
-}
-
-/**
  * @brief RssDataModel::setFolder
  * @param folder
  */
-void RssDataModel::setFolder(const QString& folder){
-    this->folder = folder;
+void RssDataModel::setCacheFolder(const QString& folder){
+    this->cacheFolder = folder;
 }
 
 /**
@@ -71,11 +64,18 @@ void RssDataModel::setFolder(const QString& folder){
  * Adds feed urls to queue
  */
 void RssDataModel::downloadRssData(){
-    //check if feedmodel is NULL
-    Q_ASSERT_X(this->feedModel!=NULL, "downloadRssData()", "FeedModel is null");
-
     //list of feeds
-    const QList<FeedItem>& feeds = feedModel->feedList();
+    const QList<FeedItem>& feeds = feedList();
+
+    //feedlist empty
+    if(feeds.isEmpty()){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Information");
+        msgBox.setText("Feedlist for current tab is empty");
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.exec();
+        return;
+    }
 
     //adds feed urls to queue
     for(int i = 0; i < feeds.length(); i++){
@@ -95,12 +95,8 @@ void RssDataModel::downloadRssData(){
  * @param url address of rss source
  */
 void RssDataModel::loadFeed(QString url){
-    //check if feedmodel is NULL
-    Q_ASSERT_X(this->feedModel!=NULL, "loadFeed()", "FeedModel is null");
-
-    //loads feed
     manager->get(QNetworkRequest(QUrl(url)));
-    int progress = 100 - (loadingQueue.length()+1)*100 / feedModel->feedList().length();
+    int progress = 100 - (loadingQueue.length()+1)*100 / feedList().length();
     emit loadingStarted(url, progress);
 }
 
@@ -109,11 +105,8 @@ void RssDataModel::loadFeed(QString url){
  * @param reply
  */
 void RssDataModel::replyFinished(QNetworkReply* reply){
-    //check if feedmodel is NULL
-    Q_ASSERT_X(this->feedModel!=NULL, "replyFinished()", "FeedModel is null");
-
     //gets feed item by its url
-    const FeedItem* feed = feedModel->byUrl(reply->url().toString());
+    const FeedItem* feed = feedByUrl(reply->url().toString());
     QString xml = reply->readAll();
     if(xml.isEmpty()) return;
     parseRss(xml, *feed);
@@ -223,17 +216,16 @@ void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
  * @brief Loads rss data from chache
  * Ususaly called at program startup
  */
-void RssDataModel::loadRss(){
-    Q_ASSERT_X(this->feedModel!=NULL, "loadRss()", "FeedModel is null");
-    Q_ASSERT_X(!this->folder.isEmpty(), "loadRss()", "No cache folder was set");
+void RssDataModel::loadRssCache(){
+    Q_ASSERT_X(!this->cacheFolder.isEmpty(), "loadRss()", "No cache folder was set");
 
     //feed list
-    const QList<FeedItem>& feeds = feedModel->feedList();
+    const QList<FeedItem>& feeds = feedList();
 
     //loads data
     for(int i = 0; i < feeds.length(); i++){
         QString filename = feeds[i].name.toLower().replace(" ", "_");
-        QString relativePath = QString(this->folder) + "/" + filename + ".xml";
+        QString relativePath = QString(this->cacheFolder) + "/" + filename + ".xml";
         if(!StorageAccess::get().exists(relativePath)) continue;
         if(!feeds[i].enabled) continue;
         QString xml;
@@ -251,14 +243,14 @@ void RssDataModel::loadRss(){
  * @param feed asociated feed
  */
 void RssDataModel::saveRss(const QString& xml, const FeedItem& feed) const{
-    Q_ASSERT_X(!this->folder.isEmpty(), "saveRss()", "No cache folder was set");
+    Q_ASSERT_X(!this->cacheFolder.isEmpty(), "saveRss()", "No cache folder was set");
 
     //creates data folder if does not exists
-    StorageAccess::get().mkDir(this->folder);
+    StorageAccess::get().mkDir(this->cacheFolder);
 
     //saves data
     QString filename = feed.name.toLower().replace(" ", "_");
-    QString relativePath = QString(this->folder) + "/" + filename + ".xml";
+    QString relativePath = QString(this->cacheFolder) + "/" + filename + ".xml";
     StorageAccess::get().writeString(xml, relativePath);
 }
 
@@ -272,6 +264,6 @@ const QMultiMap<QDate,NewsItem>& RssDataModel::data() const{
 /**
  * Returns name of cache folder
  */
-QString RssDataModel::dataFolder() const{
-    return folder;
+QString RssDataModel::rssCacheFolder() const{
+    return cacheFolder;
 }

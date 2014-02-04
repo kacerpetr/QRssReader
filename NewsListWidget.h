@@ -47,6 +47,8 @@ class NewsListWidget : public QScrollArea{
 
     private slots:
         void itemPressed(NewsItemWidget* item);
+        void collapsePressed(NewsGroupWidget* group);
+        void expandPressed(NewsGroupWidget* group);
 
     private:
         QWidget* content;
