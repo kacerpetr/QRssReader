@@ -49,8 +49,7 @@ MOBILITY =
 
 RESOURCES += \
     Icons.qrc \
-    Default.qrc \
-    FeedList.qrc
+    Default.qrc
 
 OTHER_FILES += \
     android/AndroidManifest.xml

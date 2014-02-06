@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/feedlist">
-        <file>feedlist/cznews-idnes_blesk_ac24.xml</file>
-        <file>feedlist/forex1-dailyFX_fxStreet.xml</file>
-    </qresource>
-</RCC>

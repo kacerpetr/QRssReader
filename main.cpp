@@ -25,6 +25,8 @@
 // 5. write application help
 // 6. load default feedlist if none exists
 // 7. full support of RSS 1.0 and RSS 2.0
+// 8. block toolbar when downloading data
+// 9. set file permission, unix and other systems
 
 /**
  * @brief main

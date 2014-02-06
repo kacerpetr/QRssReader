@@ -1,25 +1,25 @@
 <RCC>
     <qresource prefix="/icons">
-        <file alias="help_about">resource/help_about.png</file>
-        <file alias="help_contents">resource/help_contents.png</file>
-        <file alias="manage_feeds">resource/manage_feeds.png</file>
-        <file alias="qt5_about">resource/qt5_about.png</file>
-        <file alias="edit_paste">resource/edit_paste.png</file>
-        <file alias="view_refresh">resource/view_refresh.png</file>
-        <file alias="settings">resource/settings.png</file>
-        <file alias="qrssreader">resource/qrssreader.png</file>
-        <file alias="arrow_up">resource/arrow_up.png</file>
-        <file alias="arrow_down_double">resource/arrow_down_double.png</file>
-        <file alias="arrow_down">resource/arrow_down.png</file>
-        <file alias="arrow_up_double">resource/arrow_up_double.png</file>
-        <file alias="list_tab1">resource/list_tab1.png</file>
-        <file alias="list_tab2">resource/list_tab2.png</file>
-        <file alias="list_tab3">resource/list_tab3.png</file>
-        <file alias="list_tab4">resource/list_tab4.png</file>
-        <file alias="list_tab5">resource/list_tab5.png</file>
-        <file alias="list_tab6">resource/list_tab6.png</file>
-        <file alias="list_tab7">resource/list_tab7.png</file>
-        <file alias="expanded_list">resource/expanded_list.png</file>
-        <file alias="collapsed_list">resource/collapsed_list.png</file>
+        <file alias="help_about">icons/help_about.png</file>
+        <file alias="help_contents">icons/help_contents.png</file>
+        <file alias="manage_feeds">icons/manage_feeds.png</file>
+        <file alias="qt5_about">icons/qt5_about.png</file>
+        <file alias="edit_paste">icons/edit_paste.png</file>
+        <file alias="view_refresh">icons/view_refresh.png</file>
+        <file alias="settings">icons/settings.png</file>
+        <file alias="qrssreader">icons/qrssreader.png</file>
+        <file alias="arrow_up">icons/arrow_up.png</file>
+        <file alias="arrow_down_double">icons/arrow_down_double.png</file>
+        <file alias="arrow_down">icons/arrow_down.png</file>
+        <file alias="arrow_up_double">icons/arrow_up_double.png</file>
+        <file alias="list_tab1">icons/list_tab1.png</file>
+        <file alias="list_tab2">icons/list_tab2.png</file>
+        <file alias="list_tab3">icons/list_tab3.png</file>
+        <file alias="list_tab4">icons/list_tab4.png</file>
+        <file alias="list_tab5">icons/list_tab5.png</file>
+        <file alias="list_tab6">icons/list_tab6.png</file>
+        <file alias="list_tab7">icons/list_tab7.png</file>
+        <file alias="expanded_list">icons/expanded_list.png</file>
+        <file alias="collapsed_list">icons/collapsed_list.png</file>
     </qresource>
 </RCC>

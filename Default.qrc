@@ -3,4 +3,13 @@
         <file alias="settings_android">default/settings_android.xml</file>
         <file alias="settings_pc">default/settings_pc.xml</file>
     </qresource>
+    <qresource prefix="/feedlist">
+        <file>feedlist/default1.xml</file>
+        <file>feedlist/default2.xml</file>
+        <file>feedlist/default3.xml</file>
+        <file>feedlist/default4.xml</file>
+        <file>feedlist/default5.xml</file>
+        <file>feedlist/default6.xml</file>
+        <file>feedlist/default7.xml</file>
+    </qresource>
 </RCC>

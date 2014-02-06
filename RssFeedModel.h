@@ -23,6 +23,9 @@
 #include <QColor>
 #include <QList>
 
+#define FEEDS_PREFIX (QString(":/feedlist/feedlist"))
+#define DEFAULT_LIST_NAME (QString("/default"))
+
 /** Feed item structure */
 typedef struct{
     QString name;
@@ -53,10 +56,15 @@ class RssFeedModel : public QObject{
         void removeFeed(int index);
         const FeedItem* feedByUrl(QString url);
         QString feedListFileName() const;
+        void setDefaultList(int defaultList);
+
+    private:
+        bool copyDefaultList();
 
     private:
         QString feedListFile;
         QList<FeedItem> feeds;
+        int defaultList;
 };
 
 #endif //RSSFEEDMODEL_H

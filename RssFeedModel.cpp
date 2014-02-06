@@ -18,6 +18,8 @@
 
 #include "RssFeedModel.h"
 #include "StorageAccess.h"
+#include <QMessageBox>
+#include <QFile>
 
 /**
  * @brief Compares two feed items
@@ -32,7 +34,7 @@ bool operator==(const FeedItem& item1, const FeedItem& item2){
  * @brief Class constructor
  * @param filename
  */
-RssFeedModel::RssFeedModel(QObject* parent) : QObject(parent){}
+RssFeedModel::RssFeedModel(QObject* parent) : QObject(parent), defaultList(0){}
 
 /**
  * @brief Sets name of feedlist file
@@ -99,7 +101,69 @@ void RssFeedModel::saveFeedList() const{
 }
 
 /**
+ * @brief Default list index setter
+ * @param defaultList index of predefined feedlist
+ */
+void RssFeedModel::setDefaultList(int defaultList){
+    this->defaultList = defaultList;
+}
+
+/**
+ * @brief Creates copy of default feedlist
+ * @return true if success, false otherwise
+ */
+bool RssFeedModel::copyDefaultList(){
+    //no default list set
+    if(defaultList == 0) return false;
+
+    //storage access singleton reference
+    StorageAccess& sa = StorageAccess::get();
+
+    //predefined feedlist path
+    QString dflPath = FEEDS_PREFIX + DEFAULT_LIST_NAME + QString::number(defaultList) + ".xml";
+
+    //error handling vars
+    bool success = false;
+
+    //creates copy of predefined feedlist to current feedlist
+    QFile source(dflPath);
+    success = source.copy(sa.absPath(feedListFile));
+
+    //error check
+    if(!success){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Load default error");
+        msgBox.setText("Error creating copy of default feed list file");
+        msgBox.setInformativeText(source.errorString());
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        return false;
+    }
+
+    //sets file permissions
+    #ifndef ANDROID
+        QFile file(sa.absPath(feedListFile));
+        success = file.setPermissions(QFileDevice::WriteOwner | QFileDevice::ReadOwner |
+                                      QFileDevice::ReadGroup | QFileDevice::ReadOther);
+
+        //error check
+        if(!success){
+            QMessageBox msgBox;
+            msgBox.setWindowTitle("Load default error");
+            msgBox.setText("Unable to set feedlist file permissions");
+            msgBox.setInformativeText(file.errorString());
+            msgBox.setIcon(QMessageBox::Critical);
+            msgBox.exec();
+        }
+    #endif
+
+    //success
+    return true;
+}
+
+/**
  * @brief Loads feedlist from xml
+ * @param defaultList index of predefined feedlist
  */
 void RssFeedModel::loadFeedList(){
     Q_ASSERT_X(!this->feedListFile.isEmpty(), "loadFeedList()", "No feedlist file was set");
@@ -108,9 +172,9 @@ void RssFeedModel::loadFeedList(){
     feeds.clear();
 
     //loads default feedlist if file does not exists
-    //TODO: maybe in future
     if(!StorageAccess::get().exists(feedListFile)){
-        return;
+        if(defaultList == 0) return;
+        if(!copyDefaultList()) return;
     }
 
     //opens xml reader

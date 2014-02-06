@@ -112,20 +112,4 @@
         <bkgColor>241,144,237</bkgColor>
         <textColor>0,0,0</textColor>
     </feed>
-    <feed>
-        <name>blesk.cz</name>
-        <url>http://www.blesk.cz/rss</url>
-        <description></description>
-        <enabled>true</enabled>
-        <bkgColor>255,126,220</bkgColor>
-        <textColor>0,0,0</textColor>
-    </feed>
-    <feed>
-        <name>ac24.cz</name>
-        <url>http://www.ac24.cz/index.php?format=feed&amp;type=rss</url>
-        <description></description>
-        <enabled>true</enabled>
-        <bkgColor>221,129,103</bkgColor>
-        <textColor>0,0,0</textColor>
-    </feed>
 </feedlist>

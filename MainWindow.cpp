@@ -64,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         RssDataModel* rssDataMdl = new RssDataModel(this);
         rssDataMdl->setFeedListFileName(RSS_FEED_FILE + QString::number(i+1) + ".xml");
         rssDataMdl->setCacheFolder(RSS_DATA_FOLDER + QString::number(i+1));
+        rssDataMdl->setDefaultList(i+1);
 
         //loads save data
         rssDataMdl->loadFeedList();

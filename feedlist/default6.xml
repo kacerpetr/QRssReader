@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feedlist>
+    <feed>
+        <name>Svět androida</name>
+        <url>http://feeds.feedburner.com/SvetAndroida?format=xml</url>
+        <description></description>
+        <enabled>true</enabled>
+        <bkgColor>180,230,180</bkgColor>
+        <textColor>0,0,0</textColor>
+    </feed>
+	<feed>
+        <name>Živě.cz</name>
+        <url>http://www.zive.cz/rss/sc-47/</url>
+        <description></description>
+        <enabled>true</enabled>
+        <bkgColor>230,180,180</bkgColor>
+        <textColor>0,0,0</textColor>
+    </feed>
+	<feed>
+        <name>Hw.cz</name>
+        <url>http://www.hw.cz/rss/hw_cz_top15.xml</url>
+        <description></description>
+        <enabled>true</enabled>
+        <bkgColor>180,180,230</bkgColor>
+        <textColor>0,0,0</textColor>
+    </feed>
+</feedlist>
