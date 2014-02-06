@@ -24,7 +24,10 @@
 #include <QMultiMap>
 #include <QColor>
 #include <QNetworkReply>
+#include <QTimer>
 #include "RssFeedModel.h"
+
+#define REQUEST_TIMEOUT 4000
 
 /** News item structure */
 typedef struct{
@@ -56,6 +59,7 @@ class RssDataModel : public RssFeedModel{
 
     public slots:
         void replyFinished(QNetworkReply* reply);
+        void requestTimeout();
 
     signals:
         void dataChanged();
@@ -74,6 +78,8 @@ class RssDataModel : public RssFeedModel{
         QNetworkAccessManager* manager;
         QList<QString> loadingQueue;
         QString cacheFolder;
+        QNetworkReply* networkReply;
+        QTimer* timeoutTimer;
 };
 
 #endif // RSSDATAMODEL_H

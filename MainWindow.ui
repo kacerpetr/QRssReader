@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>736</width>
-    <height>467</height>
+    <height>940</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -146,7 +146,7 @@ QProgressBar::chunk {
            <x>0</x>
            <y>0</y>
            <width>334</width>
-           <height>443</height>
+           <height>916</height>
           </rect>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -349,19 +349,7 @@ QProgressBar::chunk {
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionManageFeeds"/>
-   <addaction name="actionSettings"/>
    <addaction name="actionRefresh"/>
-   <addaction name="separator"/>
-   <addaction name="actionHelp"/>
-   <addaction name="actionAbout"/>
-   <addaction name="actionAboutQt"/>
-   <addaction name="separator"/>
-   <addaction name="actionFirst"/>
-   <addaction name="actionLast"/>
-   <addaction name="separator"/>
-   <addaction name="actionPrevious"/>
-   <addaction name="actionNext"/>
    <addaction name="separator"/>
    <addaction name="actionTab1"/>
    <addaction name="actionTab2"/>
@@ -370,6 +358,19 @@ QProgressBar::chunk {
    <addaction name="actionTab5"/>
    <addaction name="actionTab6"/>
    <addaction name="actionTab7"/>
+   <addaction name="separator"/>
+   <addaction name="actionFirst"/>
+   <addaction name="actionPrevious"/>
+   <addaction name="separator"/>
+   <addaction name="actionNext"/>
+   <addaction name="actionLast"/>
+   <addaction name="separator"/>
+   <addaction name="actionManageFeeds"/>
+   <addaction name="actionSettings"/>
+   <addaction name="separator"/>
+   <addaction name="actionHelp"/>
+   <addaction name="actionAbout"/>
+   <addaction name="actionAboutQt"/>
   </widget>
   <action name="actionManageFeeds">
    <property name="icon">

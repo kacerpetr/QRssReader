@@ -38,9 +38,13 @@ bool operator==(const NewsItem& item1, const NewsItem& item2){
  * @brief Class constructor
  * @param parent
  */
-RssDataModel::RssDataModel(QObject* parent) : RssFeedModel(parent){
+RssDataModel::RssDataModel(QObject* parent) : RssFeedModel(parent),
+networkReply(NULL), timeoutTimer(NULL){
     manager = new QNetworkAccessManager();
+    timeoutTimer = new QTimer(this);
+    timeoutTimer->setSingleShot(true);
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+    connect(timeoutTimer, SIGNAL(timeout()), this, SLOT(requestTimeout()));
 }
 
 /**
@@ -95,9 +99,19 @@ void RssDataModel::downloadRssData(){
  * @param url address of rss source
  */
 void RssDataModel::loadFeed(QString url){
-    manager->get(QNetworkRequest(QUrl(url)));
+    networkReply = manager->get(QNetworkRequest(QUrl(url)));
     int progress = 100 - (loadingQueue.length()+1)*100 / feedList().length();
+    timeoutTimer->start(REQUEST_TIMEOUT);
     emit loadingStarted(url, progress);
+}
+
+/**
+ * @brief Stops feed download after defined interval runs out
+ */
+void RssDataModel::requestTimeout(){
+    networkReply->abort();
+    networkReply = NULL;
+    timeoutTimer->stop();
 }
 
 /**
@@ -105,12 +119,20 @@ void RssDataModel::loadFeed(QString url){
  * @param reply
  */
 void RssDataModel::replyFinished(QNetworkReply* reply){
+    //clears internal reply pointer (used for timeout check)
+    networkReply = NULL;
+
+    //stops timeout timer
+    timeoutTimer->stop();
+
     //gets feed item by its url
-    const FeedItem* feed = feedByUrl(reply->url().toString());
-    QString xml = reply->readAll();
-    if(xml.isEmpty()) return;
-    parseRss(xml, *feed);
-    saveRss(xml, *feed);
+    if(reply->error() == QNetworkReply::NoError && reply->isOpen()){
+        const FeedItem* feed = feedByUrl(reply->url().toString());
+        QString xml = reply->readAll();
+        if(xml.isEmpty()) return;
+        parseRss(xml, *feed);
+        saveRss(xml, *feed);
+    }
 
     //all feeds were loaded
     if(loadingQueue.length() == 0){

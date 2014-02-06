@@ -21,11 +21,10 @@
 
 //------ TODO -----//
 // 1. get data directory in android in better way
-// 2. what to do when no internet access ?
 // 3. do something if required settings tag does not exists
-// 4. add tabs - browsing more feedlist at once
 // 5. write application help
-// 6. load default feedlist if one does not exists
+// 6. load default feedlist if none exists
+// 7. full support of RSS 1.0 and RSS 2.0
 
 /**
  * @brief main
