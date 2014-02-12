@@ -5,71 +5,62 @@
         <url>http://www.dailyfx.com/feeds/forex_market_news</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>222,192,158</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>162,132,98</bkgColor>
     </feed> 
 	<feed>
         <name>DailyFX - Technical Analysis</name>
         <url>http://www.dailyfx.com/feeds/technical_analysis</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>254,165,131</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>194,105,71</bkgColor>
     </feed> 
 	<feed>
         <name>DailyFX - Alerts</name>
         <url>http://www.dailyfx.com/feeds/alerts</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>218,232,213</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>158,172,153</bkgColor>
     </feed> 
 	<feed>
         <name>DailyFX - Analyst Picks</name>
         <url>http://www.dailyfx.com/feeds/all_analyst_picks</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>77,172,214</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>17,112,154</bkgColor>
     </feed> 
 	<feed>
         <name>DailyFX - For Beginners</name>
         <url>http://www.dailyfx.com/feeds/dfx_for_beginners</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>210,187,145</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>150,127,185</bkgColor>
     </feed> 
 	<feed>
         <name>FXstreet.com - News</name>
         <url>http://xml.fxstreet.com/news/forex-news/index.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>164,238,214</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>104,178,154</bkgColor>
     </feed> 
 	<feed>
         <name>FXstreet.com - Analysis</name>
         <url>http://xml.fxstreet.com/Analysis/index.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>251,243,168</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>191,183,108</bkgColor>
     </feed> 
 	<feed>
         <name>FXstreet.com - Economic Calendar</name>
         <url>http://xml.fxstreet.com/fundamental/economic-calendar/events.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>203,217,242</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>83,157,192</bkgColor>
     </feed> 
 	<feed>
         <name>FXstreet.com - Education</name>
         <url>http://xml.fxstreet.com/education/index.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>215,149,208</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>155,99,148</bkgColor>
     </feed> 
 </feedlist>

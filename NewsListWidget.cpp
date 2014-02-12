@@ -21,6 +21,7 @@
 #include <QScrollBar>
 #include <QScroller>
 #include <QEasingCurve>
+#include <QResizeEvent>
 
 /**
  * @brief Class constructor
@@ -39,7 +40,7 @@ NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
     //layout for scroll area content
     layout = new QVBoxLayout(content);
     layout->setMargin(0);
-    layout->setSpacing(1);
+    layout->setSpacing(0);
 
     //puts it together
     content->setLayout(layout);
@@ -51,7 +52,9 @@ NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
         QScrollerProperties sp;
         sp.setScrollMetric(QScrollerProperties::DragStartDistance, 0.001);
         sp.setScrollMetric(QScrollerProperties::FrameRate, QScrollerProperties::Fps60);
-        sp.setScrollMetric(QScrollerProperties::MousePressEventDelay, 0.13);
+        sp.setScrollMetric(QScrollerProperties::MousePressEventDelay, 0.1);
+        sp.setScrollMetric(QScrollerProperties::OvershootDragDistanceFactor, 0);
+        sp.setScrollMetric(QScrollerProperties::OvershootScrollDistanceFactor, 0);
         QScroller* qs = QScroller::scroller(this);
         qs->setScrollerProperties(sp);
     #endif
@@ -65,12 +68,15 @@ void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
     //gets array of keys (daily groups)
     QList<QDate> keys = news.uniqueKeys();
 
+    //used for background colors
+    bool odd = true;
+
     //through daily groups
     for(int i = keys.length()-1; i >=0; i--){
         //adds group header
         NewsGroupWidget* title = new NewsGroupWidget(content);
-        connect(title, SIGNAL(collapsePress(NewsGroupWidget*)), this, SLOT(collapsePressed(NewsGroupWidget*)));
-        connect(title, SIGNAL(expandPress(NewsGroupWidget*)), this, SLOT(expandPressed(NewsGroupWidget*)));
+        title->setOdd(odd);
+        odd = !odd;
         title->setText(keys[i].toString("dddd dd.MM.yyyy"));
         layout->addWidget(title);
         this->allItems.append(title);
@@ -82,18 +88,19 @@ void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
         for(int j = items.length()-1; j >= 0 ; j--){
             if(!items[j].feed.enabled) continue;
             NewsItemWidget* item = new NewsItemWidget(content);
-            item->setGroup(title);
-            item->setHidden(true);
             item->setNewsItem(items[j]);
+
+            item->setOdd(odd);
+            odd = !odd;
+
+            item->setIcon(items[j].feed.bkgColor, items.length()-j);
+
             connect(item, SIGNAL(pressed(NewsItemWidget*)), this, SLOT(itemPressed(NewsItemWidget*)));
+
             layout->addWidget(item);
             this->allItems.append(item);
             this->newsItems.append(item);
         }
-
-        //expand first item
-        if(i == keys.length()-1)
-            title->setExpanded(true);
     }
 }
 
@@ -128,30 +135,6 @@ void NewsListWidget::clearList(){
     //clears pointer lists
     allItems.clear();
     newsItems.clear();
-}
-
-/**
- * @brief Handles expanded group title press
- * @param group
- */
-void NewsListWidget::collapsePressed(NewsGroupWidget* group){
-    for(int i = 0; i < newsItems.length(); i++){
-        if(newsItems[i]->group() == group){
-            newsItems[i]->setHidden(true);
-        }
-    }
-}
-
-/**
- * @brief Handles collapsed group title press
- * @param group
- */
-void NewsListWidget::expandPressed(NewsGroupWidget* group){
-    for(int i = 0; i < newsItems.length(); i++){
-        if(newsItems[i]->group() == group){
-            newsItems[i]->setHidden(false);
-        }
-    }
 }
 
 /**
@@ -270,4 +253,11 @@ NewsItem* NewsListWidget::selectedItem() const{
 
     //nothing found
     return NULL;
+}
+
+void NewsListWidget::resizeEvent(QResizeEvent* event){
+    for(int i = 0; i < newsItems.length(); i++){
+        newsItems[i]->setMaximumWidth(event->size().width());
+    }
+    QScrollArea::resizeEvent(event);
 }

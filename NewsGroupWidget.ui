@@ -6,29 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>328</width>
-    <height>32</height>
+    <width>419</width>
+    <height>40</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>40</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>40</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#NewsGroupWidget{
-	background-color: rgb(90, 90, 90);
-}
-
-#textLabel{
-	color: rgb(59, 235, 0);
-	font-size: 14pt;
-}</string>
+   <string notr="true"/>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
     <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
     <number>0</number>
@@ -41,49 +46,14 @@
    </property>
    <item>
     <widget class="QLabel" name="textLabel">
+     <property name="styleSheet">
+      <string notr="true">#textLabel{
+	color: rgb(70, 70, 70);
+	font-size: 12pt;
+}</string>
+     </property>
      <property name="text">
       <string>-</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="expandedLabel">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>32</width>
-       <height>32</height>
-      </size>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="Icons.qrc">:/icons/expanded_list</pixmap>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="collapsedLabel">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>32</width>
-       <height>32</height>
-      </size>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="Icons.qrc">:/icons/collapsed_list</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -92,8 +62,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="Icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

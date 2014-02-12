@@ -83,12 +83,6 @@ void RssFeedModel::saveFeedList() const{
         bkgClr += QString::number(feeds[i].bkgColor.blue());
         wr->writeTextElement("bkgColor", bkgClr);
 
-        //text color in news list
-        QString textClr = QString::number(feeds[i].textColor.red()) + ",";
-        textClr += QString::number(feeds[i].textColor.green()) + ",";
-        textClr += QString::number(feeds[i].textColor.blue());
-        wr->writeTextElement("textColor", textClr);
-
         //end element
         wr->writeEndElement();
     }
@@ -200,7 +194,6 @@ void RssFeedModel::loadFeedList(){
                     item.description = "";
                     item.enabled = false;
                     item.bkgColor = QColor(220, 220, 220);
-                    item.textColor = QColor(20, 20, 20);
                 }
                 break;
 
@@ -244,16 +237,6 @@ void RssFeedModel::loadFeedList(){
                     unsigned char g = clr[1].toInt();
                     unsigned char b = clr[2].toInt();
                     item.bkgColor = QColor(r, g, b);
-                }
-                //text color in news list
-                else if(elemName == "textColor"){
-                    QString text = rd->text().toString();
-                    QStringList clr = text.split(",");
-                    if(clr.length() != 3) break;
-                    unsigned char r = clr[0].toInt();
-                    unsigned char g = clr[1].toInt();
-                    unsigned char b = clr[2].toInt();
-                    item.textColor = QColor(r, g, b);
                 }
                 break;
 

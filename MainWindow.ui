@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>736</width>
-    <height>940</height>
+    <width>949</width>
+    <height>530</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,45 +18,15 @@
     <normaloff>:/icons/qrssreader</normaloff>:/icons/qrssreader</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">#MainWindow{
-	background-color: rgb(30, 30, 30);
-}
-
-#NewsListContent{
-	background-color: rgb(30, 30, 30);
-}
-
-#toolBar{
-	background-color: rgb(100, 100, 100);
-}
-
-#toolBar QToolButton:hover{
-	background-color: rgb(70, 70, 70);
-}
-
-#toolBar QToolButton:pressed{
-	background-color: rgb(70, 70, 70);
-}
-
-#toolBar QToolButton:checked{
-	background-color: rgb(30, 30, 130);
-}
-
-#toolBar::separator{
-	background-color: rgb(150, 150, 150);
-	margin-top: 2px;
-	margin-bottom: 2px;
-	border: 0px;
-	padding: 0px;
-	height: 1px;
-}
-
-#newsViewContents{
+   <string notr="true">#splitter::handle{
 	background-color: white;
+	image: url(:/icons/splitter);
+	border-top: 40px solid rgb(70,70,70);
+	border-left: 1px solid rgb(215,215,215);
 }
 
-QScrollBar:vertical{
-	width: 20px;
+#MainWindow{
+	background-color: white;
 }
 
 #progressBar{
@@ -64,19 +34,19 @@ QScrollBar:vertical{
 	text-align: center;
 }
 
-QProgressBar::chunk {
+#progressBar::chunk {
 	border: 0px;
 	background-color: rgb(50, 230, 50);
 }
 </string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="centralVerticalLayout">
     <property name="spacing">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="leftMargin">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="topMargin">
      <number>0</number>
@@ -88,289 +58,128 @@ QProgressBar::chunk {
      <number>0</number>
     </property>
     <item>
-     <widget class="QStackedWidget" name="newsListStack">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>1</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>350</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>350</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+     <widget class="QSplitter" name="splitter">
+      <property name="styleSheet">
+       <string notr="true"/>
       </property>
       <property name="lineWidth">
        <number>0</number>
       </property>
-     </widget>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout3">
-      <property name="spacing">
-       <number>0</number>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <item>
-       <widget class="QScrollArea" name="newsView">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>4</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="lineWidth">
+      <property name="handleWidth">
+       <number>12</number>
+      </property>
+      <property name="childrenCollapsible">
+       <bool>false</bool>
+      </property>
+      <widget class="QFrame" name="frame1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>4</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="lineWidth">
+        <number>0</number>
+       </property>
+       <layout class="QVBoxLayout" name="leftVLayout">
+        <property name="spacing">
          <number>0</number>
         </property>
-        <property name="widgetResizable">
-         <bool>true</bool>
+        <property name="leftMargin">
+         <number>0</number>
         </property>
-        <widget class="QWidget" name="newsViewContents">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>334</width>
-           <height>916</height>
-          </rect>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <property name="spacing">
-           <number>10</number>
-          </property>
-          <property name="leftMargin">
-           <number>10</number>
-          </property>
-          <property name="topMargin">
-           <number>10</number>
-          </property>
-          <property name="rightMargin">
-           <number>10</number>
-          </property>
-          <property name="bottomMargin">
-           <number>10</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="titleLabel">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="textLabel">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="textFormat">
-             <enum>Qt::RichText</enum>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-            <property name="openExternalLinks">
-             <bool>true</bool>
-            </property>
-            <property name="textInteractionFlags">
-             <set>Qt::LinksAccessibleByMouse</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>10</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="Line" name="line1">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="timeLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>1</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="feedNameLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>2</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="linkLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>2</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-            <property name="openExternalLinks">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="guidLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>2</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-            <property name="openExternalLinks">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer3">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QProgressBar" name="progressBar">
-        <property name="value">
-         <number>24</number>
+        <property name="topMargin">
+         <number>0</number>
         </property>
-        <property name="invertedAppearance">
-         <bool>false</bool>
+        <property name="rightMargin">
+         <number>0</number>
         </property>
-       </widget>
-      </item>
-     </layout>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QProgressBar" name="progressBar">
+          <property name="value">
+           <number>24</number>
+          </property>
+          <property name="invertedAppearance">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QFrame" name="frame2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>3</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <property name="lineWidth">
+        <number>0</number>
+       </property>
+       <layout class="QVBoxLayout" name="rightVLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QStackedWidget" name="newsListStack">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>1</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>350</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <property name="movable">
-    <bool>false</bool>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>32</width>
-     <height>32</height>
-    </size>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>LeftToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionRefresh"/>
-   <addaction name="separator"/>
-   <addaction name="actionTab1"/>
-   <addaction name="actionTab2"/>
-   <addaction name="actionTab3"/>
-   <addaction name="actionTab4"/>
-   <addaction name="actionTab5"/>
-   <addaction name="actionTab6"/>
-   <addaction name="actionTab7"/>
-   <addaction name="separator"/>
-   <addaction name="actionFirst"/>
-   <addaction name="actionPrevious"/>
-   <addaction name="separator"/>
-   <addaction name="actionNext"/>
-   <addaction name="actionLast"/>
-   <addaction name="separator"/>
-   <addaction name="actionManageFeeds"/>
-   <addaction name="actionSettings"/>
-   <addaction name="separator"/>
-   <addaction name="actionHelp"/>
-   <addaction name="actionAbout"/>
-   <addaction name="actionAboutQt"/>
   </widget>
   <action name="actionManageFeeds">
    <property name="icon">
@@ -387,7 +196,7 @@ QProgressBar::chunk {
   <action name="actionHelp">
    <property name="icon">
     <iconset resource="Icons.qrc">
-     <normaloff>:/icons/help_contents</normaloff>:/icons/help_contents</iconset>
+     <normaloff>:/icons/help_about</normaloff>:/icons/help_about</iconset>
    </property>
    <property name="text">
     <string>Help</string>
@@ -397,30 +206,6 @@ QProgressBar::chunk {
    </property>
    <property name="shortcut">
     <string>F1</string>
-   </property>
-  </action>
-  <action name="actionAbout">
-   <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/help_about</normaloff>:/icons/help_about</iconset>
-   </property>
-   <property name="text">
-    <string>About</string>
-   </property>
-   <property name="toolTip">
-    <string>About</string>
-   </property>
-  </action>
-  <action name="actionAboutQt">
-   <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/qt5_about</normaloff>:/icons/qt5_about</iconset>
-   </property>
-   <property name="text">
-    <string>AboutQt</string>
-   </property>
-   <property name="toolTip">
-    <string>AboutQt</string>
    </property>
   </action>
   <action name="actionRefresh">

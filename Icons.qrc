@@ -1,9 +1,7 @@
 <RCC>
     <qresource prefix="/icons">
         <file alias="help_about">icons/help_about.png</file>
-        <file alias="help_contents">icons/help_contents.png</file>
         <file alias="manage_feeds">icons/manage_feeds.png</file>
-        <file alias="qt5_about">icons/qt5_about.png</file>
         <file alias="edit_paste">icons/edit_paste.png</file>
         <file alias="view_refresh">icons/view_refresh.png</file>
         <file alias="settings">icons/settings.png</file>
@@ -19,7 +17,7 @@
         <file alias="list_tab5">icons/list_tab5.png</file>
         <file alias="list_tab6">icons/list_tab6.png</file>
         <file alias="list_tab7">icons/list_tab7.png</file>
-        <file alias="expanded_list">icons/expanded_list.png</file>
-        <file alias="collapsed_list">icons/collapsed_list.png</file>
+        <file alias="selectionHighlight">icons/selectionHighlight.png</file>
+        <file alias="splitter">icons/splitter.png</file>
     </qresource>
 </RCC>

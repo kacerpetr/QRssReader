@@ -5,23 +5,20 @@
         <url>http://feeds.feedburner.com/SvetAndroida?format=xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>180,230,180</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>90,140,95</bkgColor>
     </feed>
 	<feed>
         <name>Živě.cz</name>
         <url>http://www.zive.cz/rss/sc-47/</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>230,180,180</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>130,110,65</bkgColor>
     </feed>
 	<feed>
         <name>Hw.cz</name>
         <url>http://www.hw.cz/rss/hw_cz_top15.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>180,180,230</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>86,66,135</bkgColor>
     </feed>
 </feedlist>

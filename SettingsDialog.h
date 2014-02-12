@@ -22,8 +22,7 @@
 #include <QDialog>
 #include <RssFeedModel.h>
 #include <RssDataModel.h>
-
-#define FEEDS_PREFIX ":/feedlist/feedlist"
+#include "globaldef.h"
 
 namespace Ui {
     class SettingsDialog;

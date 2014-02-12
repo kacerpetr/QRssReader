@@ -36,11 +36,6 @@ FeedManagement::FeedManagement(QWidget* parent) : QDialog(parent), ui(new Ui::Fe
     connect(ui->bkgGreenBox, SIGNAL(valueChanged(int)), this, SLOT(bkgColorChanged()));
     connect(ui->bkgBlueBox, SIGNAL(valueChanged(int)), this, SLOT(bkgColorChanged()));
 
-    //text color preview
-    connect(ui->textRedBox, SIGNAL(valueChanged(int)), this, SLOT(textColorChanged()));
-    connect(ui->textGreenBox, SIGNAL(valueChanged(int)), this, SLOT(textColorChanged()));
-    connect(ui->textBlueBox, SIGNAL(valueChanged(int)), this, SLOT(textColorChanged()));
-
     //feed list selection
     connect(ui->feedList, SIGNAL(currentRowChanged(int)), this, SLOT(feedSelected(int)));
 
@@ -103,13 +98,6 @@ FeedItem FeedManagement::makeFeedItem() const{
         ui->bkgBlueBox->value()
     );
 
-    //text color in news list
-    item.textColor = QColor(
-        ui->textRedBox->value(),
-        ui->textGreenBox->value(),
-        ui->textBlueBox->value()
-    );
-
     return item;
 }
 
@@ -135,14 +123,8 @@ void FeedManagement::feedSelected(int row){
     ui->bkgGreenBox->setValue(items[row].bkgColor.green());
     ui->bkgBlueBox->setValue(items[row].bkgColor.blue());
 
-    //text color in news list
-    ui->textRedBox->setValue(items[row].textColor.red());
-    ui->textGreenBox->setValue(items[row].textColor.green());
-    ui->textBlueBox->setValue(items[row].textColor.blue());
-
     //renew color previews
     bkgColorChanged();
-    textColorChanged();
 }
 
 /**
@@ -153,16 +135,6 @@ void FeedManagement::bkgColorChanged(){
     color += QString::number(ui->bkgGreenBox->value()) + ",";
     color += QString::number(ui->bkgBlueBox->value());
     ui->bkgColorPreview->setStyleSheet("background-color: rgb(" + color + ");");
-}
-
-/**
- * @brief Set color of text color preview label
- */
-void FeedManagement::textColorChanged(){
-    QString color = QString::number(ui->textRedBox->value()) + ",";
-    color += QString::number(ui->textGreenBox->value()) + ",";
-    color += QString::number(ui->textBlueBox->value());
-    ui->textColorPreview->setStyleSheet("background-color: rgb(" + color + ");");
 }
 
 /**

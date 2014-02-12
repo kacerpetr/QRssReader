@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feedlist>
     <feed>
-        <name>Archlinux updates</name>
-        <url>https://www.archlinux.org/feeds/packages/</url>
+        <name>Blesk.cz</name>
+        <url>http://www.blesk.cz/rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>180,180,230</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>150,100,150</bkgColor>
     </feed>
 </feedlist>

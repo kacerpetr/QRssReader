@@ -20,6 +20,8 @@
 #include "ui_NewsItemWidget.h"
 #include <QPainter>
 #include <QDebug>
+#include <QFontMetrics>
+#include <QResizeEvent>
 #include "SettingsModel.h"
 
 /**
@@ -27,7 +29,7 @@
  * @param parent
  */
 NewsItemWidget::NewsItemWidget(QWidget* parent) : QWidget(parent),
-ui(new Ui::NewsItemWidget), selected(false), groupWidget(NULL){
+ui(new Ui::NewsItemWidget), selected(false){
     ui->setupUi(this);
 
     //settings model instance
@@ -90,9 +92,6 @@ void NewsItemWidget::setNewsItem(NewsItem item){
     ui->titleLabel->setText(item.title);
     ui->feedLabel->setText(item.time.time().toString("hh:mm:ss") + " - " + item.feed.name);
 
-    //set colors
-    setColor(item.feed.bkgColor, item.feed.textColor);
-
     //stores news item
     this->item = item;
 }
@@ -103,23 +102,38 @@ void NewsItemWidget::setNewsItem(NewsItem item){
  */
 void NewsItemWidget::setSelected(bool selected){
     if(selected){
-        QColor bkgClr = item.feed.bkgColor;
-        QString clrStr = QString::number((bkgClr.red()<=40) ? 0 : (bkgClr.red()-40)) + ",";
-        clrStr += QString::number((bkgClr.green()<=40) ? 0 : (bkgClr.green()-40)) + ",";
-        clrStr += QString::number((bkgClr.blue()<=40) ? 0 : (bkgClr.blue()-40));
-        ui->selectHighlight->setStyleSheet("background-color: rgb(" + clrStr + ")");
+        ui->selectionHighlight->setStyleSheet(
+            "#selectionHighlight{\n"
+            "   background-image: url(:/icons/selectionHighlight);\n"
+            "}"
+        );
     }else{
-        ui->selectHighlight->setStyleSheet("");
+        ui->selectionHighlight->setStyleSheet("");
     }
     this->selected = selected;
 }
 
-void NewsItemWidget::setGroup(NewsGroupWidget* group){
-    groupWidget = group;
-}
-
-NewsGroupWidget* NewsItemWidget::group() const{
-    return groupWidget;
+/**
+ * @brief Sets item background color
+ * @param true when item is odd in news list
+ */
+void NewsItemWidget::setOdd(bool odd){
+    //first background color
+    if(odd){
+        setStyleSheet(
+            "#NewsItemWidget{"
+            "   background-color: rgb(240,240,240);"
+            "}"
+        );
+    }
+    //second background color
+    else{
+        setStyleSheet(
+            "#NewsItemWidget{"
+            "   background-color: rgb(225,225,225);"
+            "}"
+        );
+    }
 }
 
 /**
@@ -137,31 +151,47 @@ bool NewsItemWidget::isSelected() const{
 }
 
 /**
- * @brief Sets colors of NewsItemWidget
- * @param bkgColor background color
- * @param textColor text color
+ * @brief Makes title text shorter to approximately match given width
  */
-void NewsItemWidget::setColor(QColor bkgColor, QColor textColor){
+void NewsItemWidget::cutText(int width){
+    QFontMetrics fm = ui->titleLabel->fontMetrics();
+    QString str = newsItem()->title;
+    int textWidth = fm.width(str);
+
+    if(textWidth <= width){
+        ui->titleLabel->setText(str);
+        return;
+    }
+
+    int chopLeft = 4 + (textWidth - width) / fm.averageCharWidth();
+    str.chop(chopLeft);
+    str.append(" ...");
+    ui->titleLabel->setText(str);
+}
+
+/**
+ * @brief Sets color and number of feed icon
+ * @param background background color
+ * @param index number viewed in feed icon
+ */
+void NewsItemWidget::setIcon(QColor background, int number){
     //background color
-    QString textClrStr = QString::number(textColor.red()) + ",";
-    textClrStr += QString::number(textColor.green()) + ",";
-    textClrStr += QString::number(textColor.blue());
+    QString textClrStr = QString::number(background.red()) + ",";
+    textClrStr += QString::number(background.green()) + ",";
+    textClrStr += QString::number(background.blue());
 
-    //text color
-    QString bkgClrStr = QString::number(bkgColor.red()) + ",";
-    bkgClrStr += QString::number(bkgColor.green()) + ",";
-    bkgClrStr += QString::number(bkgColor.blue());
-
-    //text color
-    QString styleSheet = QString(
-        "#NewsItemWidget{ \n"
-        "    background-color: rgb(" + bkgClrStr + "); \n"
-        "    color: rgb(" + textClrStr + "); \n"
-        "} \n"
+    //sets icon stylesheet
+    ui->feedIconLabel->setStyleSheet(
+        "#feedIconLabel{\n"
+        "   border-radius: 17px;\n"
+        "   color: white;\n"
+        "   font-weight: bold;\n"
+        "   background: rgb("+textClrStr+");\n"
+        "}"
     );
 
-    //sets stylesheet
-    setStyleSheet(styleSheet);
+    //feed index
+    ui->feedIconLabel->setText(QString::number(number));
 }
 
 /**

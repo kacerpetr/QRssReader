@@ -129,9 +129,10 @@ void RssDataModel::replyFinished(QNetworkReply* reply){
     if(reply->error() == QNetworkReply::NoError && reply->isOpen()){
         const FeedItem* feed = feedByUrl(reply->url().toString());
         QString xml = reply->readAll();
-        if(xml.isEmpty()) return;
-        parseRss(xml, *feed);
-        saveRss(xml, *feed);
+        if(!xml.isEmpty()){
+            parseRss(xml, *feed);
+            saveRss(xml, *feed);
+        }
     }
 
     //all feeds were loaded

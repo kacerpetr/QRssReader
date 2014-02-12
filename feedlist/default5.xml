@@ -5,71 +5,62 @@
         <url>http://www.abclinuxu.cz/auto/abc.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>208,225,236</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>98,115,186</bkgColor>
     </feed>
     <feed>
         <name>AbcLinuxu.cz - Blog</name>
         <url>http://www.abclinuxu.cz/auto/blog.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>163,199,229</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>83,119,199</bkgColor>
     </feed>
 	<feed>
         <name>AbcLinuxu.cz - Linux Blog</name>
         <url>http://www.abclinuxu.cz/auto/blogDigest.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>181,178,227</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>81,98,177</bkgColor>
     </feed>
 	<feed>
         <name>Root.cz - Čánky</name>
         <url>http://www.root.cz/rss/clanky/</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>242,200,202</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>192,60,62</bkgColor>
     </feed>
 	<feed>
         <name>Root.cz - Zprávičky</name>
         <url>http://www.root.cz/rss/zpravicky/</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>252,247,227</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>212,117,97</bkgColor>
     </feed>
 	<feed>
         <name>Root.cz - Knihy</name>
         <url>http://www.root.cz/rss/knihy/</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>250,187,225</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>221,77,95</bkgColor>
     </feed>
 	<feed>
         <name>ITBiz.cz - Články</name>
         <url>http://www.itbiz.cz/auto/articles.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>179,236,127</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>129,196,97</bkgColor>
     </feed>
 	<feed>
         <name>ITBiz.cz - Komentujeme</name>
         <url>http://www.itbiz.cz/auto/komentujeme.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>215,242,179</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>82,203,111</bkgColor>
     </feed>
 	<feed>
         <name>ITBiz.cz - Zprávičky</name>
         <url>http://www.itbiz.cz/auto/news.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>80,252,163</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>66,216,48</bkgColor>
     </feed>
 </feedlist>

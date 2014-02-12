@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     RssFeedModel.cpp \
     HelpDialog.cpp \
     SettingsModel.cpp \
-    SettingsDialog.cpp
+    SettingsDialog.cpp \
+    ActionBarWidget.cpp \
+    NewsViewWidget.cpp
 
 HEADERS  += MainWindow.h \
     FeedManagement.h \
@@ -35,14 +37,19 @@ HEADERS  += MainWindow.h \
     RssFeedModel.h \
     HelpDialog.h \
     SettingsModel.h \
-    SettingsDialog.h
+    SettingsDialog.h \
+    ActionBarWidget.h \
+    NewsViewWidget.h \
+    globaldef.h
 
 FORMS    += MainWindow.ui \
     FeedManagement.ui \
     NewsGroupWidget.ui \
     NewsItemWidget.ui \
     HelpDialog.ui \
-    SettingsDialog.ui
+    SettingsDialog.ui \
+    ActionBarWidget.ui \
+    NewsViewWidget.ui
 
 CONFIG += mobility
 MOBILITY = 

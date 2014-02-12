@@ -22,12 +22,10 @@
 #include <QMainWindow>
 #include <QActionGroup>
 #include "NewsListWidget.h"
+#include "NewsViewWidget.h"
 #include "RssDataModel.h"
 #include "RssFeedModel.h"
-
-#define RSS_FEED_FILE "feedlist"
-#define RSS_DATA_FOLDER "RssData"
-#define TAB_COUNT 7
+#include "globaldef.h"
 
 namespace Ui{
     class MainWindow;
@@ -42,20 +40,18 @@ class MainWindow : public QMainWindow{
 
     public:
         explicit MainWindow(QWidget* parent = 0);
+        void finishUI();
+        void createModels();
         ~MainWindow();
 
     public slots:
         void manageFeeds();
         void refreshAction();
-        void itemPressed(NewsItem* item);
         void updateNewsList();
         void updateProgressBar(QString feed, int progress);
-        void aboutQt5();
         void showAppHelp();
-        void aboutApp();
         void showSettings();
         void hideProgressBar();
-        void settingsChanged(QString tag);
         void selectFirst();
         void selectNext();
         void selectPrev();
@@ -65,6 +61,7 @@ class MainWindow : public QMainWindow{
     private:
         Ui::MainWindow* ui;
         NewsListWidget* newsListCurrent;
+        NewsViewWidget* newsViewWidget;
         QList<RssDataModel*> rssData;
         RssDataModel* rssDataCurrent;
         QActionGroup* actionGroup;

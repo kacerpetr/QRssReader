@@ -24,10 +24,8 @@
  * @brief Class constructor
  * @param parent
  */
-NewsGroupWidget::NewsGroupWidget(QWidget* parent) : QWidget(parent), ui(new Ui::NewsGroupWidget), expanded(false){
+NewsGroupWidget::NewsGroupWidget(QWidget* parent) : QWidget(parent), ui(new Ui::NewsGroupWidget){
     ui->setupUi(this);
-    ui->collapsedLabel->setHidden(false);
-    ui->expandedLabel->setHidden(true);
 }
 
 /**
@@ -39,23 +37,25 @@ void NewsGroupWidget::setText(QString text){
 }
 
 /**
- * @brief Sets widget expanded or collapsed
- * @param expanded
+ * @brief Sets item background color
+ * @param true when item is odd in news list
  */
-void NewsGroupWidget::setExpanded(bool state){
-    //collapse
-    if(!state){
-        expanded = false;
-        ui->expandedLabel->setHidden(true);
-        ui->collapsedLabel->setHidden(false);
-        emit collapsePress(this);
+void NewsGroupWidget::setOdd(bool odd){
+    //first background color
+    if(odd){
+        setStyleSheet(
+            "#NewsGroupWidget{"
+            "   background-color: rgb(240,240,240);"
+            "}"
+        );
     }
-    //expand
+    //second background color
     else{
-        expanded = true;
-        ui->collapsedLabel->setHidden(true);
-        ui->expandedLabel->setHidden(false);
-        emit expandPress(this);
+        setStyleSheet(
+            "#NewsGroupWidget{"
+            "   background-color: rgb(225,225,225);"
+            "}"
+        );
     }
 }
 
@@ -67,20 +67,6 @@ void NewsGroupWidget::paintEvent(QPaintEvent*){
      opt.init(this);
      QPainter p(this);
      style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-}
-
-/**
- * Toggles widget state to expanded or collapsed
- */
-void NewsGroupWidget::mousePressEvent(QMouseEvent*){
-    //collapse
-    if(expanded){
-        setExpanded(false);
-    }
-    //expand
-    else{
-        setExpanded(true);
-    }
 }
 
 /**

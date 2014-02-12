@@ -35,20 +35,14 @@ class NewsGroupWidget : public QWidget{
     public:
         explicit NewsGroupWidget(QWidget* parent = 0);
         void setText(QString text);
-        void setExpanded(bool expanded);
+        void setOdd(bool odd);
         ~NewsGroupWidget();
-
-    signals:
-        void expandPress(NewsGroupWidget* item);
-        void collapsePress(NewsGroupWidget* item);
 
     private:
        void paintEvent(QPaintEvent*);
-       void mousePressEvent(QMouseEvent*);
 
     private:
         Ui::NewsGroupWidget* ui;
-        bool expanded;
 };
 
 #endif //NEWSGROUPWIDGET_H

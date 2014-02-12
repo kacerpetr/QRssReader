@@ -22,9 +22,7 @@
 #include <QString>
 #include <QColor>
 #include <QList>
-
-#define FEEDS_PREFIX (QString(":/feedlist/feedlist"))
-#define DEFAULT_LIST_NAME (QString("/default"))
+#include "globaldef.h"
 
 /** Feed item structure */
 typedef struct{
@@ -32,7 +30,6 @@ typedef struct{
     QString url;
     QString description;
     QColor bkgColor;
-    QColor textColor;
     bool enabled;
 }FeedItem;
 

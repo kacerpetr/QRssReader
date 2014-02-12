@@ -30,6 +30,7 @@
 #include "HelpDialog.h"
 #include "SettingsDialog.h"
 #include "SettingsModel.h"
+#include "ActionBarWidget.h"
 
 /**
  * @brief Class constructor
@@ -38,14 +39,57 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow){
     ui->setupUi(this);
 
-    //hides line under message text
-    ui->line1->setHidden(true);
+    //creates additional widgets and adds them to layout
+    finishUI();
 
+    //loads settings
+    SettingsModel::get().loadSettings();
+
+    //creates and initializes data models
+    createModels();
+
+    //sets font sizes of news list
+    newsViewWidget->settingsChanged("view_footer_font_size");
+    newsViewWidget->settingsChanged("view_text_font_size");
+    newsViewWidget->settingsChanged("view_title_font_size");
+
+    //selects first tab
+    ui->actionTab1->setChecked(true);
+    tabSelected(ui->actionTab1);
+
+    //action of left toolbar
+    connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(showAppHelp()));
+    connect(ui->actionFirst, SIGNAL(triggered()), this, SLOT(selectFirst()));
+    connect(ui->actionLast, SIGNAL(triggered()), this, SLOT(selectLast()));
+    connect(ui->actionNext, SIGNAL(triggered()), this, SLOT(selectNext()));
+    connect(ui->actionPrevious, SIGNAL(triggered()), this, SLOT(selectPrev()));
+    connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
+
+    //action of right toolbar
+    connect(ui->actionRefresh, SIGNAL(triggered()), this, SLOT(refreshAction()));
+    connect(actionGroup, SIGNAL(triggered(QAction*)), this, SLOT(tabSelected(QAction*)));
+    connect(ui->actionManageFeeds, SIGNAL(triggered()), this, SLOT(manageFeeds()));   
+}
+
+/**
+ * @brief Class destructor
+ */
+MainWindow::~MainWindow(){
+    delete ui;
+}
+
+/**
+ * @brief Creates additional widgets and adds them to layout
+ */
+void MainWindow::finishUI(){
     //hides progress bar
     ui->progressBar->setHidden(true);
 
+    newsViewWidget = new NewsViewWidget(this);
+    ui->leftVLayout->insertWidget(0, newsViewWidget);
+
     //tab actions
-    actionGroup = new QActionGroup(ui->toolBar);
+    actionGroup = new QActionGroup(this);
     actionGroup->setExclusive(true);
     actionGroup->addAction(ui->actionTab1);
     actionGroup->addAction(ui->actionTab2);
@@ -55,9 +99,37 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     actionGroup->addAction(ui->actionTab6);
     actionGroup->addAction(ui->actionTab7);
 
-    //loads settings
-    SettingsModel::get().loadSettings();
+    //top left action bar
+    ActionBarWidget* leftActionBar = new ActionBarWidget(this);
+    leftActionBar->setMargin(0,0,11,0);
+    leftActionBar->setBackgroundColor(QColor(90,90,90));
+    leftActionBar->addAction(ui->actionHelp, AlignLeft);
+    leftActionBar->addAction(ui->actionFirst, AlignCenter);
+    leftActionBar->addAction(ui->actionPrevious, AlignCenter);
+    leftActionBar->addAction(ui->actionNext, AlignCenter);
+    leftActionBar->addAction(ui->actionLast, AlignCenter);
+    leftActionBar->addAction(ui->actionSettings, AlignRight);
+    ui->leftVLayout->insertWidget(0, leftActionBar);
 
+    //top right action bar
+    ActionBarWidget* rightActionBar = new ActionBarWidget(this);
+    rightActionBar->setBackgroundColor(QColor(70,70,70));
+    rightActionBar->addAction(ui->actionRefresh, AlignLeft);
+    rightActionBar->addAction(ui->actionTab1, AlignCenter);
+    rightActionBar->addAction(ui->actionTab2, AlignCenter);
+    rightActionBar->addAction(ui->actionTab3, AlignCenter);
+    rightActionBar->addAction(ui->actionTab4, AlignCenter);
+    rightActionBar->addAction(ui->actionTab5, AlignCenter);
+    rightActionBar->addAction(ui->actionTab6, AlignCenter);
+    rightActionBar->addAction(ui->actionTab7, AlignCenter);
+    rightActionBar->addAction(ui->actionManageFeeds, AlignRight);
+    ui->rightVLayout->insertWidget(0, rightActionBar);
+}
+
+/**
+ * @brief Creates and initializes data models
+ */
+void MainWindow::createModels(){
     //cerates and inits rss models
     for(int i = 0; i < TAB_COUNT; i++){
         //creates data model
@@ -93,39 +165,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         ui->newsListStack->addWidget(newsListWg);
 
         //signal must be emited only when widget is current
-        connect(newsListWg, SIGNAL(pressed(NewsItem*)), this, SLOT(itemPressed(NewsItem*)));
+        connect(newsListWg, SIGNAL(pressed(NewsItem*)), newsViewWidget, SLOT(itemPressed(NewsItem*)));
     }
-
-    //sets width of news list
-    settingsChanged("list_width");
-    settingsChanged("view_footer_font_size");
-    settingsChanged("view_text_font_size");
-    settingsChanged("view_title_font_size");
-
-    //selects first tab
-    ui->actionTab1->setChecked(true);
-    tabSelected(ui->actionTab1);
-
-    //signal slot connection
-    connect(&SettingsModel::get(), SIGNAL(dataChanged(QString)), this, SLOT(settingsChanged(QString)));
-    connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
-    connect(ui->actionManageFeeds, SIGNAL(triggered()), this, SLOT(manageFeeds()));
-    connect(ui->actionRefresh, SIGNAL(triggered()), this, SLOT(refreshAction()));
-    connect(ui->actionAboutQt, SIGNAL(triggered()), this, SLOT(aboutQt5()));
-    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(aboutApp()));
-    connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(showAppHelp()));
-    connect(ui->actionFirst, SIGNAL(triggered()), this, SLOT(selectFirst()));
-    connect(ui->actionLast, SIGNAL(triggered()), this, SLOT(selectLast()));
-    connect(ui->actionNext, SIGNAL(triggered()), this, SLOT(selectNext()));
-    connect(ui->actionPrevious, SIGNAL(triggered()), this, SLOT(selectPrev()));
-    connect(actionGroup, SIGNAL(triggered(QAction*)), this, SLOT(tabSelected(QAction*)));
-}
-
-/**
- * @brief Class destructor
- */
-MainWindow::~MainWindow(){
-    delete ui;
 }
 
 /**
@@ -133,35 +174,6 @@ MainWindow::~MainWindow(){
  */
 void MainWindow::refreshAction(){
     rssDataCurrent->downloadRssData();
-}
-
-/**
- * @brief Called when item from news list is pressed
- * @param item pointer to selected news item
- */
-void MainWindow::itemPressed(NewsItem* item){
-    //unhides line under report text
-    ui->line1->setHidden(false);
-
-    //feed name and description
-    QString name = "Feed: " + item->feed.name;
-    if(!item->feed.description.isEmpty())
-        name += " - " + item->feed.description;
-    ui->feedNameLabel->setText(name);
-
-    //report time
-    ui->timeLabel->setText("Datetime: " +
-    item->time.toString("ddd, dd MMM yyyy hh:mm:ss"));
-
-    //link of full report
-    QString linkText = item->link;
-    if(item->link.length() > 50) linkText = item->link.left(20) + " ... " + item->link.right(20);
-    ui->linkLabel->setText("Link: <a href=\""+item->link+"\">" + linkText + "</a>");
-
-    //other report parts
-    ui->titleLabel->setText(item->title);
-    ui->textLabel->setText(item->text);
-    ui->guidLabel->setText("Guid: " + item->guid);
 }
 
 /**
@@ -189,22 +201,6 @@ void MainWindow::updateProgressBar(QString feed, int progress){
  */
 void MainWindow::hideProgressBar(){
     ui->progressBar->setHidden(true);
-}
-
-/**
- * @brief Shows dialog about Qt5 framework
- */
-void MainWindow::aboutQt5(){
-    QMessageBox::aboutQt(this, "About Qt5");
-}
-
-/**
- * @brief Shows dialog about QRssReader
- */
-void MainWindow::aboutApp(){
-    QString about = "Application is currently in development state.\n";
-    about += "by Petr Kacer <kacerpetr@gmail.com>";
-    QMessageBox::about(this, "About QRssReader", about);
 }
 
 /**
@@ -243,47 +239,12 @@ void MainWindow::showAppHelp(){
 }
 
 /**
- * @brief Called when settings was changed
- * @param tag key of item in settings
- */
-void MainWindow::settingsChanged(QString tag){
-    if(tag == "list_width"){
-        int width = SettingsModel::get().getInt(tag);
-        ui->newsListStack->setMinimumWidth(width);
-    }
-    if(tag == "view_title_font_size"){
-        SettingsModel& sm = SettingsModel::get();
-        QFont font;
-        font.setBold(true);
-        font.setUnderline(true);
-        font.setPointSize(sm.getInt(tag));
-        ui->titleLabel->setFont(font);
-    }
-    if(tag == "view_text_font_size"){
-        SettingsModel& sm = SettingsModel::get();
-        QFont font;
-        font.setPointSize(sm.getInt(tag));
-        ui->textLabel->setFont(font);
-    }
-    if(tag == "view_footer_font_size"){
-        SettingsModel& sm = SettingsModel::get();
-        QFont font;
-        font.setItalic(true);
-        font.setPointSize(sm.getInt(tag));
-        ui->timeLabel->setFont(font);
-        ui->linkLabel->setFont(font);
-        ui->feedNameLabel->setFont(font);
-        ui->guidLabel->setFont(font);
-    }
-}
-
-/**
  * @brief Selects first item from news list
  */
 void MainWindow::selectFirst(){
     NewsItem* item = newsListCurrent->selectFirst();
     if(item == NULL) return;
-    itemPressed(item);
+    newsViewWidget->itemPressed(item);
 }
 
 /**
@@ -292,7 +253,7 @@ void MainWindow::selectFirst(){
 void MainWindow::selectNext(){
     NewsItem* item = newsListCurrent->selectNext();
     if(item == NULL) return;
-    itemPressed(item);
+    newsViewWidget->itemPressed(item);
 }
 
 /**
@@ -301,7 +262,7 @@ void MainWindow::selectNext(){
 void MainWindow::selectPrev(){
     NewsItem* item = newsListCurrent->selectPrev();
     if(item == NULL) return;
-    itemPressed(item);
+    newsViewWidget->itemPressed(item);
 }
 
 /**
@@ -310,7 +271,7 @@ void MainWindow::selectPrev(){
 void MainWindow::selectLast(){
     NewsItem* item = newsListCurrent->selectLast();
     if(item == NULL) return;
-    itemPressed(item);
+    newsViewWidget->itemPressed(item);
 }
 
 /**
@@ -364,6 +325,6 @@ void MainWindow::tabSelected(QAction* action){
     //selected item
     NewsItem* item = newsListCurrent->selectedItem();
     //shows this item or selects first
-    if(item != NULL) itemPressed(item);
+    if(item != NULL) newsViewWidget->itemPressed(item);
     else selectFirst();
 }

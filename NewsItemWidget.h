@@ -21,6 +21,7 @@
 
 #include <QWidget>
 #include <QColor>
+#include <QLabel>
 #include "RssDataModel.h"
 #include "NewsGroupWidget.h"
 
@@ -40,10 +41,12 @@ class NewsItemWidget : public QWidget{
         ~NewsItemWidget();
         void setNewsItem(NewsItem item);
         void setSelected(bool selected);
-        void setGroup(NewsGroupWidget* group);
+        void setOdd(bool odd);
+        void setIcon(QColor background, int number);
         NewsGroupWidget* group() const;
         NewsItem* newsItem();
         bool isSelected() const;
+        void cutText(int width);
 
     public slots:
         void settingsChanged(QString key);
@@ -52,7 +55,6 @@ class NewsItemWidget : public QWidget{
         void pressed(NewsItemWidget* item);
 
     private:
-        void setColor(QColor bkgColor, QColor textColor);
         void paintEvent(QPaintEvent*);
         void mousePressEvent(QMouseEvent*);
 
@@ -60,7 +62,6 @@ class NewsItemWidget : public QWidget{
         Ui::NewsItemWidget* ui;
         NewsItem item;
         bool selected;
-        NewsGroupWidget* groupWidget;
 };
 
 #endif // NEWSITEM_H

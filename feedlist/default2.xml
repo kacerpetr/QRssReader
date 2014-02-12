@@ -5,151 +5,132 @@
         <url>http://rss.nytimes.com/services/xml/rss/nyt/InternationalHome.xml</url>
         <description>International Edition</description>
         <enabled>true</enabled>
-        <bkgColor>253,226,192</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>153,127,72</bkgColor>
     </feed>
 	<feed>
         <name>NYTimes - Europe</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Europe.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>189,218,250</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>79,108,134</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Business Day</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Business.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>225,213,207</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>130,113,107</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - International Business</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/InternationalBusiness.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>230,187,224</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>95,127,164</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Economy</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Economy.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>206,195,245</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>146,135,35</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Your Money</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/YourMoney.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>217,220,123</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>157,63,63</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Technology</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Technology.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>249,253,213</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>189,51,153</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Personal Tech</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/PersonalTech.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>215,239,129</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>155,117,69</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Science</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Science.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>234,181,161</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>174,20,101</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Environment</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Environment.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>217,228,127</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>157,168,127</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Space &amp; Cosmos</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Space.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>201,247,248</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>141,28,188</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Money &amp; Policy</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/HealthCarePolicy.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>195,205,176</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>135,145,107</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Research</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Research.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>248,158,153</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>188,98,38</bkgColor>
     </feed> 
 	<feed>
         <name>NYTimes - Health</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Health.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>216,220,191</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>156,109,131</bkgColor>
     </feed>
 	<feed>
         <name>NYTimes - Arts</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Arts.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>178,229,208</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>118,169,86</bkgColor>
     </feed>
 	<feed>
         <name>NYTimes - Art &amp; Design</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/ArtandDesign.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>188,210,86</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>128,150,26</bkgColor>
     </feed>
 	<feed>
         <name>NYTimes - International Arts</name>
         <url>http://www.nytimes.com/services/xml/rss/nyt/InternationalArts.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>221,173,175</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>128,73,115</bkgColor>
     </feed>
 	<feed>
         <name>NYTimes - Books</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Books.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>184,231,191</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>124,31,131</bkgColor>
     </feed>
 	<feed>
         <name>NYTimes - Movies</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/Movies.xml</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>220,219,216</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>60,159,156</bkgColor>
     </feed>
 </feedlist>

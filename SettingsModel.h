@@ -22,9 +22,7 @@
 #include <QObject>
 #include <QString>
 #include <QMap>
-
-/** Name of application settings file */
-#define SETTINGS_FILE "settings.xml"
+#include "globaldef.h"
 
 /**
  * @brief The SettingsModel class, singleton

@@ -26,8 +26,7 @@
 #include <QNetworkReply>
 #include <QTimer>
 #include "RssFeedModel.h"
-
-#define REQUEST_TIMEOUT 4000
+#include "globaldef.h"
 
 /** News item structure */
 typedef struct{

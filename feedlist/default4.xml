@@ -5,111 +5,97 @@
         <url>http://idnes.cz.feedsportal.com/c/34387/f/625936/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>89,214,198</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>29,154,138</bkgColor>
     </feed>
     <feed>
         <name>Ekonomika iDNES.cz</name>
         <url>http://idnes.cz.feedsportal.com/c/34387/f/625943/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>247,252,169</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>197,172,99</bkgColor>
     </feed>
     <feed>
         <name>Kultura iDNES.cz</name>
         <url>http://idnes.cz.feedsportal.com/c/34387/f/625944/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>134,211,248</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>74,151,188</bkgColor>
     </feed>
     <feed>
         <name>Finance iDNES.cz</name>
         <url>http://idnes.cz.feedsportal.com/c/33698/f/625987/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>134,250,180</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>74,190,120</bkgColor>
     </feed>
     <feed>
         <name>Ona iDNES.cz</name>
         <url>http://idnes.cz.feedsportal.com/c/33698/f/625988/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>225,136,193</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>165,76,133</bkgColor>
     </feed>
     <feed>
         <name>Xman.cz</name>
         <url>http://idnes.cz.feedsportal.com/c/33698/f/625989/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>198,142,242</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>138,82,182</bkgColor>
     </feed>
     <feed>
         <name>Revue iDNES.cz</name>
         <url>http://idnes.cz.feedsportal.com/c/33698/f/625990/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>138,209,141</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>78,149,81</bkgColor>
     </feed>
     <feed>
         <name>Mobil iDNES.cz</name>
         <url>http://mobil.idnes.cz.feedsportal.com/c/33698/f/597321/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>170,247,94</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>110,187,34</bkgColor>
     </feed>
     <feed>
         <name>Technet iDNES.cz</name>
         <url>http://technet.idnes.feedsportal.com/c/33324/f/565937/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>203,227,197</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>133,157,107</bkgColor>
     </feed>
     <feed>
         <name>Hobby.cz</name>
         <url>http://idnes.cz.feedsportal.com/c/33698/f/625991/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>151,158,155</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>91,158,95</bkgColor>
     </feed>
     <feed>
         <name>Auto iDNES.cz</name>
         <url>http://auto.idnes.cz.feedsportal.com/c/33697/f/597322/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>171,187,179</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>111,127,119</bkgColor>
     </feed>
     <feed>
         <name>BonusWeb iDNES.cz</name>
         <url>http://bonusweb.idnes.cz.feedsportal.com/c/33696/f/597320/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>187,221,230</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>97,141,150</bkgColor>
     </feed>
     <feed>
         <name>Bydlení iDNES.cz</name>
         <url>http://idnes.cz.feedsportal.com/c/33698/f/625992/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>249,223,182</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>159,133,92</bkgColor>
     </feed>
     <feed>
         <name>Cestování iDNES.cz</name>
         <url>http://idnes.cz.feedsportal.com/c/33698/f/625993/index.rss</url>
         <description></description>
         <enabled>true</enabled>
-        <bkgColor>241,144,237</bkgColor>
-        <textColor>0,0,0</textColor>
+        <bkgColor>181,84,177</bkgColor>
     </feed>
 </feedlist>

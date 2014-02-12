@@ -44,7 +44,6 @@ class FeedManagement : public QDialog{
     public slots:
         void feedSelected(int row);
         void bkgColorChanged();
-        void textColorChanged();
         void addNewPressed();
         void saveChangesPressed();
         void removePressed();
