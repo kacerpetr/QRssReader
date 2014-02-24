@@ -14,8 +14,8 @@
    <string>Application help</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Icons.qrc">
-    <normaloff>:/icons/qrssreader</normaloff>:/icons/qrssreader</iconset>
+   <iconset resource="Images.qrc">
+    <normaloff>:/images/qrssreader</normaloff>:/images/qrssreader</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">#HelpDialog{
@@ -155,7 +155,7 @@ QPushButton{
   </layout>
  </widget>
  <resources>
-  <include location="Icons.qrc"/>
+  <include location="Images.qrc"/>
  </resources>
  <connections>
   <connection>

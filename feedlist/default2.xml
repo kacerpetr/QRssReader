@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feedlist>
+	<header>
+		<name>New York Times</name>
+		<description>Default for tab2. Contains NYTimes.com Home Page, Europe, Business Day, International Business, Economy, Your Money, Technology, Personal Tech, Science, Environment, Space &amp; Cosmos, Money &amp; Policy, Research, Health, Arts, Art &amp; Design, International Arts, Books, Movies.</description>
+	</header>
     <feed>
-        <name>NYTimes.com Home Page</name>
+        <name>NYTimes.com - Home Page</name>
         <url>http://rss.nytimes.com/services/xml/rss/nyt/InternationalHome.xml</url>
         <description>International Edition</description>
         <enabled>true</enabled>

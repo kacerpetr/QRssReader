@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feedlist>
+	<header>
+		<name>Blesk.cz</name>
+		<description></description>
+	</header>
     <feed>
         <name>Blesk.cz</name>
         <url>http://www.blesk.cz/rss</url>

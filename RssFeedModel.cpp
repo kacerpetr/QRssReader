@@ -20,6 +20,7 @@
 #include "StorageAccess.h"
 #include <QMessageBox>
 #include <QFile>
+#include <QDirIterator>
 
 /**
  * @brief Compares two feed items
@@ -297,4 +298,70 @@ const FeedItem* RssFeedModel::feedByUrl(QString url){
  */
 QString RssFeedModel::feedListFileName() const{
     return feedListFile;
+}
+
+/**
+ * @brief Fills given array with info about predefined feedlists
+ * @param list list to be filled
+ */
+bool RssFeedModel::predefinedFeedlist(QList<FeedList>& lists){
+    //creates list of predefined feedlist containing only urls
+    QDirIterator it(FEEDS_PREFIX, QDirIterator::Subdirectories);
+    while(it.hasNext()){
+        FeedList list;
+        list.url = it.next();
+        lists.append(list);
+    }
+
+    //loads feedlists names and descriptions
+    for(int i = 0; i < lists.length(); i++){
+        //opens xml reader
+        QXmlStreamReader* rd = StorageAccess::get().openXmlReader(lists[i].url);
+        if(rd == NULL) return false;
+
+        //support variables
+        QString elemName;
+        int state = 0;
+
+        //parsing file
+        while(!rd->atEnd()){
+            if(state == 2) break;
+            switch(rd->readNext()){
+                case QXmlStreamReader::StartElement:
+                    elemName = rd->name().toString();
+                    if(rd->name() == "header"){
+                        state = 1;
+                    }
+                    break;
+
+                case QXmlStreamReader::EndElement:
+                    elemName = "";
+                    if(rd->name() == "header"){
+                        state = 2;
+                    }
+                    break;
+
+                case QXmlStreamReader::Characters:
+                    if(elemName.isEmpty()) break;
+                    if(state != 1) break;
+                    //feedlist name
+                    if(elemName == "name"){
+                        lists[i].name = rd->text().toString();
+                    }
+                    //feedlist description
+                    else if(elemName == "description"){
+                        lists[i].description = rd->text().toString();
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        //closes xml reader
+        StorageAccess::get().closeXmlReader(&rd);
+    }
+
+    return true;
 }

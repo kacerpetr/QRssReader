@@ -53,8 +53,10 @@ NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
         sp.setScrollMetric(QScrollerProperties::DragStartDistance, 0.001);
         sp.setScrollMetric(QScrollerProperties::FrameRate, QScrollerProperties::Fps60);
         sp.setScrollMetric(QScrollerProperties::MousePressEventDelay, 0.1);
-        sp.setScrollMetric(QScrollerProperties::OvershootDragDistanceFactor, 0);
-        sp.setScrollMetric(QScrollerProperties::OvershootScrollDistanceFactor, 0);
+        sp.setScrollMetric(QScrollerProperties::VerticalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+        sp.setScrollMetric(QScrollerProperties::HorizontalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+        sp.setScrollMetric(QScrollerProperties::OvershootDragDistanceFactor, 0.1);
+        sp.setScrollMetric(QScrollerProperties::OvershootScrollDistanceFactor, 0.1);
         QScroller* qs = QScroller::scroller(this);
         qs->setScrollerProperties(sp);
     #endif

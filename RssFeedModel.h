@@ -33,6 +33,13 @@ typedef struct{
     bool enabled;
 }FeedItem;
 
+/** Feed list description */
+typedef struct{
+    QString name;
+    QString description;
+    QString url;
+}FeedList;
+
 bool operator==(const FeedItem& item1, const FeedItem& item2);
 
 /**
@@ -54,6 +61,7 @@ class RssFeedModel : public QObject{
         const FeedItem* feedByUrl(QString url);
         QString feedListFileName() const;
         void setDefaultList(int defaultList);
+        bool predefinedFeedlist(QList<FeedList>& lists);
 
     private:
         bool copyDefaultList();

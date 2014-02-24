@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FeedEditDialog</class>
+ <widget class="QDialog" name="FeedEditDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>993</width>
+    <height>573</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Feed management</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Images.qrc">
+    <normaloff>:/images/qrssreader</normaloff>:/images/qrssreader</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#FeedEditDialog{
+	background: rgb(150, 150, 150);
+}
+
+#tabWidget::pane{
+    border-top: 2px solid rgb(90, 90, 90);
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb(240, 240, 240), stop:1 rgb(250, 250, 250));
+}
+
+QTabWidget::tab-bar{
+	left: 10px;
+}
+
+QTabBar::tab{
+    background: rgb(70, 70, 70);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-right: 2px;
+	height: 50px;
+	color: white;
+	font-weight: bold;
+}
+
+QTabBar::tab:selected {
+	background: rgb(90, 90, 90);
+	height: 52px;
+}
+
+QTabBar::tab:!selected {
+	height: 50px;
+	margin-top: 2px;
+}
+
+
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="tabShape">
+      <enum>QTabWidget::Triangular</enum>
+     </property>
+     <property name="currentIndex">
+      <number>-1</number>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="Images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

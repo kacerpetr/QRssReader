@@ -14,7 +14,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         MainWindow.cpp \
-    FeedManagement.cpp \
     NewsGroupWidget.cpp \
     NewsItemWidget.cpp \
     NewsListWidget.cpp \
@@ -25,10 +24,11 @@ SOURCES += main.cpp\
     SettingsModel.cpp \
     SettingsDialog.cpp \
     ActionBarWidget.cpp \
-    NewsViewWidget.cpp
+    NewsViewWidget.cpp \
+    FeedEditWidget.cpp \
+    FeedEditDialog.cpp
 
 HEADERS  += MainWindow.h \
-    FeedManagement.h \
     NewsGroupWidget.h \
     NewsItemWidget.h \
     NewsListWidget.h \
@@ -40,22 +40,25 @@ HEADERS  += MainWindow.h \
     SettingsDialog.h \
     ActionBarWidget.h \
     NewsViewWidget.h \
-    globaldef.h
+    globaldef.h \
+    FeedEditWidget.h \
+    FeedEditDialog.h
 
 FORMS    += MainWindow.ui \
-    FeedManagement.ui \
     NewsGroupWidget.ui \
     NewsItemWidget.ui \
     HelpDialog.ui \
     SettingsDialog.ui \
     ActionBarWidget.ui \
-    NewsViewWidget.ui
+    NewsViewWidget.ui \
+    FeedEditWidget.ui \
+    FeedEditDialog.ui
 
 CONFIG += mobility
 MOBILITY = 
 
 RESOURCES += \
-    Icons.qrc \
+    Images.qrc \
     Default.qrc
 
 OTHER_FILES += \

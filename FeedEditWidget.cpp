@@ -16,17 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "FeedManagement.h"
-#include "ui_FeedManagement.h"
+#include "FeedEditWidget.h"
+#include "ui_FeedEditWidget.h"
+#include "StorageAccess.h"
 #include <QMessageBox>
 #include <QClipboard>
+#include <QDirIterator>
 
-/**
- * @brief Class constructor
- * @param parent
- */
-FeedManagement::FeedManagement(QWidget* parent) : QDialog(parent), ui(new Ui::FeedManagement), model(NULL){
+FeedEditWidget::FeedEditWidget(QWidget *parent) : QWidget(parent), ui(new Ui::FeedEditWidget){
     ui->setupUi(this);
+
+    //fills predefined feed lists
+    listFeedPresets();
 
     //sets focus to save button
     ui->saveButton->setFocus();
@@ -38,23 +39,45 @@ FeedManagement::FeedManagement(QWidget* parent) : QDialog(parent), ui(new Ui::Fe
 
     //feed list selection
     connect(ui->feedList, SIGNAL(currentRowChanged(int)), this, SLOT(feedSelected(int)));
+    connect(ui->feedPresetList, SIGNAL(currentRowChanged(int)), this, SLOT(presetSelected(int)));
 
     //main control buttons
     connect(ui->saveButton, SIGNAL(pressed()), this, SLOT(saveChangesPressed()));
     connect(ui->addButton, SIGNAL(pressed()), this, SLOT(addNewPressed()));
     connect(ui->removeButton, SIGNAL(pressed()), this, SLOT(removePressed()));
+    connect(ui->loadFeedlistButton, SIGNAL(pressed()), this, SLOT(loadPresetPressed()));
 
     //paste buttons
     connect(ui->pasteNameButton, SIGNAL(pressed()), this, SLOT(pasteNamePressed()));
     connect(ui->urlNameButton, SIGNAL(pressed()), this, SLOT(pasteUrlPressed()));
     connect(ui->descriptionNameButton, SIGNAL(pressed()), this, SLOT(pasteDescriptionPressed()));
+
+    //close button
+    connect(ui->closeButton, SIGNAL(pressed()), this, SLOT(emitClosePressed()));
+}
+
+FeedEditWidget::~FeedEditWidget(){
+    delete ui;
 }
 
 /**
- * @brief Class destructor
+ * @brief Lists predefined feedlists and fills feedPresetList
  */
-FeedManagement::~FeedManagement(){
-    delete ui;
+void FeedEditWidget::listFeedPresets(){
+    //reads predefined feedlists and their names and descriptions
+    lists.clear();
+    model->predefinedFeedlist(lists);
+
+    //fills list widget
+    for(int i = 0; i < lists.length(); i++){
+        if(lists[i].name.isEmpty())
+            ui->feedPresetList->addItem(lists[i].url);
+        else
+            ui->feedPresetList->addItem(lists[i].name);
+    }
+
+    //selects first item
+    ui->feedPresetList->setCurrentRow(0);
 }
 
 /**
@@ -62,9 +85,20 @@ FeedManagement::~FeedManagement(){
  * @param model
  * @see RssFeedModel
  */
-void FeedManagement::setModel(RssFeedModel* model){
+void FeedEditWidget::setModel(RssDataModel* model){
     //saves model pointer
     this->model = model;
+
+    //fills listWidget of feed
+    fillFeedList();
+}
+
+/**
+ * @brief Fills list of current feeds
+ */
+void FeedEditWidget::fillFeedList(){
+    //clears view
+    ui->feedList->clear();
 
     //list of feeds
     const QList<FeedItem>& items = model->feedList();
@@ -76,13 +110,14 @@ void FeedManagement::setModel(RssFeedModel* model){
 
     //selects first item
     ui->feedList->setCurrentRow(0);
+    presetSelected(0);
 }
 
 /**
  * @brief Returns FeedItem created from dialog inputs
  * @see FeedItem
  */
-FeedItem FeedManagement::makeFeedItem() const{
+FeedItem FeedEditWidget::makeFeedItem() const{
     FeedItem item;
 
     //main properties
@@ -105,7 +140,7 @@ FeedItem FeedManagement::makeFeedItem() const{
  * @brief Fills form inputs with feed data
  * @param row
  */
-void FeedManagement::feedSelected(int row){
+void FeedEditWidget::feedSelected(int row){
     //invalid row check
     if(row < 0) return;
 
@@ -130,7 +165,7 @@ void FeedManagement::feedSelected(int row){
 /**
  * @brief Set color of background color preview label
  */
-void FeedManagement::bkgColorChanged(){
+void FeedEditWidget::bkgColorChanged(){
     QString color = QString::number(ui->bkgRedBox->value()) + ",";
     color += QString::number(ui->bkgGreenBox->value()) + ",";
     color += QString::number(ui->bkgBlueBox->value());
@@ -140,7 +175,7 @@ void FeedManagement::bkgColorChanged(){
 /**
  * @brief Saves modified feed parameters as new feed
  */
-void FeedManagement::addNewPressed(){
+void FeedEditWidget::addNewPressed(){
     FeedItem item = makeFeedItem();
 
     //adds feed
@@ -163,7 +198,7 @@ void FeedManagement::addNewPressed(){
 /**
  * @brief Saves changes of selected feed
  */
-void FeedManagement::saveChangesPressed(){
+void FeedEditWidget::saveChangesPressed(){
     //index of selected item
     int index = ui->feedList->currentRow();
     if(index < 0) return;
@@ -191,7 +226,7 @@ void FeedManagement::saveChangesPressed(){
 /**
  * @brief Removes selected feed
  */
-void FeedManagement::removePressed(){
+void FeedEditWidget::removePressed(){
     //index of selected item
     int index = ui->feedList->currentRow();
     if(index < 0) return;
@@ -211,7 +246,7 @@ void FeedManagement::removePressed(){
 /**
  * @brief Pastes text from clipboard to feed name input
  */
-void FeedManagement::pasteNamePressed(){
+void FeedEditWidget::pasteNamePressed(){
     QClipboard *clipboard = QApplication::clipboard();
     ui->nameEdit->setText(clipboard->text());
 }
@@ -219,7 +254,7 @@ void FeedManagement::pasteNamePressed(){
 /**
  * @brief Pastes text from clipboard to feed url input
  */
-void FeedManagement::pasteUrlPressed(){
+void FeedEditWidget::pasteUrlPressed(){
     QClipboard *clipboard = QApplication::clipboard();
     ui->urlEdit->setText(clipboard->text());
 }
@@ -227,7 +262,82 @@ void FeedManagement::pasteUrlPressed(){
 /**
  * @brief Pastes text from clipboard to feed description input
  */
-void FeedManagement::pasteDescriptionPressed(){
+void FeedEditWidget::pasteDescriptionPressed(){
     QClipboard *clipboard = QApplication::clipboard();
     ui->descriptionEdit->setText(clipboard->text());
+}
+
+/**
+ * @brief Emits closePressed signal when close button is pressed
+ */
+void FeedEditWidget::emitClosePressed(){
+    emit closePressed();
+}
+
+
+/**
+ * @brief Loads predefined feedlist
+ */
+void FeedEditWidget::loadPresetPressed(){
+    //must have data models
+    if(model == NULL) return;
+
+    //storage access singleton reference
+    StorageAccess& sa = StorageAccess::get();
+
+    //predefined feedlist path
+    QString pflPath = lists[ui->feedPresetList->currentRow()].url;
+
+    //error handling vars
+    bool success = false;
+
+    //deletes old feedlist
+    sa.rmFile(model->feedListFileName());
+
+    //creates copy of predefined feedlist to current feedlist
+    QFile source(pflPath);
+    success = source.copy(sa.absPath(model->feedListFileName()));
+
+    //error check
+    if(!success){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Load preset error");
+        msgBox.setText("Error creating copy of predefined feed list file");
+        msgBox.setInformativeText(source.errorString());
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        return;
+    }
+
+    //sets file permissions
+    #ifndef ANDROID
+        QFile file(sa.absPath(model->feedListFileName()));
+        success = file.setPermissions(QFileDevice::WriteOwner | QFileDevice::ReadOwner |
+                                      QFileDevice::ReadGroup | QFileDevice::ReadOther);
+
+        //error check
+        if(!success){
+            QMessageBox msgBox;
+            msgBox.setWindowTitle("Load preset error");
+            msgBox.setText("Unable to set feedlist file permissions");
+            msgBox.setInformativeText(file.errorString());
+            msgBox.setIcon(QMessageBox::Critical);
+            msgBox.exec();
+        }
+    #endif
+
+    //clears data cache
+    sa.clearDir(model->rssCacheFolder());
+
+    //and finaly, loads feedlist into model
+    model->loadFeedList();
+
+    //selects first item
+    fillFeedList();
+}
+
+void FeedEditWidget::presetSelected(int currentRow){
+    QString text = lists[currentRow].description;
+    if(text.isEmpty()) text = "Feedlist has no description.";
+    ui->feedlistDescriptionText->setPlainText(text);
 }

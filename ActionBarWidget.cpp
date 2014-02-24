@@ -42,8 +42,8 @@ void ActionBarWidget::addAction(QAction* action, BarActionAlign align){
     //creates toolbutton for given action
     QToolButton* btn = new QToolButton(this);
     btn->setIconSize(QSize(32,32));
-    btn->setMaximumSize(40,40);
-    btn->setMinimumSize(40,40);
+    btn->setMaximumSize(50,50);
+    btn->setMinimumSize(50,50);
     btn->setDefaultAction(action);
     btn->setStyleSheet(
         "QToolButton{\n"

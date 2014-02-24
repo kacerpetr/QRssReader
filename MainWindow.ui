@@ -14,14 +14,14 @@
    <string>QRssReader</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Icons.qrc">
-    <normaloff>:/icons/qrssreader</normaloff>:/icons/qrssreader</iconset>
+   <iconset resource="Images.qrc">
+    <normaloff>:/images/qrssreader</normaloff>:/images/qrssreader</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">#splitter::handle{
 	background-color: white;
-	image: url(:/icons/splitter);
-	border-top: 40px solid rgb(70,70,70);
+	image: url(:/images/splitter);
+	border-top: 50px solid rgb(70,70,70);
 	border-left: 1px solid rgb(215,215,215);
 }
 
@@ -38,7 +38,10 @@
 	border: 0px;
 	background-color: rgb(50, 230, 50);
 }
-</string>
+
+#newsListStack{
+	background: rgb(240,240,240);
+}</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="centralVerticalLayout">
@@ -183,8 +186,8 @@
   </widget>
   <action name="actionManageFeeds">
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/manage_feeds</normaloff>:/icons/manage_feeds</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/manage_feeds</normaloff>:/images/manage_feeds</iconset>
    </property>
    <property name="text">
     <string>Feeds</string>
@@ -195,8 +198,8 @@
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/help_about</normaloff>:/icons/help_about</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/help_about</normaloff>:/images/help_about</iconset>
    </property>
    <property name="text">
     <string>Help</string>
@@ -210,8 +213,8 @@
   </action>
   <action name="actionRefresh">
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/view_refresh</normaloff>:/icons/view_refresh</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/view_refresh</normaloff>:/images/view_refresh</iconset>
    </property>
    <property name="text">
     <string>Refresh</string>
@@ -225,8 +228,8 @@
   </action>
   <action name="actionSettings">
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/settings</normaloff>:/icons/settings</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/settings</normaloff>:/images/settings</iconset>
    </property>
    <property name="text">
     <string>Settings</string>
@@ -237,8 +240,8 @@
   </action>
   <action name="actionFirst">
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/arrow_up_double</normaloff>:/icons/arrow_up_double</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/arrow_up_double</normaloff>:/images/arrow_up_double</iconset>
    </property>
    <property name="text">
     <string>Home</string>
@@ -249,8 +252,8 @@
   </action>
   <action name="actionPrevious">
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/arrow_up</normaloff>:/icons/arrow_up</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/arrow_up</normaloff>:/images/arrow_up</iconset>
    </property>
    <property name="text">
     <string>Previous</string>
@@ -261,8 +264,8 @@
   </action>
   <action name="actionNext">
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/arrow_down</normaloff>:/icons/arrow_down</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/arrow_down</normaloff>:/images/arrow_down</iconset>
    </property>
    <property name="text">
     <string>Next</string>
@@ -273,8 +276,8 @@
   </action>
   <action name="actionLast">
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/arrow_down_double</normaloff>:/icons/arrow_down_double</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/arrow_down_double</normaloff>:/images/arrow_down_double</iconset>
    </property>
    <property name="text">
     <string>End</string>
@@ -288,8 +291,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/list_tab1</normaloff>:/icons/list_tab1</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/list_tab1</normaloff>:/images/list_tab1</iconset>
    </property>
    <property name="text">
     <string>Tab1</string>
@@ -300,8 +303,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/list_tab2</normaloff>:/icons/list_tab2</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/list_tab2</normaloff>:/images/list_tab2</iconset>
    </property>
    <property name="text">
     <string>Tab2</string>
@@ -312,8 +315,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/list_tab3</normaloff>:/icons/list_tab3</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/list_tab3</normaloff>:/images/list_tab3</iconset>
    </property>
    <property name="text">
     <string>Tab3</string>
@@ -327,8 +330,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/list_tab4</normaloff>:/icons/list_tab4</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/list_tab4</normaloff>:/images/list_tab4</iconset>
    </property>
    <property name="text">
     <string>Tab4</string>
@@ -339,8 +342,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/list_tab5</normaloff>:/icons/list_tab5</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/list_tab5</normaloff>:/images/list_tab5</iconset>
    </property>
    <property name="text">
     <string>Tab5</string>
@@ -354,8 +357,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/list_tab6</normaloff>:/icons/list_tab6</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/list_tab6</normaloff>:/images/list_tab6</iconset>
    </property>
    <property name="text">
     <string>Tab6</string>
@@ -369,8 +372,8 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="Icons.qrc">
-     <normaloff>:/icons/list_tab7</normaloff>:/icons/list_tab7</iconset>
+    <iconset resource="Images.qrc">
+     <normaloff>:/images/list_tab7</normaloff>:/images/list_tab7</iconset>
    </property>
    <property name="text">
     <string>Tab7</string>
@@ -382,7 +385,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="Icons.qrc"/>
+  <include location="Images.qrc"/>
  </resources>
  <connections/>
 </ui>

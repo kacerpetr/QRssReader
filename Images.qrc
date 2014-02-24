@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="help_about">images/help_about.png</file>
+        <file alias="manage_feeds">images/manage_feeds.png</file>
+        <file alias="edit_paste">images/edit_paste.png</file>
+        <file alias="view_refresh">images/view_refresh.png</file>
+        <file alias="settings">images/settings.png</file>
+        <file alias="qrssreader">images/qrssreader.png</file>
+        <file alias="arrow_up">images/arrow_up.png</file>
+        <file alias="arrow_down_double">images/arrow_down_double.png</file>
+        <file alias="arrow_down">images/arrow_down.png</file>
+        <file alias="arrow_up_double">images/arrow_up_double.png</file>
+        <file alias="list_tab1">images/list_tab1.png</file>
+        <file alias="list_tab2">images/list_tab2.png</file>
+        <file alias="list_tab3">images/list_tab3.png</file>
+        <file alias="list_tab4">images/list_tab4.png</file>
+        <file alias="list_tab5">images/list_tab5.png</file>
+        <file alias="list_tab6">images/list_tab6.png</file>
+        <file alias="list_tab7">images/list_tab7.png</file>
+        <file alias="selectionHighlight">images/selectionHighlight.png</file>
+        <file alias="splitter">images/splitter.png</file>
+        <file alias="spinbox_down">images/spinbox_down.png</file>
+        <file alias="spinbox_up">images/spinbox_up.png</file>
+        <file alias="hsplitter">images/hsplitter.png</file>
+    </qresource>
+</RCC>

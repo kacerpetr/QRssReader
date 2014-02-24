@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Images.qrc">
+    <normaloff>:/images/qrssreader</normaloff>:/images/qrssreader</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">#NewsViewWidget{
 	background-color: white;
@@ -304,6 +308,19 @@ QScrollBar::sub-line:vertical {
         </layout>
        </item>
        <item>
+        <spacer name="vSpacer1">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="hLayout6">
          <property name="spacing">
           <number>10</number>
@@ -459,25 +476,14 @@ QScrollBar::sub-line:vertical {
          </item>
         </layout>
        </item>
-       <item>
-        <spacer name="vSpacer1">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
       </layout>
      </widget>
     </widget>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="Images.qrc"/>
+ </resources>
  <connections/>
 </ui>

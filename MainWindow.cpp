@@ -25,7 +25,7 @@
 #include <QMessageBox>
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "FeedManagement.h"
+#include "FeedEditDialog.h"
 #include "StorageAccess.h"
 #include "HelpDialog.h"
 #include "SettingsDialog.h"
@@ -207,8 +207,8 @@ void MainWindow::hideProgressBar(){
  * @brief Shows feed management dialog
  */
 void MainWindow::manageFeeds(){
-    FeedManagement dialog;
-    dialog.setModel(rssDataCurrent);
+    FeedEditDialog dialog;
+    dialog.setModels(&rssData);
     #ifdef ANDROID
         dialog.setWindowState(Qt::WindowMaximized);
     #endif

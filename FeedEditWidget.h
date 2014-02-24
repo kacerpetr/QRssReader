@@ -16,30 +16,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FEEDMANAGEMENT_H
-#define FEEDMANAGEMENT_H
+#ifndef FEEDEDITWIDGET_H
+#define FEEDEDITWIDGET_H
 
-#include <QDialog>
-#include "RssFeedModel.h"
+#include <QWidget>
+#include "RssDataModel.h"
 
-namespace Ui{
-    class FeedManagement;
+namespace Ui {
+    class FeedEditWidget;
 }
 
-/**
- * @brief The FeedManagement dialog class
- * Dialog to edit feed items in list of feeds
- */
-class FeedManagement : public QDialog{
+class FeedEditWidget : public QWidget{
     Q_OBJECT
 
     public:
-        explicit FeedManagement(QWidget* parent = 0);
-        void setModel(RssFeedModel* model);
-        ~FeedManagement();
+        explicit FeedEditWidget(QWidget* parent = 0);
+        void setModel(RssDataModel* model);
+        ~FeedEditWidget();
 
     private:
         FeedItem makeFeedItem() const;
+        void listFeedPresets();
+        void fillFeedList();
+
+    signals:
+        void closePressed();
 
     public slots:
         void feedSelected(int row);
@@ -50,10 +51,14 @@ class FeedManagement : public QDialog{
         void pasteNamePressed();
         void pasteUrlPressed();
         void pasteDescriptionPressed();
+        void emitClosePressed();
+        void loadPresetPressed();
+        void presetSelected(int currentRow);
 
     private:
-        Ui::FeedManagement* ui;
-        RssFeedModel* model;
+        Ui::FeedEditWidget *ui;
+        RssDataModel* model;
+        QList<FeedList> lists;
 };
 
-#endif // FEEDMANAGEMENT_H
+#endif // FEEDEDITWIDGET_H

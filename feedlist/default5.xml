@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feedlist>
-    <feed>
+	<header>
+		<name>Zprávy ze světa IT</name>
+		<description>Default for tab5. Contains AbcLinuxu.cz Čánky, Blog, Linux Blog and Root.cz Čánky, Zprávičky, Knihy and ITBiz.cz Články, Komentujeme, Zprávičky.</description>
+	</header>
+    <feed>, 
         <name>AbcLinuxu.cz - Čánky</name>
         <url>http://www.abclinuxu.cz/auto/abc.rss</url>
         <description></description>

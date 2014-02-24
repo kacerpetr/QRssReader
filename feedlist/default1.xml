@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feedlist>
+	<header>
+		<name>BBC News</name>
+		<description>Default for tab1. Contains BBC News Home, World, UK, Bussines, Politics, Health, Education &amp; Family, Science &amp; Environment, Technology, Entertainment &amp; Arts, BBC News - Special reports, In Pictures, Also in the News, Magazine, Latest Published Content.</description>
+	</header>
     <feed>
         <name>BBC News - Home</name>
         <url>http://feeds.bbci.co.uk/news/rss.xml</url>

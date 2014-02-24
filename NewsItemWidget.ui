@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Images.qrc">
+    <normaloff>:/images/qrssreader</normaloff>:/images/qrssreader</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">#NewsItemWidget{ 
     background-color: rgb(240,240,250); 
@@ -79,7 +83,7 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <property name="spacing">
-      <number>0</number>
+      <number>4</number>
      </property>
      <property name="rightMargin">
       <number>8</number>
@@ -94,6 +98,9 @@
        </property>
        <property name="text">
         <string>Title</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
        </property>
        <property name="wordWrap">
         <bool>false</bool>
@@ -110,6 +117,9 @@
        </property>
        <property name="text">
         <string>Zdroj: </string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
        </property>
       </widget>
      </item>
@@ -148,6 +158,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="Images.qrc"/>
+ </resources>
  <connections/>
 </ui>

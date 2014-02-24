@@ -104,7 +104,7 @@ void NewsItemWidget::setSelected(bool selected){
     if(selected){
         ui->selectionHighlight->setStyleSheet(
             "#selectionHighlight{\n"
-            "   background-image: url(:/icons/selectionHighlight);\n"
+            "   background-image: url(:/images/selectionHighlight);\n"
             "}"
         );
     }else{

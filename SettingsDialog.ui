@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Application settings</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="Images.qrc">
+    <normaloff>:/images/qrssreader</normaloff>:/images/qrssreader</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">#SettingsDialog{
 	background-color: rgb(30, 30, 30);
@@ -566,7 +570,9 @@ QGroupBox::title{
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="Images.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>cancelButton</sender>
