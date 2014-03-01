@@ -42,16 +42,18 @@ QSpinBox::up-button{
 	height: 23px;
 	subcontrol-origin: margin;
 	subcontrol-position: center right;
-	border-left: 1px solid rgb(210, 210, 210);
 	image: url(:/images/spinbox_up);
+	border-right: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255, 255, 255), stop:1 rgb(245, 245, 245));
 }
 
 QSpinBox::up-button:hover{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(245, 245, 245), stop:1 rgb(235, 235, 235));
 }
 
 QSpinBox::up-button:pressed{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(215, 215, 215), stop:1 rgb(205, 205, 205));
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
 }
 
 QSpinBox::down-button{
@@ -59,17 +61,18 @@ QSpinBox::down-button{
 	height: 23px;
 	subcontrol-origin: margin;
 	subcontrol-position: center left;
-	border-right: 1px solid rgb(220, 220, 220);
 	image: url(:/images/spinbox_down);	
-	padding-left: 1px;
+	border-right: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255, 255, 255), stop:1 rgb(245, 245, 245));
 }
 
 QSpinBox::down-button:hover{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(245, 245, 245), stop:1 rgb(235, 235, 235));
 }
 
 QSpinBox::down-button:pressed{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(215, 215, 215), stop:1 rgb(205, 205, 205));
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
 }
 
 QLineEdit{
@@ -109,11 +112,11 @@ QPushButton{
 }
 
 QPushButton:hover{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(245, 245, 245), stop:1 rgb(235, 235, 235));
 }
 
 QPushButton:pressed{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(215, 215, 215), stop:1 rgb(205, 205, 205));
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
 }
 
 QToolButton{
@@ -127,11 +130,11 @@ QToolButton{
 }
 
 QToolButton:hover{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(245, 245, 245), stop:1 rgb(235, 235, 235));
 }
 
 QToolButton:pressed{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(215, 215, 215), stop:1 rgb(205, 205, 205));
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
 }
 
 QGroupBox{	
@@ -160,6 +163,14 @@ QGroupBox::title{
 
 #presetSplitter::handle{
 	image: url(:/images/hsplitter);
+}
+
+#feedlistDescriptionText{
+	border-bottom: 1px solid rgb(200, 200, 230);
+	border-right: 1px solid rgb(200, 200, 230);
+	border-top: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
+	background-color: white;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">

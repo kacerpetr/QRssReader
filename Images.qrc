@@ -22,5 +22,6 @@
         <file alias="spinbox_down">images/spinbox_down.png</file>
         <file alias="spinbox_up">images/spinbox_up.png</file>
         <file alias="hsplitter">images/hsplitter.png</file>
+        <file alias="noImg128">images/noImg128.png</file>
     </qresource>
 </RCC>

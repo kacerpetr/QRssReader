@@ -26,7 +26,10 @@ SOURCES += main.cpp\
     ActionBarWidget.cpp \
     NewsViewWidget.cpp \
     FeedEditWidget.cpp \
-    FeedEditDialog.cpp
+    FeedEditDialog.cpp \
+    AbstractParser.cpp \
+    Rss10Parser.cpp \
+    Rss20Parser.cpp
 
 HEADERS  += MainWindow.h \
     NewsGroupWidget.h \
@@ -42,7 +45,10 @@ HEADERS  += MainWindow.h \
     NewsViewWidget.h \
     globaldef.h \
     FeedEditWidget.h \
-    FeedEditDialog.h
+    FeedEditDialog.h \
+    AbstractParser.h \
+    Rss10Parser.h \
+    Rss20Parser.h
 
 FORMS    += MainWindow.ui \
     NewsGroupWidget.ui \

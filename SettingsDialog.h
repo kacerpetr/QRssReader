@@ -43,7 +43,6 @@ class SettingsDialog : public QDialog{
     public slots:
         void clearCachePressed();
         void savePressed();
-        void loadPresetPressed();
 
     private:
         Ui::SettingsDialog* ui;

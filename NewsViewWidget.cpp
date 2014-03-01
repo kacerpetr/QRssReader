@@ -58,14 +58,12 @@ void NewsViewWidget::itemPressed(NewsItem* item){
     ui->textLabel->setText(item->text.trimmed());
     ui->guidLabel->setText("Guid: " + item->guid);
 
-    //left labels color
+    //image label background color
     QString textClrStr = QString::number(item->feed.bkgColor.red()) + ",";
     textClrStr += QString::number(item->feed.bkgColor.green()) + ",";
     textClrStr += QString::number(item->feed.bkgColor.blue());
     textClrStr = "background: rgb(" + textClrStr + ");";
-    ui->leftLabelFooter->setStyleSheet(textClrStr);
-    ui->leftLabelText->setStyleSheet(textClrStr);
-    ui->leftLabelTitle->setStyleSheet(textClrStr);
+    ui->imageLabel->setStyleSheet(textClrStr);
 }
 
 /**
@@ -77,7 +75,6 @@ void NewsViewWidget::settingsChanged(QString tag){
         SettingsModel& sm = SettingsModel::get();
         QFont font;
         font.setBold(true);
-        font.setUnderline(true);
         font.setPointSize(sm.getInt(tag));
         ui->titleLabel->setFont(font);
     }

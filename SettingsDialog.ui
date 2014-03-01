@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>803</width>
-    <height>482</height>
+    <width>886</width>
+    <height>572</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,83 +19,190 @@
   </property>
   <property name="styleSheet">
    <string notr="true">#SettingsDialog{
-	background-color: rgb(30, 30, 30);
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgb(240, 240, 240), stop:1 rgb(250, 250, 250));
+}
+
+#FeedEditWidget{
+	background-color: white;
 }
 
 QLabel{
-	color: rgb(215,215,215);
+	color: black;
+}
+
+#tabWidget{
+	border: 0px;
 }
 
 QSpinBox{
-	background-color: rgb(70, 70, 70);
-	color: rgb(215,215,215);
+	background-color: white;
+	color: black;
+	border-bottom: 1px solid rgb(200, 200, 230);
+	border-right: 1px solid rgb(200, 200, 230);
+	border-top: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
+	border-radius: 0px;
+	min-width: 80px;
+}
+
+QSpinBox::up-button{
+	width: 23px;
+	height: 23px;
+	subcontrol-origin: margin;
+	subcontrol-position: center right;
+	image: url(:/images/spinbox_up);
+	border-right: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255, 255, 255), stop:1 rgb(245, 245, 245));
+}
+
+QSpinBox::up-button:hover{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(245, 245, 245), stop:1 rgb(235, 235, 235));
+}
+
+QSpinBox::up-button:pressed{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
+}
+
+QSpinBox::down-button{
+	width: 22px;
+	height: 23px;
+	subcontrol-origin: margin;
+	subcontrol-position: center left;
+	image: url(:/images/spinbox_down);	
+	border-right: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255, 255, 255), stop:1 rgb(245, 245, 245));
+}
+
+QSpinBox::down-button:hover{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(245, 245, 245), stop:1 rgb(235, 235, 235));
+}
+
+QSpinBox::down-button:pressed{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
+}
+
+QLineEdit{
+	background-color: white;
+	color: black;
+	border-bottom: 1px solid rgb(200, 200, 230);
+	border-right: 1px solid rgb(200, 200, 230);
+	border-top: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
+	border-radius: 0px;
 }
 
 QListWidget{
-	background-color: rgb(50, 50, 50);
-	color: rgb(215,215,215);
-	border: 1px solid rgb(90, 90, 90);
-	border-radius: 2px;
-	margin-top: 1ex;
+	background-color: white;
+	color: black;
+	border-radius: 0px;
+	border-bottom: 1px solid rgb(200, 200, 230);
+	border-right: 1px solid rgb(200, 200, 230);
+	border-top: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
 }
 
 QListView::item:selected{
-	border-radius: 2px;
-	background-color: rgb(90, 90, 90);
+	border-radius: 0px;
+	background-color: rgb(245, 245, 245);
+	color: black;
 }
 
 QPushButton{
-	background-color: rgb(30, 30, 30);
-	color: rgb(215,215,215);
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255, 255, 255), stop:1 rgb(245, 245, 245));
+	color: black;
+	border-radius: 0px;
+	border-bottom: 1px solid rgb(200, 200, 230);
+	border-right: 1px solid rgb(200, 200, 230);
+	border-top: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
 }
 
-QGroupBox{
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(35, 35, 35), stop: 1 rgb(45, 45, 45));
-	border: 1px solid rgb(90, 90, 90);
-	border-radius: 2px;
+QPushButton:hover{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(245, 245, 245), stop:1 rgb(235, 235, 235));
+}
+
+QPushButton:pressed{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
+}
+
+QToolButton{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255, 255, 255), stop:1 rgb(245, 245, 245));
+	color: black;
+	border-radius: 0px;
+	border-bottom: 1px solid rgb(200, 200, 230);
+	border-right: 1px solid rgb(200, 200, 230);
+	border-top: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
+}
+
+QToolButton:hover{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(245, 245, 245), stop:1 rgb(235, 235, 235));
+}
+
+QToolButton:pressed{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
+}
+
+QGroupBox{	
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255, 255, 255), stop:1 rgb(245, 245, 245));
+	border-bottom: 1px solid rgb(200, 200, 230);
+	border-right: 1px solid rgb(200, 200, 230);
+	border-top: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
+	border-radius: 0px;
 	margin-top: 1ex;
 }
 
 QGroupBox::title{
-	color: rgb(215,215,215);
+	color: black;
 	subcontrol-origin: margin;
 	subcontrol-position: top conter;
+}
+
+#splitter::handle{
+	image: url(:/images/splitter);
+}
+
+#feedPresetList{
+
+}
+
+#presetSplitter::handle{
+	image: url(:/images/hsplitter);
+}
+
+#feedlistDescriptionText{
+	border-bottom: 1px solid rgb(200, 200, 230);
+	border-right: 1px solid rgb(200, 200, 230);
+	border-top: 1px solid rgb(210, 210, 210);
+	border-left: 1px solid rgb(210, 210, 210);
+	background-color: white;
 }</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
-   <property name="spacing">
-    <number>10</number>
-   </property>
-   <property name="leftMargin">
-    <number>10</number>
-   </property>
-   <property name="topMargin">
-    <number>10</number>
-   </property>
-   <property name="rightMargin">
-    <number>10</number>
-   </property>
-   <property name="bottomMargin">
-    <number>10</number>
-   </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QGroupBox" name="groupBox4">
+      <widget class="QGroupBox" name="groupBox5">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>1</horstretch>
+         <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="title">
-        <string>Feeds presets</string>
+        <string>Fonts</string>
        </property>
-       <property name="flat">
-        <bool>false</bool>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <property name="spacing">
+       <layout class="QFormLayout" name="formLayout">
+        <property name="fieldGrowthPolicy">
+         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+        </property>
+        <property name="horizontalSpacing">
+         <number>10</number>
+        </property>
+        <property name="verticalSpacing">
          <number>10</number>
         </property>
         <property name="leftMargin">
@@ -110,75 +217,115 @@ QGroupBox::title{
         <property name="bottomMargin">
          <number>10</number>
         </property>
-        <item>
-         <widget class="QListWidget" name="listWidget">
-          <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label1">
+          <property name="text">
+           <string>News list width</string>
           </property>
          </widget>
         </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout3">
-          <property name="spacing">
-           <number>10</number>
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="listWidthBox">
+          <property name="minimumSize">
+           <size>
+            <width>82</width>
+            <height>25</height>
+           </size>
           </property>
-          <item>
-           <spacer name="horizontalSpacer5">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="loadButton">
-            <property name="minimumSize">
-             <size>
-              <width>180</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Load predefined feedlist</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
+          <property name="suffix">
+           <string> px</string>
+          </property>
+          <property name="minimum">
+           <number>100</number>
+          </property>
+          <property name="maximum">
+           <number>1000</number>
+          </property>
+          <property name="singleStep">
+           <number>50</number>
+          </property>
+          <property name="value">
+           <number>300</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label2">
+          <property name="text">
+           <string>Title font size</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSpinBox" name="listTitleSizeBox">
+          <property name="minimumSize">
+           <size>
+            <width>82</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="suffix">
+           <string> pt</string>
+          </property>
+          <property name="minimum">
+           <number>6</number>
+          </property>
+          <property name="maximum">
+           <number>60</number>
+          </property>
+          <property name="singleStep">
+           <number>2</number>
+          </property>
+          <property name="value">
+           <number>12</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label3">
+          <property name="text">
+           <string>Time font size</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QSpinBox" name="listTimeFontSize">
+          <property name="minimumSize">
+           <size>
+            <width>82</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="suffix">
+           <string> pt</string>
+          </property>
+          <property name="minimum">
+           <number>6</number>
+          </property>
+          <property name="maximum">
+           <number>60</number>
+          </property>
+          <property name="singleStep">
+           <number>2</number>
+          </property>
+          <property name="value">
+           <number>12</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="groupBox1">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-         <horstretch>1</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
+      <widget class="QGroupBox" name="groupBox2">
        <property name="title">
-        <string>Application settings</string>
+        <string>News view</string>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <property name="spacing">
+       <layout class="QFormLayout" name="formLayout1">
+        <property name="horizontalSpacing">
+         <number>10</number>
+        </property>
+        <property name="verticalSpacing">
          <number>10</number>
         </property>
         <property name="leftMargin">
@@ -193,378 +340,219 @@ QGroupBox::title{
         <property name="bottomMargin">
          <number>10</number>
         </property>
-        <item>
-         <widget class="QGroupBox" name="groupBox5">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label4">
+          <property name="text">
+           <string>Title font size</string>
           </property>
-          <property name="title">
-           <string>Fonts</string>
-          </property>
-          <layout class="QFormLayout" name="formLayout">
-           <property name="fieldGrowthPolicy">
-            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-           </property>
-           <property name="horizontalSpacing">
-            <number>10</number>
-           </property>
-           <property name="verticalSpacing">
-            <number>10</number>
-           </property>
-           <property name="leftMargin">
-            <number>10</number>
-           </property>
-           <property name="topMargin">
-            <number>10</number>
-           </property>
-           <property name="rightMargin">
-            <number>10</number>
-           </property>
-           <property name="bottomMargin">
-            <number>10</number>
-           </property>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label1">
-             <property name="text">
-              <string>News list width</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="listWidthBox">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="suffix">
-              <string> px</string>
-             </property>
-             <property name="minimum">
-              <number>100</number>
-             </property>
-             <property name="maximum">
-              <number>1000</number>
-             </property>
-             <property name="singleStep">
-              <number>50</number>
-             </property>
-             <property name="value">
-              <number>300</number>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label2">
-             <property name="text">
-              <string>Title font size</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QSpinBox" name="listTitleSizeBox">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="suffix">
-              <string> pt</string>
-             </property>
-             <property name="minimum">
-              <number>6</number>
-             </property>
-             <property name="maximum">
-              <number>60</number>
-             </property>
-             <property name="singleStep">
-              <number>2</number>
-             </property>
-             <property name="value">
-              <number>12</number>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label3">
-             <property name="text">
-              <string>Time font size</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QSpinBox" name="listTimeFontSize">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="suffix">
-              <string> pt</string>
-             </property>
-             <property name="minimum">
-              <number>6</number>
-             </property>
-             <property name="maximum">
-              <number>60</number>
-             </property>
-             <property name="singleStep">
-              <number>2</number>
-             </property>
-             <property name="value">
-              <number>12</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </widget>
         </item>
-        <item>
-         <widget class="QGroupBox" name="groupBox2">
-          <property name="title">
-           <string>News view</string>
-          </property>
-          <layout class="QFormLayout" name="formLayout1">
-           <property name="horizontalSpacing">
-            <number>10</number>
-           </property>
-           <property name="verticalSpacing">
-            <number>10</number>
-           </property>
-           <property name="leftMargin">
-            <number>10</number>
-           </property>
-           <property name="topMargin">
-            <number>10</number>
-           </property>
-           <property name="rightMargin">
-            <number>10</number>
-           </property>
-           <property name="bottomMargin">
-            <number>10</number>
-           </property>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label4">
-             <property name="text">
-              <string>Title font size</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QSpinBox" name="viewTitleSize">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="suffix">
-              <string> pt</string>
-             </property>
-             <property name="minimum">
-              <number>6</number>
-             </property>
-             <property name="maximum">
-              <number>60</number>
-             </property>
-             <property name="singleStep">
-              <number>2</number>
-             </property>
-             <property name="value">
-              <number>12</number>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label5">
-             <property name="text">
-              <string>Text font size</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QSpinBox" name="viewTextSize">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="suffix">
-              <string> pt</string>
-             </property>
-             <property name="minimum">
-              <number>6</number>
-             </property>
-             <property name="maximum">
-              <number>60</number>
-             </property>
-             <property name="singleStep">
-              <number>2</number>
-             </property>
-             <property name="value">
-              <number>12</number>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label6">
-             <property name="text">
-              <string>Footer font size</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QSpinBox" name="viewFooterSize">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="suffix">
-              <string> pt</string>
-             </property>
-             <property name="minimum">
-              <number>6</number>
-             </property>
-             <property name="maximum">
-              <number>60</number>
-             </property>
-             <property name="singleStep">
-              <number>2</number>
-             </property>
-             <property name="value">
-              <number>12</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QGroupBox" name="groupBox3">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="title">
-           <string>Cache</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <property name="spacing">
-            <number>10</number>
-           </property>
-           <property name="leftMargin">
-            <number>10</number>
-           </property>
-           <property name="topMargin">
-            <number>10</number>
-           </property>
-           <property name="rightMargin">
-            <number>10</number>
-           </property>
-           <property name="bottomMargin">
-            <number>10</number>
-           </property>
-           <item>
-            <widget class="QPushButton" name="clearCacheButton">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Clear rss data cache</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="viewTitleSize">
+          <property name="minimumSize">
            <size>
-            <width>20</width>
-            <height>40</height>
+            <width>82</width>
+            <height>25</height>
            </size>
           </property>
-         </spacer>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout2">
-          <property name="spacing">
-           <number>10</number>
+          <property name="suffix">
+           <string> pt</string>
           </property>
-          <item>
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="saveButton">
-            <property name="minimumSize">
-             <size>
-              <width>180</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Close and Save changes</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="cancelButton">
-            <property name="minimumSize">
-             <size>
-              <width>180</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Close and Discard changes</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
+          <property name="minimum">
+           <number>6</number>
+          </property>
+          <property name="maximum">
+           <number>60</number>
+          </property>
+          <property name="singleStep">
+           <number>2</number>
+          </property>
+          <property name="value">
+           <number>12</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label5">
+          <property name="text">
+           <string>Text font size</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QSpinBox" name="viewTextSize">
+          <property name="minimumSize">
+           <size>
+            <width>82</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="suffix">
+           <string> pt</string>
+          </property>
+          <property name="minimum">
+           <number>6</number>
+          </property>
+          <property name="maximum">
+           <number>60</number>
+          </property>
+          <property name="singleStep">
+           <number>2</number>
+          </property>
+          <property name="value">
+           <number>12</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label6">
+          <property name="text">
+           <string>Footer font size</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QSpinBox" name="viewFooterSize">
+          <property name="minimumSize">
+           <size>
+            <width>82</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="suffix">
+           <string> pt</string>
+          </property>
+          <property name="minimum">
+           <number>6</number>
+          </property>
+          <property name="maximum">
+           <number>60</number>
+          </property>
+          <property name="singleStep">
+           <number>2</number>
+          </property>
+          <property name="value">
+           <number>12</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox3">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Cache</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="clearCacheButton">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Clear rss data cache</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout2">
+     <property name="spacing">
+      <number>10</number>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="saveButton">
+       <property name="minimumSize">
+        <size>
+         <width>180</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Close and Save changes</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="minimumSize">
+        <size>
+         <width>180</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Close and Discard changes</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </item>

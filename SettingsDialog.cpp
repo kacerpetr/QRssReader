@@ -46,16 +46,8 @@ ui(new Ui::SettingsDialog), model(NULL){
     ui->viewTextSize->setValue(SettingsModel::get().getInt("view_text_font_size"));
     ui->viewFooterSize->setValue(SettingsModel::get().getInt("view_footer_font_size"));
 
-    //predefined feed lists
-    QDirIterator it(FEEDS_PREFIX, QDirIterator::Subdirectories);
-    while(it.hasNext()){
-        ui->listWidget->addItem(it.next().remove(0, QString(FEEDS_PREFIX).length()));
-    }
-    ui->listWidget->setCurrentRow(0);
-
     //connects
     connect(ui->saveButton, SIGNAL(pressed()), this, SLOT(savePressed()));
-    connect(ui->loadButton, SIGNAL(pressed()), this, SLOT(loadPresetPressed()));
     connect(ui->clearCacheButton, SIGNAL(pressed()), this, SLOT(clearCachePressed()));
 }
 
@@ -121,69 +113,4 @@ void SettingsDialog::savePressed(){
 
     //closes dialog window
     close();
-}
-
-/**
- * @brief Loads predefined feedlist
- */
-void SettingsDialog::loadPresetPressed(){
-    //must have data models
-    if(model == NULL) return;
-
-    //storage access singleton reference
-    StorageAccess& sa = StorageAccess::get();
-
-    //predefined feedlist path
-    QString pflPath = FEEDS_PREFIX + ui->listWidget->currentItem()->text();
-
-    //error handling vars
-    bool success = false;
-
-    //deletes old feedlist
-    sa.rmFile(model->feedListFileName());
-
-    //creates copy of predefined feedlist to current feedlist
-    QFile source(pflPath);
-    success = source.copy(sa.absPath(model->feedListFileName()));
-
-    //error check
-    if(!success){
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Load preset error");
-        msgBox.setText("Error creating copy of predefined feed list file");
-        msgBox.setInformativeText(source.errorString());
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
-        return;
-    }
-
-    //sets file permissions
-    #ifndef ANDROID
-        QFile file(sa.absPath(model->feedListFileName()));
-        success = file.setPermissions(QFileDevice::WriteOwner | QFileDevice::ReadOwner |
-                                      QFileDevice::ReadGroup | QFileDevice::ReadOther);
-
-        //error check
-        if(!success){
-            QMessageBox msgBox;
-            msgBox.setWindowTitle("Load preset error");
-            msgBox.setText("Unable to set feedlist file permissions");
-            msgBox.setInformativeText(file.errorString());
-            msgBox.setIcon(QMessageBox::Critical);
-            msgBox.exec();
-        }
-    #endif
-
-    //clears data cache
-    sa.clearDir(model->rssCacheFolder());
-
-    //and finaly, loads feedlist into model
-    model->loadFeedList();
-
-    //success
-    QMessageBox msgBox;
-    msgBox.setWindowTitle("Load preset");
-    msgBox.setText("Predefined feedlist loaded");
-    msgBox.setIcon(QMessageBox::Information);
-    msgBox.exec();
 }
