@@ -8,7 +8,8 @@
  */
 class AbstractParser{
     public:
-        virtual bool parseRss(const QString& xml, TRssData& rssData) = 0;
+        virtual void parseRss(const QString& xml, QList<TRssItem>& items) = 0;
+        static ERssVersion parseVersion(const QString& xml);
 };
 
 #endif // ABSTRACTPARSER_H

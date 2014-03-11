@@ -24,22 +24,6 @@
 #include <QList>
 #include "globaldef.h"
 
-/** Feed item structure */
-typedef struct{
-    QString name;
-    QString url;
-    QString description;
-    QColor bkgColor;
-    bool enabled;
-}FeedItem;
-
-/** Feed list description */
-typedef struct{
-    QString name;
-    QString description;
-    QString url;
-}FeedList;
-
 bool operator==(const FeedItem& item1, const FeedItem& item2);
 
 /**

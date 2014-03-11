@@ -6,7 +6,8 @@
 class Rss20Parser : public AbstractParser{
     public:
         Rss20Parser();
-        bool parseRss(const QString& xml, TRssData& rssData);
+        void parseRss(const QString& xml, QList<TRssItem>& items);
+        QDateTime parseDateTime(const QString& str) const;
 };
 
 #endif // RSS20PARSER_H

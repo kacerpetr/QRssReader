@@ -75,7 +75,7 @@ void RssFeedModel::saveFeedList() const{
         //main properties
         wr->writeTextElement("name", feeds[i].name);
         wr->writeTextElement("url", feeds[i].url);
-        wr->writeTextElement("description", feeds[i].description);
+        wr->writeTextElement("description", feeds[i].desc);
         wr->writeTextElement("enabled", feeds[i].enabled==true?"true":"false");
 
         //background color in news list
@@ -192,7 +192,7 @@ void RssFeedModel::loadFeedList(){
                     //default feed properties
                     item.name = "";
                     item.url = "";
-                    item.description = "";
+                    item.desc = "";
                     item.enabled = false;
                     item.bkgColor = QColor(220, 220, 220);
                 }
@@ -220,7 +220,7 @@ void RssFeedModel::loadFeedList(){
                 }
                 //feed description
                 else if(elemName == "description"){
-                    item.description = rd->text().toString();
+                    item.desc = rd->text().toString();
                 }
                 //feed enabled/disabled
                 else if(elemName == "enabled"){
@@ -350,7 +350,7 @@ bool RssFeedModel::predefinedFeedlist(QList<FeedList>& lists){
                     }
                     //feedlist description
                     else if(elemName == "description"){
-                        lists[i].description = rd->text().toString();
+                        lists[i].desc = rd->text().toString();
                     }
                     break;
 

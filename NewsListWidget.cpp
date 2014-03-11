@@ -66,7 +66,7 @@ NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
  * @brief Fills scroll area with item widgets
  * @param news reference to rss data
  */
-void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
+void NewsListWidget::createList(const QMultiMap<QDate,TRssItem>& news){
     //gets array of keys (daily groups)
     QList<QDate> keys = news.uniqueKeys();
 
@@ -77,14 +77,18 @@ void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
     for(int i = keys.length()-1; i >=0; i--){
         //adds group header
         NewsGroupWidget* title = new NewsGroupWidget(content);
+
+        //gray and darker gray swapping
         title->setOdd(odd);
         odd = !odd;
+
+        //title of group
         title->setText(keys[i].toString("dddd dd.MM.yyyy"));
         layout->addWidget(title);
         this->allItems.append(title);
 
         //gets array of group data
-        QList<NewsItem> items = news.values(keys[i]);
+        QList<TRssItem> items = news.values(keys[i]);
 
         //through all news in day
         for(int j = items.length()-1; j >= 0 ; j--){
@@ -92,11 +96,11 @@ void NewsListWidget::createList(const QMultiMap<QDate,NewsItem>& news){
             NewsItemWidget* item = new NewsItemWidget(content);
             item->setNewsItem(items[j]);
 
+            //gray and darker gray swapping
             item->setOdd(odd);
             odd = !odd;
 
             item->setIcon(items[j].feed.bkgColor, items.length()-j);
-
             connect(item, SIGNAL(pressed(NewsItemWidget*)), this, SLOT(itemPressed(NewsItemWidget*)));
 
             layout->addWidget(item);
@@ -143,7 +147,7 @@ void NewsListWidget::clearList(){
  * @brief Selects first item in list
  * @return NewsItem pointer asociated with current item widget
  */
-NewsItem* NewsListWidget::selectFirst(){
+TRssItem* NewsListWidget::selectFirst(){
     if(newsItems.isEmpty()) return NULL;
 
     //unselects all selected items
@@ -163,7 +167,7 @@ NewsItem* NewsListWidget::selectFirst(){
  * @brief Selects next item in list
  * @return NewsItem pointer asociated with current item widget
  */
-NewsItem* NewsListWidget::selectNext(){
+TRssItem* NewsListWidget::selectNext(){
     if(newsItems.isEmpty()) return NULL;
 
     //index of selected item
@@ -195,7 +199,7 @@ NewsItem* NewsListWidget::selectNext(){
  * @brief Selects previous item in list
  * @return NewsItem pointer asociated with current item widget
  */
-NewsItem* NewsListWidget::selectPrev(){
+TRssItem* NewsListWidget::selectPrev(){
     if(newsItems.isEmpty()) return NULL;
 
     //index of selected item
@@ -227,7 +231,7 @@ NewsItem* NewsListWidget::selectPrev(){
  * @brief Selects last item in list
  * @return NewsItem pointer asociated with current item widget
  */
-NewsItem* NewsListWidget::selectLast(){
+TRssItem* NewsListWidget::selectLast(){
     if(newsItems.isEmpty()) return NULL;
 
     //unselects all selected items
@@ -246,7 +250,7 @@ NewsItem* NewsListWidget::selectLast(){
 /**
  * @brief Returns pointer of selected news item
  */
-NewsItem* NewsListWidget::selectedItem() const{
+TRssItem* NewsListWidget::selectedItem() const{
     //search of selectend item
     for(int i = 0; i < newsItems.length(); i++){
         if(newsItems[i]->isSelected())

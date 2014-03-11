@@ -37,16 +37,16 @@ NewsViewWidget::~NewsViewWidget(){
  * @brief Called when item from news list is pressed
  * @param item pointer to selected news item
  */
-void NewsViewWidget::itemPressed(NewsItem* item){
+void NewsViewWidget::itemPressed(TRssItem* item){
     //feed name and description
     QString name = "Feed: " + item->feed.name;
-    if(!item->feed.description.isEmpty())
-        name += " - " + item->feed.description;
+    if(!item->feed.desc.isEmpty())
+        name += " - " + item->channel.desc;
     ui->feedNameLabel->setText(name);
 
     //report time
     ui->timeLabel->setText("Datetime: " +
-    item->time.toString("ddd, dd MMM yyyy hh:mm:ss"));
+    item->dt.toString("ddd, dd MMM yyyy hh:mm:ss"));
 
     //link of full report
     QString linkText = item->link;
@@ -55,7 +55,7 @@ void NewsViewWidget::itemPressed(NewsItem* item){
 
     //other report parts
     ui->titleLabel->setText(item->title);
-    ui->textLabel->setText(item->text.trimmed());
+    ui->textLabel->setText(item->desc.trimmed());
     ui->guidLabel->setText("Guid: " + item->guid);
 
     //image label background color

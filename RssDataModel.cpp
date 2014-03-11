@@ -23,11 +23,13 @@
 #include <QDir>
 #include <QMessageBox>
 #include "StorageAccess.h"
+#include "Rss10Parser.h"
+#include "Rss20Parser.h"
 
 /**
  * @brief Compares two news items
  */
-bool operator==(const NewsItem& item1, const NewsItem& item2){
+bool operator==(const TRssItem& item1, const TRssItem& item2){
     if(item1.title == item2.title && item1.feed.name == item2.feed.name){
         return true;
     }
@@ -150,12 +152,12 @@ void RssDataModel::replyFinished(QNetworkReply* reply){
  * @brief Adds item to list of news
  * @param item
  */
-void RssDataModel::addNewsItem(const NewsItem& item){
-    QMap<QDate, NewsItem>::iterator it = news.find(item.time.date(), item);
+void RssDataModel::addNewsItem(const TRssItem& item){
+    QMap<QDate, TRssItem>::iterator it = news.find(item.dt.date(), item);
 
     //adds item if it is not in list
     if(it == news.end()){
-        news.insert(item.time.date(), item);
+        news.insert(item.dt.date(), item);
     }
 }
 
@@ -165,73 +167,27 @@ void RssDataModel::addNewsItem(const NewsItem& item){
  * @param feed
  */
 void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
-    QXmlStreamReader rd(xml);
+    //list of parsed items
+    QList<TRssItem> items;
 
-    //news item
-    NewsItem item;
-    item.feed = feed;
+    //gets version of rss
+    ERssVersion version = AbstractParser::parseVersion(xml);
 
-    //support variables
-    QString elemName;
-    int state = 0;
+    //rss1.0 parsing
+    if(version == Rss10){
+        Rss10Parser parser;
+        parser.parseRss(xml, items);
+    }
+    //rss2.0 parsing
+    else if(version == Rss20){
+        Rss20Parser parser;
+        parser.parseRss(xml, items);
+    }
 
-    //parsing file
-    while(!rd.atEnd()){
-        switch(rd.readNext()){
-            case QXmlStreamReader::StartElement:
-                elemName = rd.name().toString();
-                if(rd.name() == "item"){
-                    state = 1;
-                    item.title = "";
-                    item.text = "";
-                    item.time = QDateTime();
-                }
-                break;
-
-            case QXmlStreamReader::EndElement:
-                elemName = "";
-                if(rd.name() == "item"){
-                    addNewsItem(item);
-                    state = 0;
-                }
-                break;
-
-            case QXmlStreamReader::Characters:
-                if(elemName.isEmpty()) break;
-
-                //rss item parsing
-                if(state == 1){
-                    //item title
-                    if(elemName == "title"){
-                        item.title = rd.text().toString();
-                    }
-                    //item description
-                    else if(elemName == "description"){
-                        item.text = rd.text().toString();
-                    }
-                    //item datetime
-                    else if(elemName == "pubDate"){
-                        QString str = rd.text().toString();
-                        QString format = "ddd, dd MMM yyyy hh:mm:ss";
-                        if(str.length() > format.length())
-                            str.chop(str.length() - format.length());
-                        QLocale loc(QLocale::English);
-                        QDateTime dt = loc.toDateTime(str, format);
-                        item.time = dt;
-                    }
-                    //link to full article
-                    else if(elemName == "link"){
-                        item.link = rd.text().toString();
-                    }
-                    //guid of article
-                    else if(elemName == "guid"){
-                        item.guid = rd.text().toString();
-                    }
-                }
-
-            default:
-                break;
-        }
+    //adds parsed items to map
+    for(int i = 0; i < items.length(); i++){
+        items[i].feed = feed;
+        addNewsItem(items[i]);
     }
 }
 
@@ -280,7 +236,7 @@ void RssDataModel::saveRss(const QString& xml, const FeedItem& feed) const{
 /**
  * Returns reference to downloaded rss data
  */
-const QMultiMap<QDate,NewsItem>& RssDataModel::data() const{
+const QMultiMap<QDate,TRssItem>& RssDataModel::data() const{
     return news;
 }
 

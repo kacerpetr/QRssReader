@@ -4,6 +4,7 @@
 #include <QString>
 #include <QList>
 #include <QDateTime>
+#include <QColor>
 
 #define SETTINGS_FILE "settings.xml"       /**< Name of application settings file */
 #define FEEDS_PREFIX (QString(":/feedlist/feedlist"))
@@ -13,6 +14,30 @@
 #define REQUEST_TIMEOUT 4000
 #define DEFAULT_LIST_NAME (QString("/default"))
 
+/** Feed item structure */
+typedef struct{
+    QString name;
+    QString url;
+    QString desc;
+    QColor bkgColor;
+    bool enabled;
+}FeedItem;
+
+/** Feed list description */
+typedef struct{
+    QString name;
+    QString desc;
+    QString url;
+}FeedList;
+
+/**
+ * @brief The ERssVersion enum
+ */
+enum ERssVersion{
+    Rss10 = 10,
+    Rss20 = 20
+};
+
 /**
  * @brief Image of rss chanel
  */
@@ -20,7 +45,6 @@ typedef struct{
     QString url;
     QString title;
     QString link;
-    QString desc;
 }TRssImage;
 
 /**
@@ -31,6 +55,7 @@ typedef struct{
     QString link;
     QString desc;
     TRssImage image;
+    ERssVersion version;
 }TRssChanel;
 
 /**
@@ -41,16 +66,9 @@ typedef struct{
     QString link;
     QString desc;
     QDateTime dt;
-    TRssChanel* src;
     QString guid;
+    TRssChanel channel;
+    FeedItem feed;
 }TRssItem;
-
-/**
- * @brief Rss data structure
- */
-typedef struct{
-    TRssChanel chanel;
-    QList<TRssItem> item;
-}TRssData;
 
 #endif // GLOBALDEF_H

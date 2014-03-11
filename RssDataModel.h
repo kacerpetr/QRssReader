@@ -28,17 +28,7 @@
 #include "RssFeedModel.h"
 #include "globaldef.h"
 
-/** News item structure */
-typedef struct{
-    QString title;
-    QString text;
-    QDateTime time;
-    FeedItem feed;
-    QString link;
-    QString guid;
-}NewsItem;
-
-bool operator==(const NewsItem& item1, const NewsItem& item2);
+bool operator==(const TRssItem& item1, const TRssItem& item2);
 
 /**
  * @brief The RssDataModel class
@@ -52,7 +42,7 @@ class RssDataModel : public RssFeedModel{
         ~RssDataModel();
         void setCacheFolder(const QString& cacheFolder);
         void downloadRssData();
-        const QMultiMap<QDate,NewsItem>& data() const;
+        const QMultiMap<QDate,TRssItem>& data() const;
         void loadRssCache();
         QString rssCacheFolder() const;
 
@@ -66,14 +56,14 @@ class RssDataModel : public RssFeedModel{
         void loadingFinished();
 
     private:
-        void addNewsItem(const NewsItem& item);
+        void addNewsItem(const TRssItem& item);
         void parseRss(const QString& xml, const FeedItem& feed);
         void saveRss(const QString& xml, const FeedItem& feed) const;
         void loadFeed(QString url);
         void newsToXml();
 
     private:
-        QMultiMap<QDate,NewsItem> news;
+        QMultiMap<QDate,TRssItem> news;
         QNetworkAccessManager* manager;
         QList<QString> loadingQueue;
         QString cacheFolder;

@@ -39,12 +39,11 @@ class NewsItemWidget : public QWidget{
     public:
         explicit NewsItemWidget(QWidget* parent = 0);
         ~NewsItemWidget();
-        void setNewsItem(NewsItem item);
+        void setNewsItem(TRssItem item);
         void setSelected(bool selected);
         void setOdd(bool odd);
         void setIcon(QColor background, int number);
-        NewsGroupWidget* group() const;
-        NewsItem* newsItem();
+        TRssItem* newsItem();
         bool isSelected() const;
         void cutText(int width);
 
@@ -60,7 +59,7 @@ class NewsItemWidget : public QWidget{
 
     private:
         Ui::NewsItemWidget* ui;
-        NewsItem item;
+        TRssItem item;
         bool selected;
 };
 

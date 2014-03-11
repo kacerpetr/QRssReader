@@ -34,19 +34,19 @@ class NewsListWidget : public QScrollArea{
 
     public:
         explicit NewsListWidget(QWidget* parent = 0);
-        void createList(const QMultiMap<QDate,NewsItem>& news);
+        void createList(const QMultiMap<QDate,TRssItem>& news);
         void clearList();
-        NewsItem* selectFirst();
-        NewsItem* selectNext();
-        NewsItem* selectPrev();
-        NewsItem* selectLast();
-        NewsItem* selectedItem() const;
+        TRssItem* selectFirst();
+        TRssItem* selectNext();
+        TRssItem* selectPrev();
+        TRssItem* selectLast();
+        TRssItem* selectedItem() const;
 
     private:
         void resizeEvent(QResizeEvent* event);
 
     signals:
-        void pressed(NewsItem* item);
+        void pressed(TRssItem* item);
 
     private slots:
         void itemPressed(NewsItemWidget* item);

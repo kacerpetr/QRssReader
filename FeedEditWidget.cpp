@@ -105,7 +105,7 @@ void FeedEditWidget::fillFeedList(){
 
     //fills list widget
     for(int i = 0; i < items.length(); i++){
-        ui->feedList->addItem(items[i].name + " - " + items[i].description);
+        ui->feedList->addItem(items[i].name + " - " + items[i].desc);
     }
 
     //selects first item
@@ -123,7 +123,7 @@ FeedItem FeedEditWidget::makeFeedItem() const{
     //main properties
     item.name = ui->nameEdit->text();
     item.url = ui->urlEdit->text();
-    item.description = ui->descriptionEdit->text();
+    item.desc = ui->descriptionEdit->text();
     item.enabled = ui->enableBox->isChecked();
 
     //background color in news list
@@ -150,7 +150,7 @@ void FeedEditWidget::feedSelected(int row){
     //sets base properties of feed
     ui->nameEdit->setText(items[row].name);
     ui->urlEdit->setText(items[row].url);
-    ui->descriptionEdit->setText(items[row].description);
+    ui->descriptionEdit->setText(items[row].desc);
     ui->enableBox->setChecked(items[row].enabled);
 
     //background color in news list
@@ -189,7 +189,7 @@ void FeedEditWidget::addNewPressed(){
     }
 
     //adds item to feed list
-    ui->feedList->addItem(item.name + " - " + item.description);
+    ui->feedList->addItem(item.name + " - " + item.desc);
 
     //saves feed list
     model->saveFeedList();
@@ -217,7 +217,7 @@ void FeedEditWidget::saveChangesPressed(){
 
     //modifies item in feed list
      QListWidgetItem* item = ui->feedList->currentItem();
-     item->setText(feed.name + " - " + feed.description);
+     item->setText(feed.name + " - " + feed.desc);
 
      //saves feed list
      model->saveFeedList();
@@ -337,7 +337,7 @@ void FeedEditWidget::loadPresetPressed(){
 }
 
 void FeedEditWidget::presetSelected(int currentRow){
-    QString text = lists[currentRow].description;
+    QString text = lists[currentRow].desc;
     if(text.isEmpty()) text = "Feedlist has no description.";
     ui->feedlistDescriptionText->setPlainText(text);
 }

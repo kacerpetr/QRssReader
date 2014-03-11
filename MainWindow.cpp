@@ -165,7 +165,7 @@ void MainWindow::createModels(){
         ui->newsListStack->addWidget(newsListWg);
 
         //signal must be emited only when widget is current
-        connect(newsListWg, SIGNAL(pressed(NewsItem*)), newsViewWidget, SLOT(itemPressed(NewsItem*)));
+        connect(newsListWg, SIGNAL(pressed(TRssItem*)), newsViewWidget, SLOT(itemPressed(TRssItem*)));
     }
 }
 
@@ -242,7 +242,7 @@ void MainWindow::showAppHelp(){
  * @brief Selects first item from news list
  */
 void MainWindow::selectFirst(){
-    NewsItem* item = newsListCurrent->selectFirst();
+    TRssItem* item = newsListCurrent->selectFirst();
     if(item == NULL) return;
     newsViewWidget->itemPressed(item);
 }
@@ -251,7 +251,7 @@ void MainWindow::selectFirst(){
  * @brief Selects next item from news list
  */
 void MainWindow::selectNext(){
-    NewsItem* item = newsListCurrent->selectNext();
+    TRssItem* item = newsListCurrent->selectNext();
     if(item == NULL) return;
     newsViewWidget->itemPressed(item);
 }
@@ -260,7 +260,7 @@ void MainWindow::selectNext(){
  * @brief Selects previous item from news list
  */
 void MainWindow::selectPrev(){
-    NewsItem* item = newsListCurrent->selectPrev();
+    TRssItem* item = newsListCurrent->selectPrev();
     if(item == NULL) return;
     newsViewWidget->itemPressed(item);
 }
@@ -269,7 +269,7 @@ void MainWindow::selectPrev(){
  * @brief Selects last item from news list
  */
 void MainWindow::selectLast(){
-    NewsItem* item = newsListCurrent->selectLast();
+    TRssItem* item = newsListCurrent->selectLast();
     if(item == NULL) return;
     newsViewWidget->itemPressed(item);
 }
@@ -323,7 +323,7 @@ void MainWindow::tabSelected(QAction* action){
     }
 
     //selected item
-    NewsItem* item = newsListCurrent->selectedItem();
+    TRssItem* item = newsListCurrent->selectedItem();
     //shows this item or selects first
     if(item != NULL) newsViewWidget->itemPressed(item);
     else selectFirst();

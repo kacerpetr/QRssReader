@@ -87,10 +87,10 @@ void NewsItemWidget::paintEvent(QPaintEvent*){
  * @brief Shows title and other from given NewsItem
  * @param item this one will be shown in news list
  */
-void NewsItemWidget::setNewsItem(NewsItem item){
+void NewsItemWidget::setNewsItem(TRssItem item){
     //set labels
     ui->titleLabel->setText(item.title);
-    ui->feedLabel->setText(item.time.time().toString("hh:mm:ss") + " - " + item.feed.name);
+    ui->feedLabel->setText(item.dt.time().toString("hh:mm:ss") + " - " + item.channel.title);
 
     //stores news item
     this->item = item;
@@ -139,7 +139,7 @@ void NewsItemWidget::setOdd(bool odd){
 /**
  * @brief Returns pointer of asociated NewsItem
  */
-NewsItem* NewsItemWidget::newsItem(){
+TRssItem* NewsItemWidget::newsItem(){
     return &item;
 }
 

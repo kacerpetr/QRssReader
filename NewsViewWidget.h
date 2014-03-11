@@ -16,7 +16,7 @@ class NewsViewWidget : public QWidget{
         ~NewsViewWidget();
 
     public slots:
-        void itemPressed(NewsItem* item);
+        void itemPressed(TRssItem* item);
         void settingsChanged(QString tag);
 
     private:
