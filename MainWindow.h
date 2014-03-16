@@ -25,6 +25,7 @@
 #include "NewsViewWidget.h"
 #include "RssDataModel.h"
 #include "RssFeedModel.h"
+#include "ActionBarWidget.h"
 #include "globaldef.h"
 
 namespace Ui{
@@ -42,6 +43,7 @@ class MainWindow : public QMainWindow{
         explicit MainWindow(QWidget* parent = 0);
         void finishUI();
         void createModels();
+        void hideTabButtons();
         ~MainWindow();
 
     public slots:
@@ -57,6 +59,7 @@ class MainWindow : public QMainWindow{
         void selectPrev();
         void selectLast();
         void tabSelected(QAction* action);
+        void settingsChanged(QString tag);
 
     private:
         Ui::MainWindow* ui;
@@ -65,6 +68,8 @@ class MainWindow : public QMainWindow{
         QList<RssDataModel*> rssData;
         RssDataModel* rssDataCurrent;
         QActionGroup* actionGroup;
+        ActionBarWidget* rightActionBar;
+        int maxTabCount;
 };
 
 #endif // MAINWINDOW_H

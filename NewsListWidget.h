@@ -40,7 +40,7 @@ class NewsListWidget : public QScrollArea{
         TRssItem* selectNext();
         TRssItem* selectPrev();
         TRssItem* selectLast();
-        TRssItem* selectedItem() const;
+        virtual TRssItem* selectedItem() const;
 
     private:
         void resizeEvent(QResizeEvent* event);

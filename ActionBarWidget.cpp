@@ -2,7 +2,6 @@
 #include "ui_ActionBarWidget.h"
 #include <QPainter>
 #include <QStyleOption>
-#include <QToolButton>
 
 /**
  * @brief Class constructor
@@ -81,7 +80,11 @@ void ActionBarWidget::addAction(QAction* action, BarActionAlign align){
         default:
             delete btn;
             btn = NULL;
+            return;
     }
+
+    //adds button
+    btnMap.insert(action, btn);
 }
 
 /**
@@ -89,6 +92,11 @@ void ActionBarWidget::addAction(QAction* action, BarActionAlign align){
  */
 void ActionBarWidget::setMargin(int left, int top, int right, int bottom){
     ui->mainLayout->setContentsMargins(left, top, right, bottom);
+}
+
+void ActionBarWidget::hideAction(QAction* action, bool hidden){
+    QToolButton* btn = btnMap[action];
+    btn->setHidden(hidden);
 }
 
 /**

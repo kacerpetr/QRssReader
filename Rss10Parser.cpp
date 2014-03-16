@@ -1,6 +1,7 @@
 #include "Rss10Parser.h"
 #include <QDebug>
 #include <QXmlStreamReader>
+#include <SettingsModel.h>
 
 Rss10Parser::Rss10Parser(){}
 

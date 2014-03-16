@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QColor>
 #include <QAction>
+#include <QMap>
+#include <QToolButton>
 
 enum BarActionAlign{
     AlignLeft,
@@ -23,6 +25,7 @@ class ActionBarWidget : public QWidget{
         void setBackgroundColor(QColor color);
         void addAction(QAction* action, BarActionAlign align);
         void setMargin(int left, int top, int right, int bottom);
+        void hideAction(QAction* action, bool hidden);
         ~ActionBarWidget();
 
     private:
@@ -30,6 +33,7 @@ class ActionBarWidget : public QWidget{
 
     private:
         Ui::ActionBarWidget* ui;
+        QMap<QAction*,QToolButton*> btnMap;
 };
 
 #endif // ACTIONBARWIDGET_H

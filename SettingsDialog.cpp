@@ -36,18 +36,19 @@ ui(new Ui::SettingsDialog), model(NULL){
     ui->setupUi(this);
 
     //button focus
-    ui->saveButton->setFocus();
+    ui->okToolButton->setFocus();
 
     //fills form with data
-    ui->listWidthBox->setValue(SettingsModel::get().getInt("list_width"));
     ui->listTitleSizeBox->setValue(SettingsModel::get().getInt("list_title_font_size"));
     ui->listTimeFontSize->setValue(SettingsModel::get().getInt("list_time_font_size"));
     ui->viewTitleSize->setValue(SettingsModel::get().getInt("view_title_font_size"));
     ui->viewTextSize->setValue(SettingsModel::get().getInt("view_text_font_size"));
     ui->viewFooterSize->setValue(SettingsModel::get().getInt("view_footer_font_size"));
+    ui->feedlistTabCount->setValue(SettingsModel::get().getInt("feedlist_tab_count"));
+    ui->maxViewedDays->setValue(SettingsModel::get().getInt("max_viewed_days"));
 
     //connects
-    connect(ui->saveButton, SIGNAL(pressed()), this, SLOT(savePressed()));
+    connect(ui->okToolButton, SIGNAL(pressed()), this, SLOT(savePressed()));
     connect(ui->clearCacheButton, SIGNAL(pressed()), this, SLOT(clearCachePressed()));
 }
 
@@ -90,9 +91,6 @@ void SettingsDialog::clearCachePressed(){
 void SettingsDialog::savePressed(){
     SettingsModel& sm = SettingsModel::get();
 
-    if(ui->listWidthBox->value() != sm.getInt("list_width"))
-        sm.setValue("list_width", ui->listWidthBox->value());
-
     if(ui->listTitleSizeBox->value() != sm.getInt("list_title_font_size"))
         sm.setValue("list_title_font_size", ui->listTitleSizeBox->value());
 
@@ -107,6 +105,12 @@ void SettingsDialog::savePressed(){
 
     if(ui->viewFooterSize->value() != sm.getInt("view_footer_font_size"))
         sm.setValue("view_footer_font_size", ui->viewFooterSize->value());
+
+    if(ui->feedlistTabCount->value() != sm.getInt("feedlist_tab_count"))
+        sm.setValue("feedlist_tab_count", ui->feedlistTabCount->value());
+
+    if(ui->maxViewedDays->value() != sm.getInt("max_viewed_days"))
+        sm.setValue("max_viewed_days", ui->maxViewedDays->value());
 
     //saves changed data
     sm.saveSettings();

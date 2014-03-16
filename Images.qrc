@@ -23,5 +23,7 @@
         <file alias="spinbox_up">images/spinbox_up.png</file>
         <file alias="hsplitter">images/hsplitter.png</file>
         <file alias="noImg128">images/noImg128.png</file>
+        <file alias="close">images/close.png</file>
+        <file alias="ok">images/ok.png</file>
     </qresource>
 </RCC>

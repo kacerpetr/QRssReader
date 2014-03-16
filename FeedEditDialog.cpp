@@ -19,6 +19,7 @@
 #include "FeedEditDialog.h"
 #include "ui_FeedEditDialog.h"
 #include "FeedEditWidget.h"
+#include "SettingsModel.h"
 
 /**
  * @brief Class constructor
@@ -27,8 +28,12 @@
 FeedEditDialog::FeedEditDialog(QWidget* parent) : QDialog(parent), ui(new Ui::FeedEditDialog), models(NULL){
     ui->setupUi(this);
 
+    //tab count
+    int tabCount = SettingsModel::get().getInt("feedlist_tab_count");
+
     //creates tabs ant their widgets
-    for(int i = 0; i < TAB_COUNT; i++){
+    for(int i = 0; i < MAX_TAB_COUNT; i++){
+        if(i >= tabCount) break;
         FeedEditWidget* few = new FeedEditWidget(this);
         ui->tabWidget->addTab(few, "Tab " + QString::number(i+1));
         ui->tabWidget->setTabIcon(i, QIcon(":/images/list_tab" + QString::number(i+1)));
@@ -51,7 +56,12 @@ FeedEditDialog::~FeedEditDialog(){
 void FeedEditDialog::setModels(QList<RssDataModel*>* models){
     this->models = models;
 
+    //tab count
+    int tabCount = SettingsModel::get().getInt("feedlist_tab_count");
+
+    //sets models to edit widgets
     for(int i = 0; i < models->length(); i++){
+        if(i >= tabCount) break;
         FeedEditWidget* few = (FeedEditWidget*)ui->tabWidget->widget(i);
         few->setModel(models->at(i));
     }

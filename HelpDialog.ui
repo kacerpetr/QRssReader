@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>640</width>
-    <height>480</height>
+    <width>886</width>
+    <height>572</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,28 +36,26 @@
 	background-color: rgb(80, 80, 80);
 }
 
-QPushButton{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255, 255, 255), stop:1 rgb(245, 245, 245));
-	color: black;
-	border-radius: 0px;
-	border-bottom: 1px solid rgb(200, 200, 230);
-	border-right: 1px solid rgb(200, 200, 230);
-	border-top: 1px solid rgb(210, 210, 210);
-	border-left: 1px solid rgb(210, 210, 210);
+#closeToolButton{
+	border: none;
+	background: rgb(80, 80, 80);
 }
 
-QPushButton:hover{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(245, 245, 245), stop:1 rgb(235, 235, 235));
+#closeToolButton:hover{
+	border: none;
+	background-color: rgb(90, 90, 90);
 }
 
-QPushButton:pressed{
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(235, 235, 235), stop:1 rgb(225, 225, 225));
+#closeToolButton:pressed{
+	border: none;
+	background-color: rgb(100, 100, 100);
 }
 
 #closeButton{
 	background-color: rgb(90, 90, 90);
 	border: 0px;
-}</string>
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -76,7 +74,7 @@ QPushButton:pressed{
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout1">
      <property name="spacing">
       <number>0</number>
      </property>
@@ -140,21 +138,31 @@ QPushButton:pressed{
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="closeButton">
+      <widget class="QToolButton" name="closeToolButton">
        <property name="minimumSize">
         <size>
-         <width>60</width>
+         <width>50</width>
          <height>50</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>60</width>
+         <width>50</width>
          <height>50</height>
         </size>
        </property>
        <property name="text">
         <string>Close</string>
+       </property>
+       <property name="icon">
+        <iconset resource="Images.qrc">
+         <normaloff>:/images/close</normaloff>:/images/close</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -176,8 +184,8 @@ QPushButton:pressed{
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>640</width>
-        <height>368</height>
+        <width>886</width>
+        <height>520</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -200,35 +208,6 @@ QPushButton:pressed{
      </widget>
     </widget>
    </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="leftMargin">
-      <number>10</number>
-     </property>
-     <property name="topMargin">
-      <number>10</number>
-     </property>
-     <property name="rightMargin">
-      <number>10</number>
-     </property>
-     <property name="bottomMargin">
-      <number>10</number>
-     </property>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="minimumSize">
-        <size>
-         <width>200</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Close help</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
  <resources>
@@ -236,18 +215,18 @@ QPushButton:pressed{
  </resources>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>closeToolButton</sender>
    <signal>pressed()</signal>
    <receiver>HelpDialog</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>300</x>
-     <y>461</y>
+     <x>616</x>
+     <y>31</y>
     </hint>
     <hint type="destinationlabel">
-     <x>404</x>
-     <y>466</y>
+     <x>642</x>
+     <y>82</y>
     </hint>
    </hints>
   </connection>

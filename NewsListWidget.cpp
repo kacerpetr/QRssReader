@@ -22,6 +22,7 @@
 #include <QScroller>
 #include <QEasingCurve>
 #include <QResizeEvent>
+#include "SettingsModel.h"
 
 /**
  * @brief Class constructor
@@ -69,12 +70,20 @@ NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
 void NewsListWidget::createList(const QMultiMap<QDate,TRssItem>& news){
     //gets array of keys (daily groups)
     QList<QDate> keys = news.uniqueKeys();
+    QDate lastDate = QDate();
+    int viewedDays = SettingsModel::get().getInt("max_viewed_days");
 
     //used for background colors
     bool odd = true;
 
     //through daily groups
-    for(int i = keys.length()-1; i >=0; i--){
+    for(int i = keys.length()-1; i >= 0; i--){
+        //viewed days restriction
+        if(i == keys.length()-1)
+            lastDate = keys[i].addDays(-viewedDays);
+        if(keys[i] <= lastDate)
+            break;
+
         //adds group header
         NewsGroupWidget* title = new NewsGroupWidget(content);
 

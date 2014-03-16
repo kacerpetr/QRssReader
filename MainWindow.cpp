@@ -30,7 +30,6 @@
 #include "HelpDialog.h"
 #include "SettingsDialog.h"
 #include "SettingsModel.h"
-#include "ActionBarWidget.h"
 
 /**
  * @brief Class constructor
@@ -44,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     //loads settings
     SettingsModel::get().loadSettings();
+    connect(&SettingsModel::get(), SIGNAL(dataChanged(QString)), this, SLOT(settingsChanged(QString)));
+    maxTabCount = SettingsModel::get().getInt("feedlist_tab_count");
 
     //creates and initializes data models
     createModels();
@@ -68,7 +69,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //action of right toolbar
     connect(ui->actionRefresh, SIGNAL(triggered()), this, SLOT(refreshAction()));
     connect(actionGroup, SIGNAL(triggered(QAction*)), this, SLOT(tabSelected(QAction*)));
-    connect(ui->actionManageFeeds, SIGNAL(triggered()), this, SLOT(manageFeeds()));   
+    connect(ui->actionManageFeeds, SIGNAL(triggered()), this, SLOT(manageFeeds()));
+
+    //hides and shows tab buttons according to max tab count from settings
+    hideTabButtons();
+
+    //resize news list
+    QList<int> sizes;
+    sizes.append(5000);
+    sizes.append(4500);
+    ui->splitter->setSizes(sizes);
 }
 
 /**
@@ -112,7 +122,7 @@ void MainWindow::finishUI(){
     ui->leftVLayout->insertWidget(0, leftActionBar);
 
     //top right action bar
-    ActionBarWidget* rightActionBar = new ActionBarWidget(this);
+    rightActionBar = new ActionBarWidget(this);
     rightActionBar->setBackgroundColor(QColor(70,70,70));
     rightActionBar->addAction(ui->actionRefresh, AlignLeft);
     rightActionBar->addAction(ui->actionTab1, AlignCenter);
@@ -130,8 +140,11 @@ void MainWindow::finishUI(){
  * @brief Creates and initializes data models
  */
 void MainWindow::createModels(){
+    //tab count
+    int tabCount = SettingsModel::get().getInt("feedlist_tab_count");
+
     //cerates and inits rss models
-    for(int i = 0; i < TAB_COUNT; i++){
+    for(int i = 0; i < MAX_TAB_COUNT; i++){
         //creates data model
         RssDataModel* rssDataMdl = new RssDataModel(this);
         rssDataMdl->setFeedListFileName(RSS_FEED_FILE + QString::number(i+1) + ".xml");
@@ -139,8 +152,10 @@ void MainWindow::createModels(){
         rssDataMdl->setDefaultList(i+1);
 
         //loads save data
-        rssDataMdl->loadFeedList();
-        rssDataMdl->loadRssCache();
+        if(i < tabCount){
+            rssDataMdl->loadFeedList();
+            rssDataMdl->loadRssCache();
+        }
 
         //signal slot connection
         //needs to be done after loadRssCache() because of dataChanged()
@@ -153,19 +168,52 @@ void MainWindow::createModels(){
     }
 
     //creates and adds news list widgets to stack widget
-    for(int i = 0; i < TAB_COUNT; i++){
+    for(int i = 0; i < MAX_TAB_COUNT; i++){
         //creates news list
         NewsListWidget* newsListWg = new NewsListWidget(ui->newsListStack);
 
         //generates list from cache data
-        newsListWg->clearList();
-        newsListWg->createList(rssData[i]->data());
+        if(i < tabCount){
+            newsListWg->clearList();
+            newsListWg->createList(rssData[i]->data());
+        }
 
         //adds widget to stack
         ui->newsListStack->addWidget(newsListWg);
 
         //signal must be emited only when widget is current
         connect(newsListWg, SIGNAL(pressed(TRssItem*)), newsViewWidget, SLOT(itemPressed(TRssItem*)));
+    }
+}
+
+void MainWindow::hideTabButtons(){
+    //tab count
+    int tabCount = SettingsModel::get().getInt("feedlist_tab_count");
+
+    //hides or shows action
+    for(int i = 0; i < MAX_TAB_COUNT; i++){
+        if(i == 0) rightActionBar->hideAction(ui->actionTab1, i >= tabCount); else
+        if(i == 1) rightActionBar->hideAction(ui->actionTab2, i >= tabCount); else
+        if(i == 2) rightActionBar->hideAction(ui->actionTab3, i >= tabCount); else
+        if(i == 3) rightActionBar->hideAction(ui->actionTab4, i >= tabCount); else
+        if(i == 4) rightActionBar->hideAction(ui->actionTab5, i >= tabCount); else
+        if(i == 5) rightActionBar->hideAction(ui->actionTab6, i >= tabCount); else
+        if(i == 6) rightActionBar->hideAction(ui->actionTab7, i >= tabCount);
+    }
+
+    //tells that currently checked tab will be hidden
+    bool checkFirst = false;
+    if(ui->actionTab2->isChecked() && tabCount < 2) checkFirst = true;
+    if(ui->actionTab3->isChecked() && tabCount < 3) checkFirst = true;
+    if(ui->actionTab4->isChecked() && tabCount < 4) checkFirst = true;
+    if(ui->actionTab5->isChecked() && tabCount < 5) checkFirst = true;
+    if(ui->actionTab6->isChecked() && tabCount < 6) checkFirst = true;
+    if(ui->actionTab7->isChecked() && tabCount < 7) checkFirst = true;
+
+    //checks first tab if currently checked tab will be hidden
+    if(checkFirst){
+        ui->actionTab1->setChecked(true);
+        tabSelected(ui->actionTab1);
     }
 }
 
@@ -327,4 +375,24 @@ void MainWindow::tabSelected(QAction* action){
     //shows this item or selects first
     if(item != NULL) newsViewWidget->itemPressed(item);
     else selectFirst();
+}
+
+void MainWindow::settingsChanged(QString tag){
+    if(tag != "feedlist_tab_count") return;
+    hideTabButtons();
+
+    //tab count
+    int tabCount = SettingsModel::get().getInt("feedlist_tab_count");
+
+    //loads unloaded data
+    if(tabCount > maxTabCount){
+        for(int i = maxTabCount; i < tabCount; i++){
+            rssData[i]->loadFeedList();
+            rssData[i]->loadRssCache();
+            QWidget* wg = ui->newsListStack->widget(i);
+            ((NewsListWidget*)wg)->clearList();
+            ((NewsListWidget*)wg)->createList(rssData[i]->data());
+        }
+        maxTabCount = tabCount;
+    }
 }
