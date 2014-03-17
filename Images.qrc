@@ -25,5 +25,13 @@
         <file alias="noImg128">images/noImg128.png</file>
         <file alias="close">images/close.png</file>
         <file alias="ok">images/ok.png</file>
+        <file alias="help_main">images/help_main.png</file>
+        <file alias="help_toolbar1">images/help_toolbar1.png</file>
+        <file alias="help_toolbar2">images/help_toolbar2.png</file>
+        <file alias="help_toolbar3">images/help_toolbar3.png</file>
+        <file alias="help_toolbar4">images/help_toolbar4.png</file>
+        <file alias="help_toolbar5">images/help_toolbar5.png</file>
+        <file alias="help_feeds">images/help_feeds.png</file>
+        <file alias="help_settings">images/help_settings.png</file>
     </qresource>
 </RCC>

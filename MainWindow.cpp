@@ -77,7 +77,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //resize news list
     QList<int> sizes;
     sizes.append(5000);
-    sizes.append(4500);
+    sizes.append(4800);
     ui->splitter->setSizes(sizes);
 }
 
@@ -111,7 +111,7 @@ void MainWindow::finishUI(){
 
     //top left action bar
     ActionBarWidget* leftActionBar = new ActionBarWidget(this);
-    leftActionBar->setMargin(0,0,11,0);
+    //leftActionBar->setMargin(0,0,11,0);
     leftActionBar->setBackgroundColor(QColor(90,90,90));
     leftActionBar->addAction(ui->actionHelp, AlignLeft);
     leftActionBar->addAction(ui->actionFirst, AlignCenter);

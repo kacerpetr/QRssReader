@@ -151,25 +151,6 @@ bool NewsItemWidget::isSelected() const{
 }
 
 /**
- * @brief Makes title text shorter to approximately match given width
- */
-void NewsItemWidget::cutText(int width){
-    QFontMetrics fm = ui->titleLabel->fontMetrics();
-    QString str = newsItem()->title;
-    int textWidth = fm.width(str);
-
-    if(textWidth <= width){
-        ui->titleLabel->setText(str);
-        return;
-    }
-
-    int chopLeft = 4 + (textWidth - width) / fm.averageCharWidth();
-    str.chop(chopLeft);
-    str.append(" ...");
-    ui->titleLabel->setText(str);
-}
-
-/**
  * @brief Sets color and number of feed icon
  * @param background background color
  * @param index number viewed in feed icon

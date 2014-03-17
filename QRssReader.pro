@@ -65,7 +65,8 @@ MOBILITY =
 
 RESOURCES += \
     Images.qrc \
-    Default.qrc
+    Default.qrc \
+    Strings.qrc
 
 OTHER_FILES += \
     android/AndroidManifest.xml

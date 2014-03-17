@@ -26,6 +26,7 @@
 #include <QMessageBox>
 #include <QDirIterator>
 #include <QDebug>
+#include <QFile>
 
 /**
  * @brief Class constructor
@@ -50,6 +51,20 @@ ui(new Ui::SettingsDialog), model(NULL){
     //connects
     connect(ui->okToolButton, SIGNAL(pressed()), this, SLOT(savePressed()));
     connect(ui->clearCacheButton, SIGNAL(pressed()), this, SLOT(clearCachePressed()));
+
+
+    //loads about text from resources
+    #ifdef ANDROID
+        QFile file(":/strings/about_android");
+        file.open(QIODevice::ReadOnly);
+        ui->aboutLabel->setText(file.readAll());
+        file.close();
+    #else
+        QFile file(":/strings/about_pc");
+        file.open(QIODevice::ReadOnly);
+        ui->aboutLabel->setText(file.readAll());
+        file.close();
+    #endif
 }
 
 /**

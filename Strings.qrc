@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/strings">
+        <file alias="about_android">strings/about_android.html</file>
+        <file alias="about_pc">strings/about_pc.html</file>
+        <file alias="help_android">strings/help_android.html</file>
+        <file alias="help_pc">strings/help_pc.html</file>
+    </qresource>
+</RCC>

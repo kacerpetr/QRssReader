@@ -45,7 +45,6 @@ class NewsItemWidget : public QWidget{
         void setIcon(QColor background, int number);
         TRssItem* newsItem();
         bool isSelected() const;
-        void cutText(int width);
 
     public slots:
         void settingsChanged(QString key);

@@ -19,6 +19,8 @@
 #include "HelpDialog.h"
 #include "ui_HelpDialog.h"
 #include <QPainter>
+#include <QFile>
+#include <QScroller>
 
 /**
  * @brief Class constructor
@@ -26,6 +28,34 @@
  */
 HelpDialog::HelpDialog(QWidget* parent) : QDialog(parent), ui(new Ui::HelpDialog){
     ui->setupUi(this);
+
+    //enables figer scrolling for android
+    #ifdef ANDROID
+        QScroller::grabGesture(ui->scrollArea, QScroller::LeftMouseButtonGesture);
+        QScrollerProperties sp;
+        sp.setScrollMetric(QScrollerProperties::DragStartDistance, 0.001);
+        sp.setScrollMetric(QScrollerProperties::FrameRate, QScrollerProperties::Fps60);
+        sp.setScrollMetric(QScrollerProperties::MousePressEventDelay, 0.1);
+        sp.setScrollMetric(QScrollerProperties::VerticalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+        sp.setScrollMetric(QScrollerProperties::HorizontalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
+        sp.setScrollMetric(QScrollerProperties::OvershootDragDistanceFactor, 0.1);
+        sp.setScrollMetric(QScrollerProperties::OvershootScrollDistanceFactor, 0.1);
+        QScroller* qs = QScroller::scroller(ui->scrollArea);
+        qs->setScrollerProperties(sp);
+    #endif
+
+    //loads help text from resources
+    #ifdef ANDROID
+        QFile file(":/strings/help_android");
+        file.open(QIODevice::ReadOnly);
+        ui->mainLabel->setText(file.readAll());
+        file.close();
+    #else
+        QFile file(":/strings/help_pc");
+        file.open(QIODevice::ReadOnly);
+        ui->mainLabel->setText(file.readAll());
+        file.close();
+    #endif
 }
 
 /**

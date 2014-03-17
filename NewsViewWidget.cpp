@@ -63,7 +63,40 @@ void NewsViewWidget::itemPressed(TRssItem* item){
     textClrStr += QString::number(item->feed.bkgColor.green()) + ",";
     textClrStr += QString::number(item->feed.bkgColor.blue());
     textClrStr = "background: rgb(" + textClrStr + ");";
-    ui->imageLabel->setStyleSheet(textClrStr);
+    ui->chDesc->setStyleSheet(textClrStr);
+    ui->chTitle->setStyleSheet(textClrStr);
+
+    #ifdef ANDROID
+    //channel title
+    ui->chTitle->setText(
+        "<html><head/><body><p>"
+        "<span style=\"font-size:54pt; font-weight:200; color:rgba(255,255,255,180);\">"
+        + item->channel.title +
+        "</span></p></body></html>"
+    );
+    //channel description
+    ui->chDesc->setText(
+        "<html><head/><body><p>"
+        "<span style=\"font-size:32pt; font-weight:200; color:rgba(255,255,255,150);\">"
+        + item->channel.desc +
+        "</span></p></body></html>"
+    );
+    #else
+    //channel title
+    ui->chTitle->setText(
+        "<html><head/><body><p>"
+        "<span style=\"font-size:38pt; font-weight:200; color:rgba(255,255,255,180);\">"
+        + item->channel.title +
+        "</span></p></body></html>"
+    );
+    //channel description
+    ui->chDesc->setText(
+        "<html><head/><body><p>"
+        "<span style=\"font-size:28pt; font-weight:200; color:rgba(255,255,255,150);\">"
+        + item->channel.desc +
+        "</span></p></body></html>"
+    );
+    #endif
 }
 
 /**
