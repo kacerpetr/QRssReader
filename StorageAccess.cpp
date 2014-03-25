@@ -20,6 +20,7 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QDebug>
 #include "StorageAccess.h"
 
 /**
@@ -51,7 +52,7 @@ QString StorageAccess::appDir() const{
     //checks if application directory exists in data dir
     //if not, application directory will be created
     if(!dataDir.exists(APP_FOLDER)){
-        if(dataDir.mkdir(APP_FOLDER)){
+        if(!dataDir.mkdir(APP_FOLDER)){
             QMessageBox msgBox;
             msgBox.setWindowTitle("Error creating application directory");
             msgBox.setText("Error when calling dataDir.mkdir(APP_FOLDER)");

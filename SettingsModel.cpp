@@ -64,16 +64,18 @@ void SettingsModel::loadSettings(){
         }
 
         //changes permission - eneble writing for owner
-        QFile file(StorageAccess::get().absPath(SETTINGS_FILE));
-        if(!file.setPermissions(QFileDevice::WriteOwner |
-        QFileDevice::ReadOwner | QFileDevice::ReadGroup | QFileDevice::ReadOther)){
-            QMessageBox msgBox;
-            msgBox.setWindowTitle("Load settings error");
-            msgBox.setText("Unable to set settings file permissions");
-            msgBox.setInformativeText(file.errorString());
-            msgBox.setIcon(QMessageBox::Critical);
-            msgBox.exec();
-        }
+        #ifndef ANDROID
+            QFile file(StorageAccess::get().absPath(SETTINGS_FILE));
+            if(!file.setPermissions(QFileDevice::WriteOwner |
+            QFileDevice::ReadOwner | QFileDevice::ReadGroup | QFileDevice::ReadOther)){
+                QMessageBox msgBox;
+                msgBox.setWindowTitle("Load settings error");
+                msgBox.setText("Unable to set settings file permissions");
+                msgBox.setInformativeText(file.errorString());
+                msgBox.setIcon(QMessageBox::Critical);
+                msgBox.exec();
+            }
+        #endif
     }
 
     //opens xml reader
