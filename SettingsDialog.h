@@ -24,7 +24,7 @@
 #include <RssDataModel.h>
 #include "globaldef.h"
 
-namespace Ui {
+namespace Ui{
     class SettingsDialog;
 }
 

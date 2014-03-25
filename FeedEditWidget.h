@@ -22,10 +22,13 @@
 #include <QWidget>
 #include "RssDataModel.h"
 
-namespace Ui {
+namespace Ui{
     class FeedEditWidget;
 }
 
+/**
+ * @brief Feed list editor widget
+ */
 class FeedEditWidget : public QWidget{
     Q_OBJECT
 

@@ -25,7 +25,7 @@
 #include "RssDataModel.h"
 #include "NewsGroupWidget.h"
 
-namespace Ui {
+namespace Ui{
     class NewsItemWidget;
 }
 

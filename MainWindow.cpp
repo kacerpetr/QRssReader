@@ -355,6 +355,9 @@ void MainWindow::tabSelected(QAction* action){
     else selectFirst();
 }
 
+/**
+ * @brief Hides or shows tab buttons according to app settings
+ */
 void MainWindow::hideTabButtons(){
     //tab count
     int tabCount = SettingsModel::get().getInt("feedlist_tab_count");
@@ -386,6 +389,10 @@ void MainWindow::hideTabButtons(){
     }
 }
 
+/**
+ * @brief Called after change in application settings
+ * Adjusts number of visible feedlist tabs according to settings
+ */
 void MainWindow::settingsChanged(QString tag){
     if(tag != "feedlist_tab_count") return;
     hideTabButtons();

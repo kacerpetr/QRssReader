@@ -73,6 +73,7 @@ NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
 /**
  * @brief Fills scroll area with item widgets
  * @param news reference to rss data
+ * @param all number of days restriction will be ignored
  */
 void NewsListWidget::createList(const QMultiMap<QDate,TRssItem>& news, bool all){
     //gets array of keys (daily groups)
@@ -284,6 +285,9 @@ TRssItem* NewsListWidget::selectedItem() const{
     return NULL;
 }
 
+/**
+ * @brief Resize event
+ */
 void NewsListWidget::resizeEvent(QResizeEvent* event){
     for(int i = 0; i < newsItems.length(); i++){
         newsItems[i]->setMaximumWidth(event->size().width());

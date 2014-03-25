@@ -23,6 +23,9 @@
 #include <QClipboard>
 #include <QDirIterator>
 
+/**
+ * @brief Class constructor
+ */
 FeedEditWidget::FeedEditWidget(QWidget *parent) : QWidget(parent), ui(new Ui::FeedEditWidget){
     ui->setupUi(this);
 
@@ -56,6 +59,9 @@ FeedEditWidget::FeedEditWidget(QWidget *parent) : QWidget(parent), ui(new Ui::Fe
     connect(ui->closeButton, SIGNAL(pressed()), this, SLOT(emitClosePressed()));
 }
 
+/**
+ * @brief Class destructor
+ */
 FeedEditWidget::~FeedEditWidget(){
     delete ui;
 }
@@ -336,6 +342,9 @@ void FeedEditWidget::loadPresetPressed(){
     fillFeedList();
 }
 
+/**
+ * @brief Shows description of clicked predefined feedlist
+ */
 void FeedEditWidget::presetSelected(int currentRow){
     QString text = lists[currentRow].desc;
     if(text.isEmpty()) text = "Feedlist has no description.";

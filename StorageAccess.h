@@ -23,9 +23,7 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include <QStringList>
-
-/** Application data folder */
-#define APP_FOLDER (".qrssreader")
+#include <globaldef.h>
 
 /**
  * @brief The StorageAccess class
