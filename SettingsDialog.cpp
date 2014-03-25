@@ -36,9 +36,6 @@ SettingsDialog::SettingsDialog(QWidget* parent) : QDialog(parent),
 ui(new Ui::SettingsDialog), model(NULL){
     ui->setupUi(this);
 
-    //button focus
-    ui->okToolButton->setFocus();
-
     //fills form with data
     ui->listTitleSizeBox->setValue(SettingsModel::get().getInt("list_title_font_size"));
     ui->listTimeFontSize->setValue(SettingsModel::get().getInt("list_time_font_size"));

@@ -61,13 +61,20 @@ NewsListWidget::NewsListWidget(QWidget *parent) : QScrollArea(parent){
         QScroller* qs = QScroller::scroller(this);
         qs->setScrollerProperties(sp);
     #endif
+
+    //empty list background
+    setStyleSheet(
+        "#NewsListContent{"
+        "   background: rgb(248,248,248);"
+        "}"
+    );
 }
 
 /**
  * @brief Fills scroll area with item widgets
  * @param news reference to rss data
  */
-void NewsListWidget::createList(const QMultiMap<QDate,TRssItem>& news){
+void NewsListWidget::createList(const QMultiMap<QDate,TRssItem>& news, bool all){
     //gets array of keys (daily groups)
     QList<QDate> keys = news.uniqueKeys();
     QDate lastDate = QDate();
@@ -81,7 +88,7 @@ void NewsListWidget::createList(const QMultiMap<QDate,TRssItem>& news){
         //viewed days restriction
         if(i == keys.length()-1)
             lastDate = keys[i].addDays(-viewedDays);
-        if(keys[i] <= lastDate)
+        if(keys[i] <= lastDate && !all)
             break;
 
         //adds group header
@@ -117,6 +124,10 @@ void NewsListWidget::createList(const QMultiMap<QDate,TRssItem>& news){
             this->newsItems.append(item);
         }
     }
+
+    //adds spacer to the end of list
+    QSpacerItem* item = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    layout->addItem(item);
 }
 
 /**
@@ -150,6 +161,9 @@ void NewsListWidget::clearList(){
     //clears pointer lists
     allItems.clear();
     newsItems.clear();
+
+    //removes vertical spacer
+    layout->removeItem(layout->itemAt(0));
 }
 
 /**

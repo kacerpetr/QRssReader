@@ -34,7 +34,7 @@ class NewsListWidget : public QScrollArea{
 
     public:
         explicit NewsListWidget(QWidget* parent = 0);
-        void createList(const QMultiMap<QDate,TRssItem>& news);
+        void createList(const QMultiMap<QDate,TRssItem>& news, bool all = false);
         void clearList();
         TRssItem* selectFirst();
         TRssItem* selectNext();

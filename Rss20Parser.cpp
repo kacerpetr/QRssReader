@@ -62,7 +62,7 @@ void Rss20Parser::parseRss(const QString& xml, QList<TRssItem>& data){
                 if(elemName.isEmpty()) break;
                 //channel description
                 if(state == 0){
-                    if(elemName == "description") channel.desc = rd.text().toString(); else
+                    if(elemName == "description") channel.desc = rd.text().toString().trimmed(); else
                     if(elemName == "link") channel.link = rd.text().toString(); else
                     if(elemName == "title") channel.title = rd.text().toString();
                 }

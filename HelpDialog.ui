@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>931</width>
-    <height>598</height>
+    <width>1047</width>
+    <height>706</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -189,8 +189,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>931</width>
-        <height>546</height>
+        <width>1047</width>
+        <height>654</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">

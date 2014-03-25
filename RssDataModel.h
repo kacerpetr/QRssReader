@@ -43,8 +43,9 @@ class RssDataModel : public RssFeedModel{
         void setCacheFolder(const QString& cacheFolder);
         void downloadRssData();
         const QMultiMap<QDate,TRssItem>& data() const;
-        void loadRssCache();
+        void loadRssCache(bool noEmit = false);
         QString rssCacheFolder() const;
+        void loadRssFile(QString relativePath, int feedIndex);
 
     public slots:
         void replyFinished(QNetworkReply* reply);

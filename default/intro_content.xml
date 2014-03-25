@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Introduction to QRssReader</title>
+        <link>www.qrssreader.kacerpetr.cz</link>
+        <description>How to start using QRssReader</description>
+        <pubDate>Tue, 25 Mar 2014 12:10:32 GMT</pubDate>
+        <item>
+            <title>Startup guide</title>
+            <link>http://www.qrssreader.kacerpetr.cz</link>
+            <description>
+            &lt;p&gt;Thanks for using QRssReader&lt;/p&gt;
+            &lt;p&gt;
+                To get fresh news simply press reload button in the middle of top tool bar.
+                To get more informations about using QRssReader press help button on the left of top tool bar.
+                To change news sources press feed managament button on the right of top tool bar.
+            &lt;/p&gt;
+
+            &lt;p align&#61;&quot;right&quot;&gt;
+                Enjoy using QRssReader
+            &lt;/p&gt;
+            </description>
+            <pubDate>Tue, 25 Mar 2014 12:10:32 GMT</pubDate>
+            <guid>introduction-to-qrssreader</guid>
+            <dc:creator>Petr Kačer</dc:creator>
+        </item>
+        <item>
+            <title>License</title>
+            <link>http://www.qrssreader.kacerpetr.cz</link>
+            <description>
+            &lt;p&gt;Copyright (C) 2014, &amp;lt;Petr Kačer kacerpetr@gmail.com&amp;gt; &lt;/p&gt;
+
+            &lt;p&gt;This program is free software: you can redistribute it and/or modify
+            it under the terms of the GNU General Public License as published by
+            the Free Software Foundation, either version 3 of the License, or
+            (at your option) any later version.&lt;/p&gt;
+
+            &lt;p&gt;This program is distributed in the hope that it will be useful,
+            but WITHOUT ANY WARRANTY; without even the implied warranty of
+            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+            GNU General Public License for more details.&lt;/p&gt;
+
+            &lt;p&gt;You should have received a copy of the GNU General Public License
+            along with this program.  If not, see &amp;lt;http://www.gnu.org/licenses/&amp;gt; &lt;/p&gt;
+            </description>
+            <pubDate>Tue, 25 Mar 2014 12:10:33 GMT</pubDate>
+            <guid>introduction-to-qrssreader</guid>
+            <dc:creator>Petr Kačer</dc:creator>
+        </item>
+        <item>
+            <title>Bug reporting</title>
+            <link>http://www.qrssreader.kacerpetr.cz</link>
+            <description>
+            Currently there is no bug report mechanism. If you found a bug, please email me at &amp;lt;kacerpetr@gmail.com&amp;gt; and I will try to fix it.
+            </description>
+            <pubDate>Tue, 25 Mar 2014 12:10:33 GMT</pubDate>
+            <guid>introduction-to-qrssreader</guid>
+            <dc:creator>Petr Kačer</dc:creator>
+        </item>
+    </channel>
+</rss>

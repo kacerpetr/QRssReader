@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feedlist>
+    <header>
+        <name>Introduction</name>
+        <description>Shown when standard data model contains no data.</description>
+    </header>
+    <feed>
+        <name>Introduction</name>
+        <url></url>
+        <description>Introduction to QRssReader</description>
+        <enabled>true</enabled>
+        <bkgColor>20,120,0</bkgColor>
+    </feed>
+</feedlist>

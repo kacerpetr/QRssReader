@@ -195,7 +195,7 @@ void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
  * @brief Loads rss data from chache
  * Ususaly called at program startup
  */
-void RssDataModel::loadRssCache(){
+void RssDataModel::loadRssCache(bool noEmit){
     Q_ASSERT_X(!this->cacheFolder.isEmpty(), "loadRss()", "No cache folder was set");
 
     //feed list
@@ -213,7 +213,18 @@ void RssDataModel::loadRssCache(){
     }
 
     //data changed signal
-    emit dataChanged();
+    if(!noEmit) emit dataChanged();
+}
+
+/**
+ * @brief Loads rss data from given rss file
+ * @param path to rss xml file
+ */
+void RssDataModel::loadRssFile(QString relativePath, int feedIndex){
+    const QList<FeedItem>& feeds = feedList();
+    QString xml;
+    StorageAccess::get().readString(xml, relativePath);
+    parseRss(xml, feeds[feedIndex]);
 }
 
 /**

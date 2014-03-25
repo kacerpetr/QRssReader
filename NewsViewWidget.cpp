@@ -41,7 +41,7 @@ void NewsViewWidget::itemPressed(TRssItem* item){
     //feed name and description
     QString name = "Feed: " + item->feed.name;
     if(!item->feed.desc.isEmpty())
-        name += " - " + item->channel.desc;
+        name += " - " + (item->channel.desc.isEmpty() ? item->feed.desc : item->channel.desc);
     ui->feedNameLabel->setText(name);
 
     //report time
@@ -71,14 +71,14 @@ void NewsViewWidget::itemPressed(TRssItem* item){
     ui->chTitle->setText(
         "<html><head/><body><p>"
         "<span style=\"font-size:54pt; font-weight:200; color:rgba(255,255,255,180);\">"
-        + item->channel.title +
+        + (item->channel.title.isEmpty() ? item->feed.name : item->channel.title) +
         "</span></p></body></html>"
     );
     //channel description
     ui->chDesc->setText(
         "<html><head/><body><p>"
         "<span style=\"font-size:32pt; font-weight:200; color:rgba(255,255,255,150);\">"
-        + item->channel.desc +
+        + (item->channel.desc.isEmpty() ? item->feed.desc : item->channel.desc) +
         "</span></p></body></html>"
     );
     #else
@@ -86,14 +86,14 @@ void NewsViewWidget::itemPressed(TRssItem* item){
     ui->chTitle->setText(
         "<html><head/><body><p>"
         "<span style=\"font-size:38pt; font-weight:200; color:rgba(255,255,255,180);\">"
-        + item->channel.title +
+        + (item->channel.title.isEmpty() ? item->feed.name : item->channel.title) +
         "</span></p></body></html>"
     );
     //channel description
     ui->chDesc->setText(
         "<html><head/><body><p>"
         "<span style=\"font-size:28pt; font-weight:200; color:rgba(255,255,255,150);\">"
-        + item->channel.desc +
+        + (item->channel.desc.isEmpty() ? item->feed.desc : item->channel.desc) +
         "</span></p></body></html>"
     );
     #endif

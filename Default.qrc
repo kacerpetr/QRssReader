@@ -12,4 +12,8 @@
         <file>feedlist/default6.xml</file>
         <file>feedlist/default7.xml</file>
     </qresource>
+    <qresource prefix="/intro">
+        <file alias="intro_content">default/intro_content.xml</file>
+        <file alias="intro_feedlist">default/intro_feedlist.xml</file>
+    </qresource>
 </RCC>

@@ -143,6 +143,12 @@ void MainWindow::createModels(){
     //tab count
     int tabCount = SettingsModel::get().getInt("feedlist_tab_count");
 
+    //data for app introduction, shown instead of empty newslist and news view
+    introData = new RssDataModel(this);
+    introData->setFeedListFileName(":/intro/intro_feedlist");
+    introData->loadFeedList();
+    introData->loadRssFile(":/intro/intro_content", 0);
+
     //cerates and inits rss models
     for(int i = 0; i < MAX_TAB_COUNT; i++){
         //creates data model
@@ -175,7 +181,10 @@ void MainWindow::createModels(){
         //generates list from cache data
         if(i < tabCount){
             newsListWg->clearList();
-            newsListWg->createList(rssData[i]->data());
+            if(rssData[i]->data().isEmpty())
+                newsListWg->createList(introData->data(), true);
+            else
+                newsListWg->createList(rssData[i]->data());
         }
 
         //adds widget to stack
@@ -183,37 +192,6 @@ void MainWindow::createModels(){
 
         //signal must be emited only when widget is current
         connect(newsListWg, SIGNAL(pressed(TRssItem*)), newsViewWidget, SLOT(itemPressed(TRssItem*)));
-    }
-}
-
-void MainWindow::hideTabButtons(){
-    //tab count
-    int tabCount = SettingsModel::get().getInt("feedlist_tab_count");
-
-    //hides or shows action
-    for(int i = 0; i < MAX_TAB_COUNT; i++){
-        if(i == 0) rightActionBar->hideAction(ui->actionTab1, i >= tabCount); else
-        if(i == 1) rightActionBar->hideAction(ui->actionTab2, i >= tabCount); else
-        if(i == 2) rightActionBar->hideAction(ui->actionTab3, i >= tabCount); else
-        if(i == 3) rightActionBar->hideAction(ui->actionTab4, i >= tabCount); else
-        if(i == 4) rightActionBar->hideAction(ui->actionTab5, i >= tabCount); else
-        if(i == 5) rightActionBar->hideAction(ui->actionTab6, i >= tabCount); else
-        if(i == 6) rightActionBar->hideAction(ui->actionTab7, i >= tabCount);
-    }
-
-    //tells that currently checked tab will be hidden
-    bool checkFirst = false;
-    if(ui->actionTab2->isChecked() && tabCount < 2) checkFirst = true;
-    if(ui->actionTab3->isChecked() && tabCount < 3) checkFirst = true;
-    if(ui->actionTab4->isChecked() && tabCount < 4) checkFirst = true;
-    if(ui->actionTab5->isChecked() && tabCount < 5) checkFirst = true;
-    if(ui->actionTab6->isChecked() && tabCount < 6) checkFirst = true;
-    if(ui->actionTab7->isChecked() && tabCount < 7) checkFirst = true;
-
-    //checks first tab if currently checked tab will be hidden
-    if(checkFirst){
-        ui->actionTab1->setChecked(true);
-        tabSelected(ui->actionTab1);
     }
 }
 
@@ -377,6 +355,37 @@ void MainWindow::tabSelected(QAction* action){
     else selectFirst();
 }
 
+void MainWindow::hideTabButtons(){
+    //tab count
+    int tabCount = SettingsModel::get().getInt("feedlist_tab_count");
+
+    //hides or shows action
+    for(int i = 0; i < MAX_TAB_COUNT; i++){
+        if(i == 0) rightActionBar->hideAction(ui->actionTab1, i >= tabCount); else
+        if(i == 1) rightActionBar->hideAction(ui->actionTab2, i >= tabCount); else
+        if(i == 2) rightActionBar->hideAction(ui->actionTab3, i >= tabCount); else
+        if(i == 3) rightActionBar->hideAction(ui->actionTab4, i >= tabCount); else
+        if(i == 4) rightActionBar->hideAction(ui->actionTab5, i >= tabCount); else
+        if(i == 5) rightActionBar->hideAction(ui->actionTab6, i >= tabCount); else
+        if(i == 6) rightActionBar->hideAction(ui->actionTab7, i >= tabCount);
+    }
+
+    //tells that currently checked tab will be hidden
+    bool checkFirst = false;
+    if(ui->actionTab2->isChecked() && tabCount < 2) checkFirst = true;
+    if(ui->actionTab3->isChecked() && tabCount < 3) checkFirst = true;
+    if(ui->actionTab4->isChecked() && tabCount < 4) checkFirst = true;
+    if(ui->actionTab5->isChecked() && tabCount < 5) checkFirst = true;
+    if(ui->actionTab6->isChecked() && tabCount < 6) checkFirst = true;
+    if(ui->actionTab7->isChecked() && tabCount < 7) checkFirst = true;
+
+    //checks first tab if currently checked tab will be hidden
+    if(checkFirst){
+        ui->actionTab1->setChecked(true);
+        tabSelected(ui->actionTab1);
+    }
+}
+
 void MainWindow::settingsChanged(QString tag){
     if(tag != "feedlist_tab_count") return;
     hideTabButtons();
@@ -385,13 +394,17 @@ void MainWindow::settingsChanged(QString tag){
     int tabCount = SettingsModel::get().getInt("feedlist_tab_count");
 
     //loads unloaded data
-    if(tabCount > maxTabCount){
+     if(tabCount > maxTabCount){
         for(int i = maxTabCount; i < tabCount; i++){
             rssData[i]->loadFeedList();
-            rssData[i]->loadRssCache();
+            rssData[i]->loadRssCache(true);
             QWidget* wg = ui->newsListStack->widget(i);
             ((NewsListWidget*)wg)->clearList();
-            ((NewsListWidget*)wg)->createList(rssData[i]->data());
+
+            if(rssData[i]->data().isEmpty())
+                ((NewsListWidget*)wg)->createList(introData->data(), true);
+            else
+                ((NewsListWidget*)wg)->createList(rssData[i]->data());
         }
         maxTabCount = tabCount;
     }

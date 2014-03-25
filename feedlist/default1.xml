@@ -15,14 +15,14 @@
         <name>BBC News - World</name>
         <url>http://feeds.bbci.co.uk/news/world/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>132,140,119</bkgColor>
     </feed> 
 	<feed>
         <name>BBC News - UK</name>
         <url>http://feeds.bbci.co.uk/news/uk/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>140,107,40</bkgColor>
     </feed> 
 	<feed>
@@ -36,21 +36,21 @@
         <name>BBC News - Politics</name>
         <url>http://feeds.bbci.co.uk/news/politics/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>135,140,36</bkgColor>
     </feed> 
 	<feed>
         <name>BBC News - Health</name>
         <url>http://feeds.bbci.co.uk/news/health/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>140,120,130</bkgColor>
     </feed> 
 	<feed>
         <name>BBC News - Education &amp; Family</name>
         <url>http://feeds.bbci.co.uk/news/education/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>120,140,78</bkgColor>
     </feed> 
 	<feed>
@@ -71,14 +71,14 @@
         <name>BBC News - Entertainment &amp; Arts</name>
         <url>http://feeds.bbci.co.uk/news/entertainment_and_arts/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>136,130,159</bkgColor>
     </feed> 
 	<feed>
         <name>BBC News - Special reports</name>
         <url>http://feeds.bbci.co.uk/news/special_reports/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>153,80,88</bkgColor>
 
     </feed> 
@@ -86,28 +86,28 @@
         <name>BBC News - In Pictures</name>
         <url>http://feeds.bbci.co.uk/news/in_pictures/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>153,150,130</bkgColor>
     </feed> 
 	<feed>
         <name>BBC News - Also in the News</name>
         <url>http://feeds.bbci.co.uk/news/also_in_the_news/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>118,85,104</bkgColor>
     </feed> 
 	<feed>
         <name>BBC News - Magazine</name>
         <url>http://feeds.bbci.co.uk/news/magazine/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>20,135,94</bkgColor>
     </feed> 
 	<feed>
         <name>BBC News - Latest Published Content</name>
         <url>http://feeds.bbci.co.uk/news/system/latest_published_content/rss.xml</url>
         <description></description>
-        <enabled>true</enabled>
+        <enabled>false</enabled>
         <bkgColor>147,29,152</bkgColor>
     </feed> 
 </feedlist> 

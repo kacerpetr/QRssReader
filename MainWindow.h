@@ -66,6 +66,7 @@ class MainWindow : public QMainWindow{
         NewsListWidget* newsListCurrent;
         NewsViewWidget* newsViewWidget;
         QList<RssDataModel*> rssData;
+        RssDataModel* introData;
         RssDataModel* rssDataCurrent;
         QActionGroup* actionGroup;
         ActionBarWidget* rightActionBar;

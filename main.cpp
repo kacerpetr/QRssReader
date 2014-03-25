@@ -19,13 +19,15 @@
 #include "MainWindow.h"
 #include <QApplication>
 
+/**
+ * @mainpage QRssReader project
+ * <p>Class docummentation.</p>
+ */
+
 //------ TODO -----//
-// 1. get data directory in android in better way
+// 1. get data directory path in android in better way
 // 3. do something if required settings tag does not exists
-// 5. write application help
-// 6. load default feedlist if none exists
 // 8. block toolbar when downloading data
-// 9. set file permission, unix and other systems
 // 10. check invalid settings values
 
 /**

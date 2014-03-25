@@ -323,6 +323,9 @@ QGroupBox::title{
          <height>50</height>
         </size>
        </property>
+       <property name="focusPolicy">
+        <enum>Qt::StrongFocus</enum>
+       </property>
        <property name="text">
         <string>Close</string>
        </property>
@@ -351,6 +354,9 @@ QGroupBox::title{
          <width>50</width>
          <height>50</height>
         </size>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::StrongFocus</enum>
        </property>
        <property name="text">
         <string>Close</string>
@@ -860,6 +866,9 @@ QGroupBox::title{
                 <width>0</width>
                 <height>40</height>
                </size>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
               </property>
               <property name="text">
                <string>Clear rss data cache</string>
