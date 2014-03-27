@@ -41,7 +41,7 @@ bool operator==(const TRssItem& item1, const TRssItem& item2){
  * @param parent
  */
 RssDataModel::RssDataModel(QObject* parent) : RssFeedModel(parent),
-networkReply(NULL), timeoutTimer(NULL){
+networkReply(NULL), timeoutTimer(NULL), clearDataFlag(false){
     manager = new QNetworkAccessManager();
     timeoutTimer = new QTimer(this);
     timeoutTimer->setSingleShot(true);
@@ -89,8 +89,9 @@ void RssDataModel::downloadRssData(){
         loadingQueue.append(feeds[i].url);
     }
 
-    //clears rss data
-    news.clear();
+    //clear data after receive new data
+    //data will not be cleared after reload press with no internet connection
+    clearDataFlag = true;
 
     //start loading of first feed
     loadFeed(loadingQueue.takeFirst());
@@ -182,6 +183,12 @@ void RssDataModel::parseRss(const QString& xml, const FeedItem& feed){
     else if(version == Rss20){
         Rss20Parser parser;
         parser.parseRss(xml, items);
+    }
+
+    //clears rss data only once per refresh
+    if(clearDataFlag && items.length() > 0){
+        news.clear();
+        clearDataFlag = false;
     }
 
     //adds parsed items to map

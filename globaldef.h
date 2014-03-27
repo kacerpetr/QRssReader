@@ -33,7 +33,9 @@
 #define REQUEST_TIMEOUT 4000
 #define DEFAULT_LIST_NAME (QString("/default"))
 
-/** Feed item structure */
+/**
+ * @brief Feed item structure
+ */
 typedef struct{
     QString name;
     QString url;
@@ -42,7 +44,9 @@ typedef struct{
     bool enabled;
 }FeedItem;
 
-/** Feed list description */
+/**
+ * @brief Feed list description
+ */
 typedef struct{
     QString name;
     QString desc;

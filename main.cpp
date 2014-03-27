@@ -21,7 +21,7 @@
 
 /**
  * @mainpage QRssReader project
- * <p>Class docummentation.</p>
+ * <p>Class docummentation</p>
  */
 
 //------ TODO -----//

@@ -70,6 +70,7 @@ class RssDataModel : public RssFeedModel{
         QString cacheFolder;
         QNetworkReply* networkReply;
         QTimer* timeoutTimer;
+        bool clearDataFlag;
 };
 
 #endif // RSSDATAMODEL_H

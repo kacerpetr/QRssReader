@@ -107,10 +107,10 @@
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>:/images/settings</pixmap>
+        <pixmap>:/images/help_about</pixmap>
        </property>
        <property name="margin">
-        <number>10</number>
+        <number>9</number>
        </property>
       </widget>
      </item>

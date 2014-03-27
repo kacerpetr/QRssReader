@@ -206,8 +206,16 @@ void MainWindow::refreshAction(){
  * @brief Called when data was changed in RssDataModel
  */
 void MainWindow::updateNewsList(){
+    //clears news list
     newsListCurrent->clearList();
-    newsListCurrent->createList(rssDataCurrent->data());
+
+    //fills it with new or old data or startup guide after reload
+    if(rssDataCurrent->data().isEmpty())
+        newsListCurrent->createList(introData->data(), true);
+    else
+        newsListCurrent->createList(rssDataCurrent->data());
+
+    //selects first item
     selectFirst();
 }
 
