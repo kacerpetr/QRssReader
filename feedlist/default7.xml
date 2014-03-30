@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feedlist>
-	<header>
-		<name>Blesk.cz</name>
-		<description></description>
-	</header>
+<feedlist xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/settings.xsd">
+    <header>
+        <name>Blesk.cz</name>
+        <description></description>
+    </header>
     <feed>
         <name>Blesk.cz</name>
         <url>http://www.blesk.cz/rss</url>

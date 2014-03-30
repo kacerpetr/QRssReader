@@ -122,6 +122,9 @@ void SettingsModel::saveSettings(){
     wr->setAutoFormatting(true);
     wr->writeStartDocument();
     wr->writeStartElement("settings");
+    wr->writeAttribute("xmlns", "qrssreader.kacerpetr.cz");
+    wr->writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+    wr->writeAttribute("xsi:schemaLocation", "qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/settings.xsd");
 
     //writes data to xml file
     QMap<QString,QString>::iterator it = data.begin();

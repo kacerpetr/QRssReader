@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feedlist>
-	<header>
-		<name>Mladá fronta dnes</name>
-		<description>Default for tab4. Contains iDNES.cz Zprávy, Ekonomika, Kultura, Finance, Ona, Xman, Revue, Mobil, Technet, Hobby, Auto, BonusWeb, Bydlení, Cestování.</description>
-	</header>
+<feedlist xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/settings.xsd">
+    <header>
+        <name>Mladá fronta dnes</name>
+        <description>Default for tab4. Contains iDNES.cz Zprávy, Ekonomika, Kultura, Finance, Ona, Xman, Revue, Mobil, Technet, Hobby, Auto, BonusWeb, Bydlení, Cestování.</description>
+    </header>
     <feed>
         <name>Zprávy iDNES.cz</name>
         <url>http://idnes.cz.feedsportal.com/c/34387/f/625936/index.rss</url>

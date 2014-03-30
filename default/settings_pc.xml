@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<settings>
-	<list_title_font_size>10</list_title_font_size>
-	<list_time_font_size>9</list_time_font_size>
-	<view_title_font_size>18</view_title_font_size>
-	<view_text_font_size>12</view_text_font_size>
-	<view_footer_font_size>11</view_footer_font_size>
-	<max_viewed_days>2</max_viewed_days>
-	<feedlist_tab_count>5</feedlist_tab_count>
+<settings xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/settings.xsd">
+    <list_title_font_size>10</list_title_font_size>
+    <list_time_font_size>9</list_time_font_size>
+    <view_title_font_size>18</view_title_font_size>
+    <view_text_font_size>12</view_text_font_size>
+    <view_footer_font_size>11</view_footer_font_size>
+    <max_viewed_days>2</max_viewed_days>
+    <feedlist_tab_count>5</feedlist_tab_count>
 </settings>

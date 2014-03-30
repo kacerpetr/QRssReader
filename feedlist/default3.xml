@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feedlist>
-	<header>
-		<name>Forex news</name>
-		<description>Default for tab3. Contains DailyFX Forex Market News, Technical Analysis, Alerts, Analyst Picks, For Beginners and FXstreet.com News, Analysis, Economic Calendar, Education</description>
-	</header>
+<feedlist xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/settings.xsd">
+    <header>
+        <name>Forex news</name>
+        <description>Default for tab3. Contains DailyFX Forex Market News, Technical Analysis, Alerts, Analyst Picks, For Beginners and FXstreet.com News, Analysis, Economic Calendar, Education</description>
+    </header>
     <feed>
         <name>DailyFX - Forex Market News</name>
         <url>http://www.dailyfx.com/feeds/forex_market_news</url>

@@ -66,6 +66,9 @@ void RssFeedModel::saveFeedList() const{
     wr->setAutoFormatting(true);
     wr->writeStartDocument();
     wr->writeStartElement("feedlist");
+    wr->writeAttribute("xmlns", "qrssreader.kacerpetr.cz");
+    wr->writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+    wr->writeAttribute("xsi:schemaLocation", "qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/feedlist.xsd");
 
     //writes feed list to xml file
     for(int i = 0; i < feeds.length(); i++){
