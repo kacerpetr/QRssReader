@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Rss20Parser.h"
 #include <QDebug>
 #include <QXmlStreamReader>
+#include "Rss20Parser.h"
 
 /**
  * @brief Class constructor

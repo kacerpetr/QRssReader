@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feedlist xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/settings.xsd">
+<feedlist xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/feedlist.xsd">
     <header>
         <name>Zprávy ze světa IT</name>
         <description>Default for tab5. Contains AbcLinuxu.cz Čánky, Blog, Linux Blog and Root.cz Čánky, Zprávičky, Knihy and ITBiz.cz Články, Komentujeme, Zprávičky.</description>

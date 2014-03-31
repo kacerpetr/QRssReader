@@ -16,17 +16,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "SettingsDialog.h"
-#include "ui_SettingsDialog.h"
-#include "SettingsDialog.h"
-#include "SettingsModel.h"
-#include "StorageAccess.h"
 #include <QDesktopServices>
 #include <QUrl>
 #include <QMessageBox>
 #include <QDirIterator>
 #include <QDebug>
 #include <QFile>
+#include "SettingsDialog.h"
+#include "ui_SettingsDialog.h"
+#include "SettingsDialog.h"
+#include "SettingsModel.h"
+#include "StorageAccess.h"
 
 /**
  * @brief Class constructor

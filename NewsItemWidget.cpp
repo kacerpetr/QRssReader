@@ -16,12 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "NewsItemWidget.h"
-#include "ui_NewsItemWidget.h"
 #include <QPainter>
 #include <QDebug>
 #include <QFontMetrics>
 #include <QResizeEvent>
+#include "NewsItemWidget.h"
+#include "ui_NewsItemWidget.h"
 #include "SettingsModel.h"
 
 /**

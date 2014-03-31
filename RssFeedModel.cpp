@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "RssFeedModel.h"
-#include "StorageAccess.h"
 #include <QMessageBox>
 #include <QFile>
 #include <QDirIterator>
+#include "RssFeedModel.h"
+#include "StorageAccess.h"
 
 /**
  * @brief Compares two feed items

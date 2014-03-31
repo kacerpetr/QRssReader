@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feedlist>
+<feedlist xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/feedlist.xsd">
     <header>
         <name>Introduction</name>
         <description>Shown when standard data model contains no data.</description>

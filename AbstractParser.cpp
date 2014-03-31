@@ -16,9 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "AbstractParser.h"
 #include <QXmlStreamReader>
 #include <QDebug>
+#include "AbstractParser.h"
 
 /**
  * @brief Parses version from given rss/xml string

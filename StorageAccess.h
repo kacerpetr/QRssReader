@@ -23,7 +23,7 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 #include <QStringList>
-#include <globaldef.h>
+#include "globaldef.h"
 
 /**
  * @brief The StorageAccess class

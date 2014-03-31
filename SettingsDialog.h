@@ -20,8 +20,8 @@
 #define SETTINGSDIALOG_H
 
 #include <QDialog>
-#include <RssFeedModel.h>
-#include <RssDataModel.h>
+#include "RssFeedModel.h"
+#include "RssDataModel.h"
 #include "globaldef.h"
 
 namespace Ui{

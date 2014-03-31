@@ -16,12 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "NewsListWidget.h"
 #include <QWidget>
 #include <QScrollBar>
 #include <QScroller>
 #include <QEasingCurve>
 #include <QResizeEvent>
+#include "NewsListWidget.h"
 #include "SettingsModel.h"
 
 /**

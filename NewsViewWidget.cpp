@@ -16,10 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QScroller>
 #include "NewsViewWidget.h"
 #include "ui_NewsViewWidget.h"
 #include "SettingsModel.h"
-#include <QScroller>
 
 /**
  * @brief Class constructor

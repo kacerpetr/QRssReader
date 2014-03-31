@@ -16,12 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "FeedEditWidget.h"
-#include "ui_FeedEditWidget.h"
-#include "StorageAccess.h"
 #include <QMessageBox>
 #include <QClipboard>
 #include <QDirIterator>
+#include "FeedEditWidget.h"
+#include "ui_FeedEditWidget.h"
+#include "StorageAccess.h"
 
 /**
  * @brief Class constructor

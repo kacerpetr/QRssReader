@@ -16,10 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Rss10Parser.h"
 #include <QDebug>
 #include <QXmlStreamReader>
-#include <SettingsModel.h>
+#include "Rss10Parser.h"
+#include "SettingsModel.h"
 
 /**
  * @brief Class constructor

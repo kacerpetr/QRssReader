@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feedlist xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/settings.xsd">
+<feedlist xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/feedlist.xsd">
     <header>
         <name>BBC News</name>
         <description>Default for tab1. Contains BBC News Home, World, UK, Bussines, Politics, Health, Education &amp; Family, Science &amp; Environment, Technology, Entertainment &amp; Arts, BBC News - Special reports, In Pictures, Also in the News, Magazine, Latest Published Content.</description>

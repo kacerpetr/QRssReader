@@ -16,12 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "SettingsModel.h"
-#include "StorageAccess.h"
 #include <QDir>
 #include <QFile>
 #include <QMessageBox>
 #include <QDebug>
+#include "SettingsModel.h"
+#include "StorageAccess.h"
 
 /**
  * @brief Returns reference of model object

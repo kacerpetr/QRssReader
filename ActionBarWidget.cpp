@@ -16,10 +16,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ActionBarWidget.h"
-#include "ui_ActionBarWidget.h"
 #include <QPainter>
 #include <QStyleOption>
+#include "ActionBarWidget.h"
+#include "ui_ActionBarWidget.h"
 
 /**
  * @brief Class constructor

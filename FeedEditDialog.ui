@@ -14,7 +14,7 @@
    <string>Feed management</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="Images.qrc">
+   <iconset>
     <normaloff>:/images/qrssreader</normaloff>:/images/qrssreader</iconset>
   </property>
   <property name="styleSheet">
@@ -93,8 +93,6 @@ QTabBar::tab:!selected {
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="Images.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

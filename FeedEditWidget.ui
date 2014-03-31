@@ -22,10 +22,6 @@ QLabel{
 	color: black;
 }
 
-#tabWidget{
-	border: 0px;
-}
-
 QSpinBox{
 	background-color: white;
 	color: black;
@@ -155,10 +151,6 @@ QGroupBox::title{
 
 #splitter::handle{
 	image: url(:/images/splitter);
-}
-
-#feedPresetList{
-
 }
 
 #presetSplitter::handle{
@@ -403,7 +395,7 @@ QGroupBox::title{
                <string>...</string>
               </property>
               <property name="icon">
-               <iconset resource="Images.qrc">
+               <iconset>
                 <normaloff>:/images/edit_paste</normaloff>:/images/edit_paste</iconset>
               </property>
               <property name="iconSize">
@@ -456,7 +448,7 @@ QGroupBox::title{
                <string>...</string>
               </property>
               <property name="icon">
-               <iconset resource="Images.qrc">
+               <iconset>
                 <normaloff>:/images/edit_paste</normaloff>:/images/edit_paste</iconset>
               </property>
               <property name="iconSize">
@@ -509,7 +501,7 @@ QGroupBox::title{
                <string>...</string>
               </property>
               <property name="icon">
-               <iconset resource="Images.qrc">
+               <iconset>
                 <normaloff>:/images/edit_paste</normaloff>:/images/edit_paste</iconset>
               </property>
               <property name="iconSize">
@@ -864,8 +856,6 @@ QGroupBox::title{
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="Images.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

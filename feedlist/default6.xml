@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feedlist xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/settings.xsd">
+<feedlist xmlns="qrssreader.kacerpetr.cz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="qrssreader.kacerpetr.cz http://qrssreader.kacerpetr.cz/schema/feedlist.xsd">
     <header>
         <name>IT, Mobil, Elektro</name>
-        <description>Default for tab6. Contains news form Svět androida, Živě.cz a Hw.cz.</description>
+        <description>Default for tab6. Contains news form Svět androida, Živě.cz, Hw.cz.</description>
     </header>
     <feed>
         <name>Svět androida</name>

@@ -16,12 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "RssDataModel.h"
 #include <QDebug>
 #include <QXmlStreamReader>
 #include <QTextStream>
 #include <QDir>
 #include <QMessageBox>
+#include "RssDataModel.h"
 #include "StorageAccess.h"
 #include "Rss10Parser.h"
 #include "Rss20Parser.h"

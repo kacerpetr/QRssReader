@@ -22,13 +22,13 @@
             </description>
             <pubDate>Tue, 25 Mar 2014 12:10:32 GMT</pubDate>
             <guid>introduction-to-qrssreader</guid>
-            <dc:creator>Petr Kačer</dc:creator>
+            <dc:creator>Petr Kacer</dc:creator>
         </item>
         <item>
             <title>License</title>
             <link>http://www.qrssreader.kacerpetr.cz</link>
             <description>
-            &lt;p&gt;Copyright (C) 2014, &amp;lt;Petr Kačer kacerpetr@gmail.com&amp;gt; &lt;/p&gt;
+            &lt;p&gt;Copyright (C) 2014, Petr Kacer &amp;lt;kacerpetr@gmail.com&amp;gt; &lt;/p&gt;
 
             &lt;p&gt;This program is free software: you can redistribute it and/or modify
             it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@
             </description>
             <pubDate>Tue, 25 Mar 2014 12:10:33 GMT</pubDate>
             <guid>introduction-to-qrssreader</guid>
-            <dc:creator>Petr Kačer</dc:creator>
+            <dc:creator>Petr Kacer</dc:creator>
         </item>
         <item>
             <title>Bug reporting</title>
@@ -55,7 +55,7 @@
             </description>
             <pubDate>Tue, 25 Mar 2014 12:10:33 GMT</pubDate>
             <guid>introduction-to-qrssreader</guid>
-            <dc:creator>Petr Kačer</dc:creator>
+            <dc:creator>Petr Kacer</dc:creator>
         </item>
     </channel>
 </rss>

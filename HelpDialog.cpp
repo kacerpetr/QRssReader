@@ -16,11 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "HelpDialog.h"
-#include "ui_HelpDialog.h"
 #include <QPainter>
 #include <QFile>
 #include <QScroller>
+#include "HelpDialog.h"
+#include "ui_HelpDialog.h"
 
 /**
  * @brief Class constructor
