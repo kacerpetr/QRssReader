@@ -134,13 +134,13 @@ QToolButton:pressed{
 }
 
 QGroupBox{	
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255, 255, 255), stop:1 rgb(245, 245, 245));
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb(255, 255, 255), stop:1 rgb(245, 245, 245));
 	border-bottom: 1px solid rgb(200, 200, 230);
 	border-right: 1px solid rgb(200, 200, 230);
 	border-top: 1px solid rgb(210, 210, 210);
 	border-left: 1px solid rgb(210, 210, 210);
 	border-radius: 0px;
-	margin-top: 1ex;
+	margin-top: 7px;
 }
 
 QGroupBox::title{

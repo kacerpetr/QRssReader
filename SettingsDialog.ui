@@ -118,7 +118,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgb
 	border-top: 1px solid rgb(210, 210, 210);
 	border-left: 1px solid rgb(210, 210, 210);
 	border-radius: 0px;
-	margin-top: 1ex;
+	margin-top: 7px;
 }
 
 QGroupBox::title{
@@ -386,7 +386,7 @@ QGroupBox::title{
           <item>
            <widget class="QLabel" name="aboutLabel">
             <property name="text">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:20pt; color:#505050;&quot;&gt;QRssReader&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:13pt; font-style:italic;&quot;&gt;Simple, modern &amp;amp; multiplatform &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:13pt; font-style:italic;&quot;&gt;RSS reader&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#a30000;&quot;&gt;Development version&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#a30000;&quot;&gt;build 16.03.2014&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;by Petr Kačer (kacerpetr@gmail.com)&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;More: &lt;a href=&quot;http://www.qrssreader.kacerpetr.cz&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#539fa3;&quot;&gt;www.qrssreader.kacerpetr.cz&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string/>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
